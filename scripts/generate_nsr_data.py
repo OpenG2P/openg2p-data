@@ -1,5 +1,10 @@
-"""Generate NSR sub-table JSON files from demography data."""
+"""Generate NSR sub-table JSON files from demography data.
 
+Reads demography CSVs from openg2p-data/demography/ and writes JSON sub-table
+files into the NSR repo's docker/db-seed/seed-data/ folder.
+"""
+
+import csv
 import json
 import random
 from datetime import date, datetime, timedelta
@@ -7,7 +12,42 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEMO_DIR = REPO_ROOT / "demography"
-OUT_DIR = REPO_ROOT / "national-social-registry"
+OUT_DIR = Path(
+    "/Volumes/Work/OpenG2P/national-social-registry/docker/db-seed/seed-data"
+)
+
+
+def _read_csv(path: Path) -> list[dict]:
+    with path.open(newline="", encoding="utf-8") as f:
+        rows = []
+        for row in csv.DictReader(f):
+            out = {}
+            for k, v in row.items():
+                if v == "":
+                    out[k] = None
+                else:
+                    out[k] = v
+            rows.append(out)
+        return rows
+
+
+def _parse_demo_individual(row: dict) -> dict:
+    row = dict(row)
+    if row.get("estimated_age") is not None:
+        row["estimated_age"] = int(row["estimated_age"])
+    return row
+
+
+def _parse_demo_household(row: dict) -> dict:
+    row = dict(row)
+    for col in (
+        "size_total", "size_adults", "size_children_u5",
+        "size_school_age", "size_elderly",
+        "number_of_female_members", "number_of_male_members",
+    ):
+        if row.get(col) is not None:
+            row[col] = int(row[col])
+    return row
 
 SEED = 1337
 random.seed(SEED)
@@ -497,8 +537,8 @@ def gen_scores(households: list[dict]) -> list[dict]:
 
 def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    individuals = json.loads((DEMO_DIR / "individuals.json").read_text())
-    households = json.loads((DEMO_DIR / "households.json").read_text())
+    individuals = [_parse_demo_individual(r) for r in _read_csv(DEMO_DIR / "individuals.csv")]
+    households = [_parse_demo_household(r) for r in _read_csv(DEMO_DIR / "households.csv")]
 
     generators = {
         "individual_livelihoods.json": gen_livelihoods(individuals),

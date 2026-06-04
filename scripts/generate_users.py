@@ -1,8 +1,10 @@
-"""Generate users/users.json from a subset of household heads."""
+"""Generate users/users.csv from a subset of household heads."""
 
-import json
+import csv
 import random
 from pathlib import Path
+
+from _csv_utils import write_csv
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEMO_DIR = REPO_ROOT / "demography"
@@ -29,12 +31,19 @@ def username_from(first: str, last: str, idx: int) -> str:
     return base
 
 
+def _read_csv(path: Path) -> list[dict]:
+    with path.open(newline="", encoding="utf-8") as f:
+        return [
+            {k: (None if v == "" else v) for k, v in row.items()}
+            for row in csv.DictReader(f)
+        ]
+
+
 def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    households = json.loads((DEMO_DIR / "households.json").read_text())
+    households = _read_csv(DEMO_DIR / "households.csv")
     individuals_by_id = {
-        i["internal_record_id"]: i
-        for i in json.loads((DEMO_DIR / "individuals.json").read_text())
+        i["internal_record_id"]: i for i in _read_csv(DEMO_DIR / "individuals.csv")
     }
 
     heads = [individuals_by_id[h["head_individual_id"]] for h in households]
@@ -71,8 +80,12 @@ def main() -> None:
             }
         )
 
-    (OUT_DIR / "users.json").write_text(json.dumps(users, indent=2) + "\n")
-    print(f"Wrote users.json: {len(users)} users")
+    columns = [
+        "username", "email", "first_name", "last_name",
+        "individual_id", "foundational_id", "roles", "dp_roles",
+    ]
+    write_csv(OUT_DIR / "users.csv", columns, users)
+    print(f"Wrote users.csv: {len(users)} users")
 
 
 if __name__ == "__main__":
