@@ -7,7 +7,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEMO_DIR = REPO_ROOT / "demography"
-OUT_DIR = REPO_ROOT / "nsr"
+OUT_DIR = REPO_ROOT / "national-social-registry"
 
 SEED = 1337
 random.seed(SEED)
