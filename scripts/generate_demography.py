@@ -52,32 +52,21 @@ def _read_csv(path: Path) -> list[dict]:
 
 
 def load_geo() -> dict:
-    levels = _read_csv(GEO_DIR / "levels.csv")
-    level_by_mnemonic = {lv["level_mnemonic"]: lv for lv in levels}
-
-    country = _read_csv(GEO_DIR / "level-0-country.csv")[0]
-    regions = _read_csv(GEO_DIR / "level-1-regions.csv")
-    districts = _read_csv(GEO_DIR / "level-2-districts.csv")
-    wards = _read_csv(GEO_DIR / "level-3-wards.csv")
-    villages = _read_csv(GEO_DIR / "level-4-villages.csv")
-
-    by_id = {}
-    for entry in [country, *regions, *districts, *wards, *villages]:
-        by_id[entry["level_value_id"]] = entry
-
-    return {
-        "level_by_mnemonic": level_by_mnemonic,
-        "by_id": by_id,
-        "villages": villages,
-    }
+    """Read flat geo.csv. Determine villages by 'no children' (terminal nodes)."""
+    rows = _read_csv(GEO_DIR / "geo.csv")
+    by_id = {r["level_value_id"]: r for r in rows}
+    children: dict[str, list[str]] = {}
+    for r in rows:
+        parent = r["parent_level_value_id"]
+        if parent:
+            children.setdefault(parent, []).append(r["level_value_id"])
+    villages = [r for r in rows if not children.get(r["level_value_id"])]
+    return {"by_id": by_id, "villages": villages}
 
 
 def build_hierarchy(geo: dict, village_id: str) -> dict:
     """Walk parent chain from village to country, return ordered hierarchy."""
     by_id = geo["by_id"]
-    levels = geo["level_by_mnemonic"]
-    level_id_to_mnemonic = {lv["level_id"]: lv["level_mnemonic"] for lv in levels.values()}
-
     chain = []
     cur_id = village_id
     while cur_id is not None:
@@ -86,31 +75,25 @@ def build_hierarchy(geo: dict, village_id: str) -> dict:
         cur_id = node["parent_level_value_id"]
     chain.reverse()
 
-    hierarchy = []
-    for node in chain:
-        mnem = level_id_to_mnemonic[node["level_id"]]
-        hierarchy.append(
-            {
-                "level": mnem,
-                "level_value_id": node["level_value_id"],
-                "level_value_mnemonic": node["level_value_mnemonic"],
-            }
-        )
+    hierarchy = [
+        {
+            "level": node["level"],
+            "level_value_id": node["level_value_id"],
+            "level_value_mnemonic": node["mnemonic"],
+        }
+        for node in chain
+    ]
     return {"hierarchy": hierarchy, "lowest_level_value_id": village_id}
 
 
 def geo_ids_from_village(geo: dict, village_id: str) -> dict:
-    """Return dict with country/region/district/ward/village IDs."""
+    """Return dict with one geo_<level>_id key per level in the parent chain."""
     by_id = geo["by_id"]
-    levels = geo["level_by_mnemonic"]
-    level_id_to_mnemonic = {lv["level_id"]: lv["level_mnemonic"] for lv in levels.values()}
-
     result = {"geo_village_id": village_id}
     cur_id = village_id
     while cur_id is not None:
         node = by_id[cur_id]
-        mnem = level_id_to_mnemonic[node["level_id"]]
-        result[f"geo_{mnem}_id"] = node["level_value_id"]
+        result[f"geo_{node['level']}_id"] = node["level_value_id"]
         cur_id = node["parent_level_value_id"]
     return result
 

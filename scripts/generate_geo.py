@@ -1,4 +1,10 @@
-"""Parse master-data SQL files into geo/*.csv."""
+"""Parse master-data SQL files into a single geo/geo.csv.
+
+Columns: level_value_id, level, mnemonic, parent_level_value_id
+
+`level` is the human-readable level name (country/region/district/ward/village).
+Levels are derivable from the data; no separate levels file is emitted.
+"""
 
 import re
 from pathlib import Path
@@ -14,19 +20,30 @@ VALUE_ROW_RE = re.compile(
     re.IGNORECASE,
 )
 
-LEVEL_FILES = {
-    0: ("level-0.sql", "level-0-country.csv"),
-    1: ("level-1.sql", "level-1-regions.csv"),
-    2: ("level-2.sql", "level-2-districts.csv"),
-    3: ("level-3.sql", "level-3-wards.csv"),
-    4: ("level-4.sql", "level-4-villages.csv"),
-}
+LEVELS_RE = re.compile(
+    r"VALUES\s*\(\s*'([^']+)'\s*,\s*'([^']+)'\s*,\s*(NULL|'[^']*')\s*\)",
+    re.IGNORECASE,
+)
 
-VALUE_COLUMNS = ["level_value_id", "level_id", "level_value_mnemonic", "parent_level_value_id"]
-LEVEL_COLUMNS = ["level_id", "level_mnemonic", "parent_level_id"]
+LEVEL_SQL_FILES = [
+    "level-0.sql",
+    "level-1.sql",
+    "level-2.sql",
+    "level-3.sql",
+    "level-4.sql",
+]
 
 
-def parse_level_values(sql_path: Path) -> list[dict]:
+def parse_level_name_by_id() -> dict[str, str]:
+    """Read g2p_geo_levels.sql and return {level_id_uuid: level_mnemonic}."""
+    text = (MASTER_DATA / "g2p_geo_levels.sql").read_text()
+    return {
+        level_id: mnemonic
+        for level_id, mnemonic, _parent in LEVELS_RE.findall(text)
+    }
+
+
+def parse_value_rows(sql_path: Path, level_name_by_id: dict[str, str]) -> list[dict]:
     text = sql_path.read_text()
     rows = []
     for m in VALUE_ROW_RE.finditer(text):
@@ -35,29 +52,9 @@ def parse_level_values(sql_path: Path) -> list[dict]:
         rows.append(
             {
                 "level_value_id": level_value_id,
-                "level_id": level_id,
-                "level_value_mnemonic": mnemonic,
+                "level": level_name_by_id.get(level_id, level_id),
+                "mnemonic": mnemonic,
                 "parent_level_value_id": parent_value,
-            }
-        )
-    return rows
-
-
-def parse_levels(sql_path: Path) -> list[dict]:
-    text = sql_path.read_text()
-    pattern = re.compile(
-        r"VALUES\s*\(\s*'([^']+)'\s*,\s*'([^']+)'\s*,\s*(NULL|'[^']*')\s*\)",
-        re.IGNORECASE,
-    )
-    rows = []
-    for m in pattern.finditer(text):
-        level_id, mnemonic, parent = m.groups()
-        parent_id = None if parent.upper() == "NULL" else parent.strip("'")
-        rows.append(
-            {
-                "level_id": level_id,
-                "level_mnemonic": mnemonic,
-                "parent_level_id": parent_id,
             }
         )
     return rows
@@ -66,14 +63,21 @@ def parse_levels(sql_path: Path) -> list[dict]:
 def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    levels = parse_levels(MASTER_DATA / "g2p_geo_levels.sql")
-    write_csv(OUT_DIR / "levels.csv", LEVEL_COLUMNS, levels)
-    print(f"Wrote levels.csv: {len(levels)} levels")
+    level_name_by_id = parse_level_name_by_id()
 
-    for level_num, (sql_name, out_name) in LEVEL_FILES.items():
-        rows = parse_level_values(MASTER_DATA / sql_name)
-        write_csv(OUT_DIR / out_name, VALUE_COLUMNS, rows)
-        print(f"Wrote {out_name}: {len(rows)} entries")
+    all_rows: list[dict] = []
+    for sql_name in LEVEL_SQL_FILES:
+        all_rows.extend(parse_value_rows(MASTER_DATA / sql_name, level_name_by_id))
+
+    columns = ["level_value_id", "level", "mnemonic", "parent_level_value_id"]
+    write_csv(OUT_DIR / "geo.csv", columns, all_rows)
+
+    by_level: dict[str, int] = {}
+    for r in all_rows:
+        by_level[r["level"]] = by_level.get(r["level"], 0) + 1
+    print(f"Wrote geo.csv: {len(all_rows)} rows")
+    for level, n in by_level.items():
+        print(f"  {level}: {n}")
 
 
 if __name__ == "__main__":
