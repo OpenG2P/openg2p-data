@@ -470,6 +470,9 @@ def gen_household_programs(households: list[dict]) -> list[dict]:
     return rows
 
 
+CR_UUID_PREFIX = "e0100000-0000-4000-8000-"
+
+
 def gen_scores(households: list[dict]) -> list[dict]:
     rows = []
     for i, hh in enumerate(households, start=1):
@@ -483,7 +486,7 @@ def gen_scores(households: list[dict]) -> list[dict]:
             "score_type": "POVERTY",
             "score_definition_id": SCORE_DEFINITION_ID,
             "link_internal_record_id": hh["internal_record_id"],
-            "triggered_by_cr_id": None,
+            "triggered_by_cr_id": f"{CR_UUID_PREFIX}{i:012d}",
             "triggered_by_submission_id": None,
             "computed_score": score,
             "computed_at": computed_at,
