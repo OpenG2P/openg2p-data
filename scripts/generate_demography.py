@@ -1,11 +1,14 @@
-"""Generate demography/individuals.json + households.json from geo/*.json."""
+"""Generate demography/individuals.csv + households.csv from geo/*.csv."""
 
+import csv
 import json
 import random
 from datetime import date, timedelta
 from pathlib import Path
 
 from faker import Faker
+
+from _csv_utils import write_csv
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 GEO_DIR = REPO_ROOT / "geo"
@@ -40,36 +43,30 @@ def hh_uuid(seq: int) -> str:
     return f"{HOUSEHOLD_UUID_PREFIX}{seq:012d}"
 
 
+def _read_csv(path: Path) -> list[dict]:
+    with path.open(newline="", encoding="utf-8") as f:
+        return [
+            {k: (None if v == "" else v) for k, v in row.items()}
+            for row in csv.DictReader(f)
+        ]
+
+
 def load_geo() -> dict:
-    levels = json.loads((GEO_DIR / "levels.json").read_text())
-    level_by_mnemonic = {lv["level_mnemonic"]: lv for lv in levels}
-
-    def load(fname):
-        return json.loads((GEO_DIR / fname).read_text())
-
-    country = load("level-0-country.json")[0]
-    regions = load("level-1-regions.json")
-    districts = load("level-2-districts.json")
-    wards = load("level-3-wards.json")
-    villages = load("level-4-villages.json")
-
-    by_id = {}
-    for entry in [country, *regions, *districts, *wards, *villages]:
-        by_id[entry["level_value_id"]] = entry
-
-    return {
-        "level_by_mnemonic": level_by_mnemonic,
-        "by_id": by_id,
-        "villages": villages,
-    }
+    """Read flat geo.csv. Determine villages by 'no children' (terminal nodes)."""
+    rows = _read_csv(GEO_DIR / "geo.csv")
+    by_id = {r["level_value_id"]: r for r in rows}
+    children: dict[str, list[str]] = {}
+    for r in rows:
+        parent = r["parent_level_value_id"]
+        if parent:
+            children.setdefault(parent, []).append(r["level_value_id"])
+    villages = [r for r in rows if not children.get(r["level_value_id"])]
+    return {"by_id": by_id, "villages": villages}
 
 
 def build_hierarchy(geo: dict, village_id: str) -> dict:
     """Walk parent chain from village to country, return ordered hierarchy."""
     by_id = geo["by_id"]
-    levels = geo["level_by_mnemonic"]
-    level_id_to_mnemonic = {lv["level_id"]: lv["level_mnemonic"] for lv in levels.values()}
-
     chain = []
     cur_id = village_id
     while cur_id is not None:
@@ -78,31 +75,25 @@ def build_hierarchy(geo: dict, village_id: str) -> dict:
         cur_id = node["parent_level_value_id"]
     chain.reverse()
 
-    hierarchy = []
-    for node in chain:
-        mnem = level_id_to_mnemonic[node["level_id"]]
-        hierarchy.append(
-            {
-                "level": mnem,
-                "level_value_id": node["level_value_id"],
-                "level_value_mnemonic": node["level_value_mnemonic"],
-            }
-        )
+    hierarchy = [
+        {
+            "level": node["level"],
+            "level_value_id": node["level_value_id"],
+            "level_value_mnemonic": node["mnemonic"],
+        }
+        for node in chain
+    ]
     return {"hierarchy": hierarchy, "lowest_level_value_id": village_id}
 
 
 def geo_ids_from_village(geo: dict, village_id: str) -> dict:
-    """Return dict with country/region/district/ward/village IDs."""
+    """Return dict with one geo_<level>_id key per level in the parent chain."""
     by_id = geo["by_id"]
-    levels = geo["level_by_mnemonic"]
-    level_id_to_mnemonic = {lv["level_id"]: lv["level_mnemonic"] for lv in levels.values()}
-
     result = {"geo_village_id": village_id}
     cur_id = village_id
     while cur_id is not None:
         node = by_id[cur_id]
-        mnem = level_id_to_mnemonic[node["level_id"]]
-        result[f"geo_{mnem}_id"] = node["level_value_id"]
+        result[f"geo_{node['level']}_id"] = node["level_value_id"]
         cur_id = node["parent_level_value_id"]
     return result
 
@@ -329,14 +320,34 @@ def main() -> None:
 
     individuals = individuals[:NUM_INDIVIDUALS]
 
-    (OUT_DIR / "individuals.json").write_text(
-        json.dumps(individuals, indent=2) + "\n"
-    )
-    (OUT_DIR / "households.json").write_text(
-        json.dumps(households, indent=2) + "\n"
-    )
-    print(f"Wrote individuals.json: {len(individuals)} records")
-    print(f"Wrote households.json: {len(households)} records")
+    individual_columns = [
+        "internal_record_id", "functional_record_id",
+        "first_name", "middle_name", "last_name", "full_name", "given_name",
+        "gender", "birth_date", "estimated_age", "marital_status",
+        "phone_numbers", "emails",
+        "foundational_id", "foundational_id_masked",
+        "education_level", "language_code", "image_file",
+        "geo_village_id", "geo_ward_id", "geo_district_id",
+        "geo_region_id", "geo_country_id", "geo_hierarchy_json",
+        "latitude", "longitude", "altitude", "plus_code",
+        "address_line_1", "address_line_2", "postal_code", "country_code",
+    ]
+    household_columns = [
+        "internal_record_id", "functional_record_id",
+        "head_individual_id", "head_name", "headship_type", "member_ids",
+        "size_total", "size_adults", "size_children_u5",
+        "size_school_age", "size_elderly",
+        "number_of_female_members", "number_of_male_members",
+        "geo_village_id", "geo_ward_id", "geo_district_id",
+        "geo_region_id", "geo_country_id", "geo_hierarchy_json",
+        "latitude", "longitude", "altitude", "plus_code",
+        "address_line_1", "address_line_2", "postal_code", "country_code",
+    ]
+
+    write_csv(OUT_DIR / "individuals.csv", individual_columns, individuals)
+    write_csv(OUT_DIR / "households.csv", household_columns, households)
+    print(f"Wrote individuals.csv: {len(individuals)} records")
+    print(f"Wrote households.csv: {len(households)} records")
     print(f"  Individuals in households: {assigned_to_households}")
     print(f"  Unattached individuals:    {len(individuals) - assigned_to_households}")
 
