@@ -52,19 +52,19 @@ def _parse_demo_household(row: dict) -> dict:
 SEED = 1337
 random.seed(SEED)
 
-# UUID prefixes per sub-table
+# Short, neat ID prefixes per sub-table (unique within each table).
 PREFIXES = {
-    "household_asset": "50000000-0000-4000-8000-",
-    "household_housing": "55000000-0000-4000-8000-",
-    "household_program": "56000000-0000-4000-8000-",
-    "individual_shock": "60000000-0000-4000-8000-",
-    "individual_land": "61000000-0000-4000-8000-",
-    "individual_livelihood": "62000000-0000-4000-8000-",
-    "individual_livestock": "63000000-0000-4000-8000-",
-    "individual_vulnerability": "64000000-0000-4000-8000-",
-    "individual_program": "30000000-0000-4000-8000-",
-    "individual_disability": "a0000000-0000-4000-8000-",
-    "score": "70000000-0000-4000-8000-",
+    "household_asset": "ast",
+    "household_housing": "hhs",
+    "household_program": "hhp",
+    "individual_shock": "shk",
+    "individual_land": "lnd",
+    "individual_livelihood": "liv",
+    "individual_livestock": "lst",
+    "individual_vulnerability": "vul",
+    "individual_program": "ipp",
+    "individual_disability": "dis",
+    "score": "sco",
 }
 
 SCORE_DEFINITION_ID = "e0000000-0000-4000-8000-000000000001"
@@ -141,7 +141,7 @@ PASTORALIST_CLASSIFICATIONS = ["SETTLED", "PASTORALIST"]
 
 
 def uuid_for(table_key: str, seq: int) -> str:
-    return f"{PREFIXES[table_key]}{seq:012d}"
+    return f"{PREFIXES[table_key]}{seq:04d}"
 
 
 def base_record(
@@ -510,7 +510,7 @@ def gen_household_programs(households: list[dict]) -> list[dict]:
     return rows
 
 
-CR_UUID_PREFIX = "e0100000-0000-4000-8000-"
+CR_UUID_PREFIX = "cr"
 
 
 def gen_scores(households: list[dict]) -> list[dict]:
@@ -526,7 +526,7 @@ def gen_scores(households: list[dict]) -> list[dict]:
             "score_type": "POVERTY",
             "score_definition_id": SCORE_DEFINITION_ID,
             "link_internal_record_id": hh["internal_record_id"],
-            "triggered_by_cr_id": f"{CR_UUID_PREFIX}{i:012d}",
+            "triggered_by_cr_id": f"{CR_UUID_PREFIX}{i:04d}",
             "triggered_by_submission_id": None,
             "computed_score": score,
             "computed_at": computed_at,

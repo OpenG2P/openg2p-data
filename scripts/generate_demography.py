@@ -1,4 +1,9 @@
-"""Generate demography/individuals.csv + households.csv from geo/*.csv."""
+"""Generate demography/individuals.csv + households.csv from geo/*.csv.
+
+Reads the per-level geo CSVs (geo_hierarchy.csv + one CSV per level) produced by
+generate_geo.py. Each individual carries a household_id (the household it belongs
+to, blank for unattached individuals); households no longer carry member_ids.
+"""
 
 import csv
 import json
@@ -22,8 +27,8 @@ random.seed(SEED)
 Faker.seed(SEED)
 fake = Faker("en_US")
 
-INDIVIDUAL_UUID_PREFIX = "20000000-0000-4000-8000-"
-HOUSEHOLD_UUID_PREFIX = "10000000-0000-4000-8000-"
+INDIVIDUAL_UUID_PREFIX = "i"
+HOUSEHOLD_UUID_PREFIX = "h"
 
 MARITAL_STATUSES = ["SINGLE", "MARRIED", "WIDOWED", "DIVORCED"]
 EDUCATION_LEVELS = [
@@ -36,11 +41,11 @@ EDUCATION_LEVELS = [
 
 
 def ind_uuid(seq: int) -> str:
-    return f"{INDIVIDUAL_UUID_PREFIX}{seq:012d}"
+    return f"{INDIVIDUAL_UUID_PREFIX}{seq:04d}"
 
 
 def hh_uuid(seq: int) -> str:
-    return f"{HOUSEHOLD_UUID_PREFIX}{seq:012d}"
+    return f"{HOUSEHOLD_UUID_PREFIX}{seq:03d}"
 
 
 def _read_csv(path: Path) -> list[dict]:
@@ -52,8 +57,30 @@ def _read_csv(path: Path) -> list[dict]:
 
 
 def load_geo() -> dict:
-    """Read flat geo.csv. Determine villages by 'no children' (terminal nodes)."""
-    rows = _read_csv(GEO_DIR / "geo.csv")
+    """Read geo_hierarchy.csv + per-level value CSVs into a flat node map.
+
+    Levels (and their CSV file names) are derived from geo_hierarchy.csv, so this
+    adapts automatically if the hierarchy changes. Villages = terminal nodes
+    (those without children)."""
+    levels = _read_csv(GEO_DIR / "geo_hierarchy.csv")
+
+    rows: list[dict] = []
+    for lv in levels:
+        level_name = lv["level_mnemonic"]
+        fname = f"{level_name.capitalize()}.csv"
+        path = GEO_DIR / fname
+        if not path.is_file():
+            continue
+        for v in _read_csv(path):
+            rows.append(
+                {
+                    "level_value_id": v["level_value_id"],
+                    "level": level_name,
+                    "mnemonic": v["level_value_mnemonic"],
+                    "parent_level_value_id": v["parent_level_value_id"],
+                }
+            )
+
     by_id = {r["level_value_id"]: r for r in rows}
     children: dict[str, list[str]] = {}
     for r in rows:
@@ -172,6 +199,7 @@ def gen_individual(seq: int, geo: dict, village_id: str | None = None) -> dict:
     record = {
         "internal_record_id": ind_uuid(seq),
         "functional_record_id": f"IND-{seq:04d}",
+        "household_id": None,
         "first_name": first_name,
         "middle_name": middle_name,
         "last_name": last_name,
@@ -211,7 +239,6 @@ def gen_individual(seq: int, geo: dict, village_id: str | None = None) -> dict:
 def gen_household(seq: int, members: list[dict], geo: dict) -> dict:
     head = members[0]
     village_id = head["geo_village_id"]
-    member_ids = [m["internal_record_id"] for m in members]
 
     n_female = sum(1 for m in members if m["gender"] == "FEMALE")
     n_male = sum(1 for m in members if m["gender"] == "MALE")
@@ -229,7 +256,6 @@ def gen_household(seq: int, members: list[dict], geo: dict) -> dict:
         "head_individual_id": head["internal_record_id"],
         "head_name": head["full_name"],
         "headship_type": headship,
-        "member_ids": member_ids,
         "size_total": len(members),
         "size_adults": adults,
         "size_children_u5": children_u5,
@@ -311,6 +337,9 @@ def main() -> None:
             next_ind_seq += 1
             hh_members.append(child)
 
+        hh_id = hh_uuid(hh_seq)
+        for m in hh_members:
+            m["household_id"] = hh_id
         households.append(gen_household(hh_seq, hh_members, geo))
         assigned_to_households += len(hh_members)
 
@@ -321,7 +350,7 @@ def main() -> None:
     individuals = individuals[:NUM_INDIVIDUALS]
 
     individual_columns = [
-        "internal_record_id", "functional_record_id",
+        "internal_record_id", "functional_record_id", "household_id",
         "first_name", "middle_name", "last_name", "full_name", "given_name",
         "gender", "birth_date", "estimated_age", "marital_status",
         "phone_numbers", "emails",
@@ -334,7 +363,7 @@ def main() -> None:
     ]
     household_columns = [
         "internal_record_id", "functional_record_id",
-        "head_individual_id", "head_name", "headship_type", "member_ids",
+        "head_individual_id", "head_name", "headship_type",
         "size_total", "size_adults", "size_children_u5",
         "size_school_age", "size_elderly",
         "number_of_female_members", "number_of_male_members",
