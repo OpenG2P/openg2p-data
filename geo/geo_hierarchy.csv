@@ -1,6 +1,0 @@
-level_id,level_mnemonic,parent_level_id
-l0,country,
-l1,region,l0
-l2,district,l1
-l3,ward,l2
-l4,village,l3
