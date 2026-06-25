@@ -174,7 +174,6 @@ def gen_lands(individuals: list[dict]) -> list[dict]:
         n = random.randint(1, 2)
         for _ in range(n):
             seq += 1
-            village = ind["geo_hierarchy_json"]
             ownership = random.choice(LAND_OWNERSHIP)
             rec = base_record(
                 uuid_for("land", seq),
@@ -202,8 +201,11 @@ def gen_lands(individuals: list[dict]) -> list[dict]:
                     "address_line_2": ind["address_line_2"],
                     "postal_code": ind["postal_code"],
                     "country_code": ind["country_code"],
-                    "geo_lowest_level_value_id": ind["geo_village_id"],
-                    "geo_code_hierarchy_json": village,
+                    "country": ind["country"],
+                    "region": ind["region"],
+                    "district": ind["district"],
+                    "ward": ind["ward"],
+                    "village": ind["village"],
                     "shape_type": random.choice(SHAPE_TYPES),
                     "shape_coordinates_json": {
                         "type": "Point",
@@ -364,11 +366,6 @@ def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     individuals = _read_csv(DEMO_DIR / "individuals.csv")
     households = _read_csv(DEMO_DIR / "households.csv")
-
-    # Parse the geo hierarchy column so lands can embed it as a JSON object.
-    for ind in individuals:
-        if ind.get("geo_hierarchy_json"):
-            ind["geo_hierarchy_json"] = json.loads(ind["geo_hierarchy_json"])
 
     farmers = gen_farmers(individuals)
     household_members = gen_household_members(individuals)
