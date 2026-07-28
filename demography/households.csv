@@ -1,0 +1,101 @@
+internal_record_id,functional_record_id,head_individual_id,head_name,headship_type,size_total,size_adults,size_children_u5,size_school_age,size_elderly,number_of_female_members,number_of_male_members,country,region,district,ward,village,latitude,longitude,altitude,plus_code,address_line_1,address_line_2,postal_code,country_code
+h001,HH-0001,i0001,Lance Hoffman,MALE_HEADED,3,3,0,0,0,2,1,kamuntu,jasiri,baraka,umani,bimaka,13.5559,71.496,158,35AB+14,65423 Garcia Light,Sector 2,000001,KM
+h002,HH-0002,i0004,Monica Martin,FEMALE_HEADED,5,5,0,0,0,3,2,kamuntu,chakula,rafiki,uhuruumeme,biluju,17.1602,69.1584,68,71AB+91,8350 Lydia Valley Suite 641,Sector 5,000004,KM
+h003,HH-0003,i0009,Pamela Anderson,FEMALE_HEADED,5,3,1,1,0,1,4,kamuntu,kilima,pembe,upande,bigeu,14.0239,66.0479,185,40AB+60,248 Brandt Plains Apt. 465,Sector 1,000009,KM
+h004,HH-0004,i0014,Javier John Ramirez,MALE_HEADED,3,3,0,0,0,1,2,kamuntu,chakula,njia,wingu,bilufu,17.8385,67.8407,98,78AB+78,80132 Tucker Forest,Sector 6,000014,KM
+h005,HH-0005,i0017,Anthony Woods,MALE_HEADED,3,2,0,1,1,1,2,kamuntu,kilima,pembe,wingi,bieke,12.8714,71.8901,65,28AB+18,136 Shelly Port,Sector 9,000017,KM
+h006,HH-0006,i0020,Jacob Moore,MALE_HEADED,3,3,0,0,1,1,2,kamuntu,jasiri,ndoto,habari,biluzo,12.4657,68.4565,130,24AB+84,808 Huynh Cove Apt. 411,Sector 3,000020,KM
+h007,HH-0007,i0023,Kevin Hernandez,MALE_HEADED,7,5,2,0,0,4,3,kamuntu,faraja,tunza,kuitwa,bilova,17.8664,71.929,240,78AB+19,31586 Sara Freeway Apt. 260,Sector 6,000023,KM
+h008,HH-0008,i0030,Megan Dixon,FEMALE_HEADED,5,4,0,1,0,3,2,kamuntu,faraja,tunza,kufa,bilosi,10.3015,69.387,95,03AB+93,34332 Brandon Mountains Apt. 769,Sector 4,000030,KM
+h009,HH-0009,i0035,Jennifer Clark,FEMALE_HEADED,3,3,0,0,0,2,1,kamuntu,jasiri,baraka,safari,bimaqa,14.9307,71.8647,61,49AB+18,670 Evans Loaf,Sector 9,000035,KM
+h010,HH-0010,i0038,Debbie Murphy,FEMALE_HEADED,7,6,0,1,0,3,4,kamuntu,faraja,tunza,kuitwa,bilovi,12.885,67.9152,265,28AB+79,5646 Conley Mountains Apt. 805,Sector 3,000038,KM
+h011,HH-0011,i0045,Anna Walker,FEMALE_HEADED,3,3,0,0,0,2,1,kamuntu,chakula,makali,sura,biluqu,12.4997,66.4602,225,24AB+64,9578 Coleman Summit,Sector 1,000045,KM
+h012,HH-0012,i0048,Melissa Hernandez,FEMALE_HEADED,7,4,1,2,0,3,4,kamuntu,faraja,sihaya,kusoma,bicha,14.758,65.7896,275,47AB+57,31869 Kimberly Light Suite 749,Sector 4,000048,KM
+h013,HH-0013,i0055,Brandon King,MALE_HEADED,6,4,0,2,0,2,4,kamuntu,faraja,tunza,kuwasha,bilkua,11.2752,68.3411,292,12AB+83,876 Jacob Lake,Sector 2,000055,KM
+h014,HH-0014,i0061,Kelly Bryant,FEMALE_HEADED,5,5,0,0,0,3,2,kamuntu,faraja,tunza,kuwasha,billah,10.0491,65.1362,264,00AB+51,2174 Hanson Locks,Sector 8,000061,KM
+h015,HH-0015,i0066,Ryan Gonzalez,MALE_HEADED,7,7,0,0,1,5,2,kamuntu,chakula,mfumo,changa,biloxa,19.971,68.9311,53,99AB+89,594 Johnson Village Suite 409,Sector 4,000066,KM
+h016,HH-0016,i0073,Melissa Fernandez,FEMALE_HEADED,3,2,0,1,0,1,2,kamuntu,jasiri,baraka,umani,bimana,10.7717,66.7335,225,07AB+67,1796 Johnson Land,Sector 2,000073,KM
+h017,HH-0017,i0076,William Jamie Buchanan,MALE_HEADED,7,7,0,0,2,4,3,kamuntu,jasiri,simba,tanzu,bilusi,14.0101,69.9878,90,40AB+99,90422 Lindsey Creek Apt. 205,Sector 5,000076,KM
+h018,HH-0018,i0083,Sarah Angela Bell,FEMALE_HEADED,3,3,0,0,0,2,1,kamuntu,chakula,njia,barafu,biluhu,17.9575,70.9371,208,79AB+09,9368 Chelsea Shoals,Sector 3,000083,KM
+h019,HH-0019,i0086,Paul Wilson,MALE_HEADED,6,5,0,1,1,3,3,kamuntu,faraja,sihaya,kusoma,bidi,10.6192,65.6312,213,06AB+56,49784 Jeffrey Rapid Apt. 034,Sector 6,000086,KM
+h020,HH-0020,i0092,Leslie Bell,FEMALE_HEADED,7,5,0,2,0,2,5,kamuntu,chakula,rafiki,uhuruumeme,biluju,17.133,69.1788,155,71AB+91,1199 Ford Plaza Apt. 793,Sector 3,000092,KM
+h021,HH-0021,i0099,Pamela Anderson,FEMALE_HEADED,5,5,0,0,0,3,2,kamuntu,kilima,nyani,shimo,bilina,12.5656,71.6254,62,25AB+16,22927 Robert Springs Apt. 794,Sector 1,000099,KM
+h022,HH-0022,i0104,Todd Lynch,MALE_HEADED,5,4,0,1,1,2,3,kamuntu,chakula,makali,cheka,bilupu,19.9831,66.9494,248,99AB+69,43410 Robert Underpass Suite 117,Sector 6,000104,KM
+h023,HH-0023,i0109,Matthew Mitchell,MALE_HEADED,7,7,0,0,2,3,4,kamuntu,chakula,makali,sura,biluqu,12.4805,66.4473,113,24AB+64,541 Kim Locks,Sector 2,000109,KM
+h024,HH-0024,i0116,Rodney Jones,MALE_HEADED,7,6,0,1,0,4,3,kamuntu,chakula,njia,barafu,biluja,10.4073,68.4705,87,04AB+84,177 Anderson Village Apt. 268,Sector 9,000116,KM
+h025,HH-0025,i0123,Kathleen Destiny Khan,FEMALE_HEADED,7,4,1,2,0,6,1,kamuntu,faraja,asilani,nguvu,bano,13.6332,66.6511,66,36AB+66,8016 Nicole Stream Suite 650,Sector 7,000123,KM
+h026,HH-0026,i0130,Tyler Stevens,MALE_HEADED,7,5,1,1,0,3,4,kamuntu,chakula,rafiki,uhuruumeme,biluka,14.9874,70.9829,151,49AB+09,48434 Bush Spurs,Sector 5,000130,KM
+h027,HH-0027,i0137,Margaret Ronald Sullivan,FEMALE_HEADED,3,2,1,0,0,2,1,kamuntu,faraja,sihaya,kusoma,bichi,17.1992,65.1981,93,71AB+51,61227 Boyle Avenue Suite 637,Sector 3,000137,KM
+h028,HH-0028,i0140,Jacqueline Miles,FEMALE_HEADED,6,4,0,2,0,3,3,kamuntu,faraja,asilani,kufa,berio,10.9104,68.9507,130,09AB+89,339 Alicia Pines Suite 191,Sector 6,000140,KM
+h029,HH-0029,i0146,Pamela Stephenson,FEMALE_HEADED,3,2,0,1,0,2,1,kamuntu,chakula,mfumo,wimbo,biluba,14.4129,65.4097,145,44AB+54,31190 Harper Squares,Sector 3,000146,KM
+h030,HH-0030,i0149,Shannon Steven Thomas,FEMALE_HEADED,7,7,0,0,1,4,3,kamuntu,chakula,njia,wingu,bilugi,17.748,66.7524,234,77AB+67,668 Paul Glens,Sector 6,000149,KM
+h031,HH-0031,i0156,Jonathan Wolfe,MALE_HEADED,7,5,1,1,1,6,1,kamuntu,jasiri,baraka,walili,bimata,11.0621,66.0946,282,10AB+60,11823 Christine Glen Suite 461,Sector 4,000156,KM
+h032,HH-0032,i0163,Abigail Parker,FEMALE_HEADED,4,4,0,0,1,1,3,kamuntu,chakula,mfumo,nguvu,biluci,16.6068,65.5921,295,66AB+55,7888 Garcia Corners,Sector 2,000163,KM
+h033,HH-0033,i0167,Tracy Carter,FEMALE_HEADED,6,5,0,1,0,3,3,kamuntu,jasiri,simba,walizo,biluti,13.2596,66.3016,240,32AB+63,4651 Brittany Plains Apt. 807,Sector 6,000167,KM
+h034,HH-0034,i0173,Mark Lopez,MALE_HEADED,7,5,0,2,1,2,5,kamuntu,kilima,karamu,hasara,bilota,12.8016,65.7932,131,28AB+57,9660 Jamie Terrace,Sector 3,000173,KM
+h035,HH-0035,i0180,Kimberly Fritz,FEMALE_HEADED,5,4,0,1,0,3,2,kamuntu,chakula,njia,moyo,bilufi,16.3599,71.4481,170,63AB+14,340 Baker Wall,Sector 1,000180,KM
+h036,HH-0036,i0185,Daniel Jason Jordan,MALE_HEADED,4,4,0,0,0,2,2,kamuntu,jasiri,mapema,upendo,bimbee,15.7307,68.7852,53,57AB+87,750 Cory Tunnel,Sector 6,000185,KM
+h037,HH-0037,i0189,James Nancy Li,MALE_HEADED,3,3,0,0,1,2,1,kamuntu,jasiri,ndoto,pamoja,biluxo,12.3184,70.278,189,23AB+02,5326 Heath Corners,Sector 1,000189,KM
+h038,HH-0038,i0192,Daisy Little,FEMALE_HEADED,7,5,0,2,0,3,4,kamuntu,faraja,asilani,nguvu,bandari,10.8991,65.8856,290,08AB+58,69658 Kathryn Trail Apt. 091,Sector 4,000192,KM
+h039,HH-0039,i0199,Tara Mathews,FEMALE_HEADED,5,4,0,1,0,2,3,kamuntu,faraja,sihaya,kutaka,bileh,18.5214,68.5865,297,85AB+85,1951 Harry Unions Apt. 617,Sector 2,000199,KM
+h040,HH-0040,i0204,Jerry Edwards,MALE_HEADED,6,5,1,0,0,3,3,kamuntu,faraja,tunza,kufa,bilosi,10.3821,69.2986,262,03AB+92,537 Ford Walk,Sector 7,000204,KM
+h041,HH-0041,i0210,Alexander Harper,MALE_HEADED,6,5,0,1,0,2,4,kamuntu,faraja,sihaya,kuzaa,bievu,16.4972,68.4613,111,64AB+84,593 Craig Shoals Apt. 480,Sector 4,000210,KM
+h042,HH-0042,i0216,David Gary Haas,MALE_HEADED,4,4,0,0,0,2,2,kamuntu,jasiri,mapema,tahini,bimbez,17.8116,68.8285,258,78AB+88,0433 Michael Turnpike Apt. 006,Sector 1,000216,KM
+h043,HH-0043,i0220,Sara Hernandez,FEMALE_HEADED,5,5,0,0,1,3,2,kamuntu,jasiri,mapema,ushindi,bimaza,18.3372,65.3035,228,83AB+53,10324 Thomas Crescent Suite 677,Sector 5,000220,KM
+h044,HH-0044,i0225,Adam Briana Graves,MALE_HEADED,6,5,0,1,1,3,3,kamuntu,jasiri,baraka,walili,bimawa,19.7471,65.7783,237,97AB+57,62299 Sara Port Apt. 485,Sector 1,000225,KM
+h045,HH-0045,i0231,Matthew Alan Burke,MALE_HEADED,7,4,0,3,0,4,3,kamuntu,kilima,mkutani,msitu,baadhi,15.8286,71.8463,216,58AB+18,446 York Mount Suite 374,Sector 7,000231,KM
+h046,HH-0046,i0238,Kenneth Moore,MALE_HEADED,5,5,0,0,1,3,2,kamuntu,chakula,njia,moyo,bilufa,18.6508,65.6701,194,86AB+56,96666 Reyes Camp,Sector 5,000238,KM
+h047,HH-0047,i0243,Jennifer Roach,FEMALE_HEADED,5,2,1,2,1,3,2,kamuntu,kilima,karamu,hasara,biloti,13.9072,67.8875,101,39AB+78,348 Michael Lodge,Sector 1,000243,KM
+h048,HH-0048,i0248,Denise Cruz,FEMALE_HEADED,6,5,1,0,1,3,3,kamuntu,kilima,karamu,damu,bilkou,16.5522,65.5564,281,65AB+55,2120 Dale Ramp Suite 972,Sector 6,000248,KM
+h049,HH-0049,i0254,Christine Powers,FEMALE_HEADED,6,5,0,1,1,1,5,kamuntu,faraja,sihaya,kupika,bertu,13.9567,71.0116,284,39AB+10,0375 Moran Lakes Suite 113,Sector 3,000254,KM
+h050,HH-0050,i0260,Michael Goodman,MALE_HEADED,7,5,1,1,0,5,2,kamuntu,kilima,karamu,uzima,bilosa,18.2149,68.2149,150,82AB+82,858 James Road Suite 522,Sector 9,000260,KM
+h051,HH-0051,i0267,Mary Rivera,FEMALE_HEADED,4,3,1,0,0,2,2,kamuntu,faraja,tunza,kufa,biloti,14.6438,69.625,196,46AB+96,57399 Susan Springs,Sector 7,000267,KM
+h052,HH-0052,i0271,Robert Grant,MALE_HEADED,3,3,0,0,0,1,2,kamuntu,faraja,asilani,usawa,athari,19.2354,71.2641,259,92AB+12,5061 Darlene River Apt. 901,Sector 2,000271,KM
+h053,HH-0053,i0274,Natalie Swanson,FEMALE_HEADED,7,6,0,1,0,3,4,kamuntu,faraja,sihaya,kusoma,bidi,10.6652,65.6957,183,06AB+56,23943 Howard Union,Sector 5,000274,KM
+h054,HH-0054,i0281,Brenda Moore,FEMALE_HEADED,4,3,1,0,0,1,3,kamuntu,jasiri,mapema,upendo,bimbea,11.1072,71.1294,95,11AB+11,750 Kathleen Fort,Sector 3,000281,KM
+h055,HH-0055,i0285,Ashley Timothy Leonard,FEMALE_HEADED,6,5,0,1,0,4,2,kamuntu,chakula,rafiki,nguvu,bilumo,16.8056,71.8352,216,68AB+18,603 David Ramp,Sector 7,000285,KM
+h056,HH-0056,i0291,Brittney Jon Pearson,FEMALE_HEADED,5,5,0,0,1,3,2,kamuntu,jasiri,simba,hatua,biluvi,11.5387,68.5293,167,15AB+85,68872 Hansen Orchard Suite 495,Sector 4,000291,KM
+h057,HH-0057,i0296,Angie Hill,FEMALE_HEADED,4,3,0,1,0,1,3,kamuntu,chakula,makali,mwali,biluni,16.4928,71.5427,83,64AB+15,011 Barber Points,Sector 9,000296,KM
+h058,HH-0058,i0300,Brandon Nunez,MALE_HEADED,3,2,1,0,0,1,2,kamuntu,chakula,mfumo,wimbo,bilozo,16.7903,65.7495,60,67AB+57,94237 Jimmy Garden Suite 333,Sector 4,000300,KM
+h059,HH-0059,i0303,Ashlee Ward,FEMALE_HEADED,3,2,0,1,0,2,1,kamuntu,chakula,njia,barafu,biluho,15.4701,66.5262,119,54AB+65,84347 Diaz Parks Suite 365,Sector 7,000303,KM
+h060,HH-0060,i0306,David Garrison,MALE_HEADED,3,3,0,0,0,1,2,kamuntu,chakula,makali,tano,biluri,13.3005,68.2978,246,33AB+82,1203 Woods Roads,Sector 1,000306,KM
+h061,HH-0061,i0309,Jennifer White,FEMALE_HEADED,3,3,0,0,1,2,1,kamuntu,kilima,karamu,hasara,biloto,12.9157,68.86,73,29AB+88,34132 Garcia Circles,Sector 4,000309,KM
+h062,HH-0062,i0312,Joseph Stout,MALE_HEADED,3,2,0,1,1,1,2,kamuntu,jasiri,simba,walizo,bilutu,16.8727,69.8637,200,68AB+98,5642 Smith Pike Apt. 547,Sector 7,000312,KM
+h063,HH-0063,i0315,Jennifer Castaneda,FEMALE_HEADED,3,3,0,0,1,1,2,kamuntu,faraja,zawadi,kupiga,biliha,18.347,67.2953,84,83AB+72,9735 Edwin Place Apt. 214,Sector 1,000315,KM
+h064,HH-0064,i0318,Catherine Huang,FEMALE_HEADED,3,2,0,1,0,1,2,kamuntu,jasiri,baraka,walili,bimaua,15.4445,65.497,101,54AB+54,7303 Moss Court,Sector 4,000318,KM
+h065,HH-0065,i0321,Alexa Williams,FEMALE_HEADED,3,3,0,0,0,1,2,kamuntu,faraja,zawadi,kuweza,biliza,17.1844,67.1303,272,71AB+71,925 John Parks Apt. 950,Sector 7,000321,KM
+h066,HH-0066,i0324,Thomas Casey Spencer,MALE_HEADED,3,3,0,0,2,2,1,kamuntu,chakula,njia,wingu,bilufu,17.839,67.815,68,78AB+78,4485 Smith Route,Sector 1,000324,KM
+h067,HH-0067,i0327,Andrew Pace,MALE_HEADED,3,3,0,0,0,1,2,kamuntu,faraja,zawadi,kuweza,bilixi,11.5857,65.6324,56,15AB+56,31731 Ashley Villages,Sector 4,000327,KM
+h068,HH-0068,i0330,James Lee,MALE_HEADED,3,3,0,0,1,1,2,kamuntu,kilima,pembe,soko,bertu,16.8108,71.8151,153,68AB+18,195 Park Meadow Apt. 228,Sector 7,000330,KM
+h069,HH-0069,i0333,Victoria Lewis,FEMALE_HEADED,3,3,0,0,2,1,2,kamuntu,chakula,mfumo,nguvu,bilubu,14.1642,66.2173,150,41AB+62,07522 Richardson Prairie,Sector 1,000333,KM
+h070,HH-0070,i0336,Joseph Annette Flores,MALE_HEADED,3,3,0,0,1,2,1,kamuntu,chakula,njia,barafu,biluhi,16.3516,70.3206,199,63AB+03,9981 Ryan Turnpike Suite 225,Sector 4,000336,KM
+h071,HH-0071,i0339,Randy Jackson,MALE_HEADED,3,2,0,1,0,1,2,kamuntu,chakula,mfumo,changa,bilowu,13.2669,69.2113,59,32AB+92,33521 Jodi Gardens Apt. 405,Sector 7,000339,KM
+h072,HH-0072,i0342,Rachel Brian Williamson,FEMALE_HEADED,3,3,0,0,0,1,2,kamuntu,jasiri,mapema,tahini,bimbez,17.7543,68.7707,282,77AB+87,64510 Dillon Run,Sector 1,000342,KM
+h073,HH-0073,i0345,Mary Miller,FEMALE_HEADED,3,3,0,0,0,1,2,kamuntu,chakula,njia,joto,biluha,14.1366,65.1277,214,41AB+51,3926 Browning Isle,Sector 4,000345,KM
+h074,HH-0074,i0348,Jonathan Jennifer Jacobs,MALE_HEADED,3,2,0,1,0,1,2,kamuntu,kilima,nyani,pika,biliki,17.3024,65.2643,166,73AB+52,33060 Clements Forges,Sector 7,000348,KM
+h075,HH-0075,i0351,Kelly Foster,FEMALE_HEADED,3,1,1,1,0,2,1,kamuntu,faraja,asilani,mapicho,bedui,14.0777,70.0533,269,40AB+00,47644 Jackson Hill,Sector 1,000351,KM
+h076,HH-0076,i0354,Anna Mccarthy,FEMALE_HEADED,3,3,0,0,1,1,2,kamuntu,faraja,asilani,usawa,baadhi,13.0154,67.0207,138,30AB+70,86892 Pierce Cape Apt. 592,Sector 4,000354,KM
+h077,HH-0077,i0357,Amber Hernandez,FEMALE_HEADED,3,3,0,0,0,1,2,kamuntu,jasiri,mapema,ujinga,bimbeo,13.3611,67.4451,288,33AB+74,20994 Knapp Causeway Apt. 622,Sector 7,000357,KM
+h078,HH-0078,i0360,Lisa French,FEMALE_HEADED,3,3,0,0,0,2,1,kamuntu,faraja,zawadi,kusikia,biliwa,11.823,70.7875,116,18AB+07,99787 Morton Ridge Apt. 430,Sector 1,000360,KM
+h079,HH-0079,i0363,Erin Morgan,FEMALE_HEADED,3,2,0,1,0,2,1,kamuntu,jasiri,baraka,walili,bimava,12.4848,67.4693,222,24AB+74,0272 Mcclain Plain Suite 760,Sector 4,000363,KM
+h080,HH-0080,i0366,Cindy Turner,FEMALE_HEADED,3,3,0,0,1,2,1,kamuntu,kilima,pembe,upande,bigny,14.8771,71.8715,279,48AB+18,0317 Lauren Parkway,Sector 7,000366,KM
+h081,HH-0081,i0369,Kirsten Nelson,FEMALE_HEADED,3,3,0,0,0,2,1,kamuntu,kilima,pembe,wingi,bieke,12.9314,71.9221,255,29AB+19,702 Thomas Spring Apt. 160,Sector 1,000369,KM
+h082,HH-0082,i0372,Kenneth Romero,MALE_HEADED,3,3,0,0,0,1,2,kamuntu,faraja,sihaya,kusoma,bieke,13.8655,67.8973,174,38AB+78,158 Laura Place Suite 696,Sector 4,000372,KM
+h083,HH-0083,i0375,Joseph Price,MALE_HEADED,3,3,0,0,0,2,1,kamuntu,faraja,asilani,usawa,asaante,15.9962,65.9855,217,59AB+59,35494 Robbins Key Apt. 909,Sector 7,000375,KM
+h084,HH-0084,i0378,Donna Salas,FEMALE_HEADED,3,2,0,1,0,1,2,kamuntu,chakula,makali,mwali,biluni,16.5066,71.496,127,65AB+14,762 Derrick Valley,Sector 1,000378,KM
+h085,HH-0085,i0381,Paula Harrison,FEMALE_HEADED,3,3,0,0,0,2,1,kamuntu,kilima,karamu,uzima,billyu,12.495,69.5435,97,24AB+95,565 Roberts Camp Suite 940,Sector 4,000381,KM
+h086,HH-0086,i0384,Randy Young,MALE_HEADED,3,3,0,0,1,2,1,kamuntu,faraja,zawadi,kujua,bilina,17.7059,69.7628,240,77AB+97,239 Brown Greens Apt. 027,Sector 7,000384,KM
+h087,HH-0087,i0387,Sandra Connor Smith,FEMALE_HEADED,3,3,0,0,0,2,1,kamuntu,chakula,mfumo,haraka,bilovi,18.7345,65.7401,252,87AB+57,3009 Brian Ranch Apt. 911,Sector 1,000387,KM
+h088,HH-0088,i0390,Matthew Rodriguez,MALE_HEADED,3,2,0,1,0,1,2,kamuntu,kilima,nyani,shimo,bilini,10.7457,66.7376,111,07AB+67,410 Chad Stream Suite 707,Sector 4,000390,KM
+h089,HH-0089,i0393,Angela Stevens,FEMALE_HEADED,3,2,0,1,0,1,2,kamuntu,jasiri,baraka,umani,bimala,15.6313,71.7221,217,56AB+17,346 Crystal Knolls Suite 173,Sector 7,000393,KM
+h090,HH-0090,i0396,Tammy Johnson,FEMALE_HEADED,3,3,0,0,0,1,2,kamuntu,jasiri,ndoto,pamoja,biluxu,13.4683,67.3967,96,34AB+73,20204 Stephen Extension,Sector 1,000396,KM
+h091,HH-0091,i0399,Andrew Garcia,MALE_HEADED,3,3,0,0,0,1,2,kamuntu,jasiri,ndoto,habari,biluzo,12.4772,68.4943,260,24AB+84,02194 Steele Turnpike,Sector 4,000399,KM
+h092,HH-0092,i0402,Mary Hill,FEMALE_HEADED,3,2,1,0,1,1,2,kamuntu,kilima,pembe,jumba,bevu,15.0448,71.0549,287,50AB+10,20054 Ryan Isle Suite 010,Sector 7,000402,KM
+h093,HH-0093,i0405,Samuel George Ellis,MALE_HEADED,3,2,0,1,0,1,2,kamuntu,chakula,makali,sura,biluqu,12.4972,66.4724,139,24AB+64,831 Vincent Overpass,Sector 1,000405,KM
+h094,HH-0094,i0408,Justin Jessica Smith,MALE_HEADED,3,2,0,1,0,2,1,kamuntu,chakula,njia,wingu,bilufu,17.8295,67.8268,146,78AB+78,74279 Tiffany Mountain,Sector 4,000408,KM
+h095,HH-0095,i0411,Amanda Richardson,FEMALE_HEADED,3,3,0,0,0,2,1,kamuntu,jasiri,simba,tanzu,biluta,14.7247,65.7529,135,47AB+57,81793 Luke Grove Suite 401,Sector 7,000411,KM
+h096,HH-0096,i0414,Joseph Burton,MALE_HEADED,3,3,0,0,0,1,2,kamuntu,chakula,rafiki,eneza,biluma,19.5307,70.5239,188,95AB+05,8275 Wallace Rue Apt. 431,Sector 1,000414,KM
+h097,HH-0097,i0417,Travis Eric Reilly,MALE_HEADED,3,2,1,0,1,1,2,kamuntu,kilima,nyani,pika,bilili,15.8302,70.8405,232,58AB+08,474 Lauren Stream Suite 517,Sector 4,000417,KM
+h098,HH-0098,i0420,Larry Hunt,MALE_HEADED,3,2,1,0,0,2,1,kamuntu,chakula,rafiki,nguvu,bilumu,10.7109,67.7457,274,07AB+77,6504 Bell Mission Apt. 376,Sector 7,000420,KM
+h099,HH-0099,i0423,Dylan Henry,MALE_HEADED,3,2,0,1,0,2,1,kamuntu,kilima,nyani,mbegu,bilixi,13.075,71.1192,282,30AB+11,478 Walker Turnpike Apt. 244,Sector 1,000423,KM
+h100,HH-0100,i0426,Sherry Taylor,FEMALE_HEADED,3,3,0,0,1,2,1,kamuntu,chakula,rafiki,nguvu,bilumi,18.2423,71.2053,167,82AB+12,44818 Katie Falls Apt. 928,Sector 4,000426,KM
