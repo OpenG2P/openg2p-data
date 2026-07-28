@@ -1,15 +1,36 @@
-"""Generate demography/individuals.json + households.json from geo/*.json."""
+"""Generate demography/individuals.csv + households.csv from geo/geo.csv.
 
-import json
+Reads the single flat, human-readable geo CSV (one row per village, with
+country/region/district/ward names denormalized) and emits the geo location as
+plain human-readable name columns (country, region, district, ward, village).
+No ids, no path strings, no hierarchy JSON — the registry/master-data loaders
+derive whatever internal keys they need from these names at seed time.
+Each individual carries a household_id (the household it belongs to, blank for
+unattached individuals); households no longer carry member_ids.
+"""
+
+import csv
 import random
 from datetime import date, timedelta
 from pathlib import Path
 
 from faker import Faker
 
+from _csv_utils import write_csv
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 GEO_DIR = REPO_ROOT / "geo"
+GEO_FILE = GEO_DIR / "geo.csv"
 OUT_DIR = REPO_ROOT / "demography"
+
+# Ordered geo levels, matching the columns of geo/geo.csv (root -> leaf).
+GEO_LEVELS = ["country", "region", "district", "ward", "village"]
+
+
+def _geo_key(village: dict) -> str:
+    """Stable string key for a village (used only for deterministic lat/long)."""
+    return "/".join(village[level] for level in GEO_LEVELS)
+
 
 NUM_INDIVIDUALS = 500
 NUM_HOUSEHOLDS = 100
@@ -19,8 +40,8 @@ random.seed(SEED)
 Faker.seed(SEED)
 fake = Faker("en_US")
 
-INDIVIDUAL_UUID_PREFIX = "20000000-0000-4000-8000-"
-HOUSEHOLD_UUID_PREFIX = "10000000-0000-4000-8000-"
+INDIVIDUAL_UUID_PREFIX = "i"
+HOUSEHOLD_UUID_PREFIX = "h"
 
 MARITAL_STATUSES = ["SINGLE", "MARRIED", "WIDOWED", "DIVORCED"]
 EDUCATION_LEVELS = [
@@ -33,78 +54,32 @@ EDUCATION_LEVELS = [
 
 
 def ind_uuid(seq: int) -> str:
-    return f"{INDIVIDUAL_UUID_PREFIX}{seq:012d}"
+    return f"{INDIVIDUAL_UUID_PREFIX}{seq:04d}"
 
 
 def hh_uuid(seq: int) -> str:
-    return f"{HOUSEHOLD_UUID_PREFIX}{seq:012d}"
+    return f"{HOUSEHOLD_UUID_PREFIX}{seq:03d}"
+
+
+def _read_csv(path: Path) -> list[dict]:
+    with path.open(newline="", encoding="utf-8") as f:
+        return [
+            {k: (None if v == "" else v) for k, v in row.items()}
+            for row in csv.DictReader(f)
+        ]
 
 
 def load_geo() -> dict:
-    levels = json.loads((GEO_DIR / "levels.json").read_text())
-    level_by_mnemonic = {lv["level_mnemonic"]: lv for lv in levels}
+    """Read the flat geo/geo.csv into a list of village name-rows.
 
-    def load(fname):
-        return json.loads((GEO_DIR / fname).read_text())
-
-    country = load("level-0-country.json")[0]
-    regions = load("level-1-regions.json")
-    districts = load("level-2-districts.json")
-    wards = load("level-3-wards.json")
-    villages = load("level-4-villages.json")
-
-    by_id = {}
-    for entry in [country, *regions, *districts, *wards, *villages]:
-        by_id[entry["level_value_id"]] = entry
-
-    return {
-        "level_by_mnemonic": level_by_mnemonic,
-        "by_id": by_id,
-        "villages": villages,
-    }
-
-
-def build_hierarchy(geo: dict, village_id: str) -> dict:
-    """Walk parent chain from village to country, return ordered hierarchy."""
-    by_id = geo["by_id"]
-    levels = geo["level_by_mnemonic"]
-    level_id_to_mnemonic = {lv["level_id"]: lv["level_mnemonic"] for lv in levels.values()}
-
-    chain = []
-    cur_id = village_id
-    while cur_id is not None:
-        node = by_id[cur_id]
-        chain.append(node)
-        cur_id = node["parent_level_value_id"]
-    chain.reverse()
-
-    hierarchy = []
-    for node in chain:
-        mnem = level_id_to_mnemonic[node["level_id"]]
-        hierarchy.append(
-            {
-                "level": mnem,
-                "level_value_id": node["level_value_id"],
-                "level_value_mnemonic": node["level_value_mnemonic"],
-            }
-        )
-    return {"hierarchy": hierarchy, "lowest_level_value_id": village_id}
-
-
-def geo_ids_from_village(geo: dict, village_id: str) -> dict:
-    """Return dict with country/region/district/ward/village IDs."""
-    by_id = geo["by_id"]
-    levels = geo["level_by_mnemonic"]
-    level_id_to_mnemonic = {lv["level_id"]: lv["level_mnemonic"] for lv in levels.values()}
-
-    result = {"geo_village_id": village_id}
-    cur_id = village_id
-    while cur_id is not None:
-        node = by_id[cur_id]
-        mnem = level_id_to_mnemonic[node["level_id"]]
-        result[f"geo_{mnem}_id"] = node["level_value_id"]
-        cur_id = node["parent_level_value_id"]
-    return result
+    Each row is one village denormalized with its parent names
+    (country, region, district, ward, village). Villages are the rows
+    themselves; no ids or hierarchy are derived here."""
+    villages = [
+        {level: row[level] for level in GEO_LEVELS}
+        for row in _read_csv(GEO_FILE)
+    ]
+    return {"villages": villages}
 
 
 def random_dob(min_age: int, max_age: int) -> date:
@@ -128,9 +103,9 @@ def mask_id(foundational_id: str) -> str:
     return "XXXXXX" + foundational_id[-4:]
 
 
-def gen_individual(seq: int, geo: dict, village_id: str | None = None) -> dict:
-    if village_id is None:
-        village_id = random.choice(geo["villages"])["level_value_id"]
+def gen_individual(seq: int, geo: dict, village: dict | None = None) -> dict:
+    if village is None:
+        village = random.choice(geo["villages"])
 
     gender = random.choice(["MALE", "FEMALE"])
     first_name = fake.first_name_male() if gender == "MALE" else fake.first_name_female()
@@ -171,9 +146,9 @@ def gen_individual(seq: int, geo: dict, village_id: str | None = None) -> dict:
     full_name_parts.append(last_name)
     full_name = " ".join(full_name_parts)
 
-    village_node = geo["by_id"][village_id]
-    base_lat = 10.0 + (hash(village_id) % 1000) / 100.0
-    base_lon = 65.0 + (hash(village_id) % 700) / 100.0
+    village_key = _geo_key(village)
+    base_lat = 10.0 + (hash(village_key) % 1000) / 100.0
+    base_lon = 65.0 + (hash(village_key) % 700) / 100.0
     lat = round(base_lat + random.uniform(-0.05, 0.05), 4)
     lon = round(base_lon + random.uniform(-0.05, 0.05), 4)
     altitude = random.randint(50, 300)
@@ -181,6 +156,7 @@ def gen_individual(seq: int, geo: dict, village_id: str | None = None) -> dict:
     record = {
         "internal_record_id": ind_uuid(seq),
         "functional_record_id": f"IND-{seq:04d}",
+        "household_id": None,
         "first_name": first_name,
         "middle_name": middle_name,
         "last_name": last_name,
@@ -200,8 +176,7 @@ def gen_individual(seq: int, geo: dict, village_id: str | None = None) -> dict:
         "language_code": "en",
         "image_file": f"images/IND-{seq:04d}.jpg",
     }
-    record.update(geo_ids_from_village(geo, village_id))
-    record["geo_hierarchy_json"] = build_hierarchy(geo, village_id)
+    record.update({level: village[level] for level in GEO_LEVELS})
     record.update(
         {
             "latitude": str(lat),
@@ -219,8 +194,6 @@ def gen_individual(seq: int, geo: dict, village_id: str | None = None) -> dict:
 
 def gen_household(seq: int, members: list[dict], geo: dict) -> dict:
     head = members[0]
-    village_id = head["geo_village_id"]
-    member_ids = [m["internal_record_id"] for m in members]
 
     n_female = sum(1 for m in members if m["gender"] == "FEMALE")
     n_male = sum(1 for m in members if m["gender"] == "MALE")
@@ -238,7 +211,6 @@ def gen_household(seq: int, members: list[dict], geo: dict) -> dict:
         "head_individual_id": head["internal_record_id"],
         "head_name": head["full_name"],
         "headship_type": headship,
-        "member_ids": member_ids,
         "size_total": len(members),
         "size_adults": adults,
         "size_children_u5": children_u5,
@@ -247,8 +219,7 @@ def gen_household(seq: int, members: list[dict], geo: dict) -> dict:
         "number_of_female_members": n_female,
         "number_of_male_members": n_male,
     }
-    record.update(geo_ids_from_village(geo, village_id))
-    record["geo_hierarchy_json"] = build_hierarchy(geo, village_id)
+    record.update({level: head[level] for level in GEO_LEVELS})
     record.update(
         {
             "latitude": head["latitude"],
@@ -277,22 +248,22 @@ def main() -> None:
     assigned_to_households = 0
 
     for hh_seq in range(1, NUM_HOUSEHOLDS + 1):
-        village_id = random.choice(geo["villages"])["level_value_id"]
+        village = random.choice(geo["villages"])
         size = random.randint(3, 7)
         if assigned_to_households + size > target_in_households:
             size = max(3, target_in_households - assigned_to_households)
             if size < 3:
                 break
 
-        head = gen_individual(next_ind_seq, geo, village_id)
+        head = gen_individual(next_ind_seq, geo, village)
         if head["estimated_age"] < 25:
-            head = gen_individual(next_ind_seq, geo, village_id)
+            head = gen_individual(next_ind_seq, geo, village)
         individuals.append(head)
         next_ind_seq += 1
         hh_members = [head]
 
         spouse_gender_pref = "FEMALE" if head["gender"] == "MALE" else "MALE"
-        spouse = gen_individual(next_ind_seq, geo, village_id)
+        spouse = gen_individual(next_ind_seq, geo, village)
         spouse["gender"] = spouse_gender_pref
         spouse["last_name"] = head["last_name"]
         spouse["full_name"] = " ".join(
@@ -308,7 +279,7 @@ def main() -> None:
         hh_members.append(spouse)
 
         for _ in range(size - 2):
-            child = gen_individual(next_ind_seq, geo, village_id)
+            child = gen_individual(next_ind_seq, geo, village)
             child["last_name"] = head["last_name"]
             child["full_name"] = " ".join(
                 [child["first_name"]]
@@ -320,6 +291,9 @@ def main() -> None:
             next_ind_seq += 1
             hh_members.append(child)
 
+        hh_id = hh_uuid(hh_seq)
+        for m in hh_members:
+            m["household_id"] = hh_id
         households.append(gen_household(hh_seq, hh_members, geo))
         assigned_to_households += len(hh_members)
 
@@ -329,14 +303,32 @@ def main() -> None:
 
     individuals = individuals[:NUM_INDIVIDUALS]
 
-    (OUT_DIR / "individuals.json").write_text(
-        json.dumps(individuals, indent=2) + "\n"
-    )
-    (OUT_DIR / "households.json").write_text(
-        json.dumps(households, indent=2) + "\n"
-    )
-    print(f"Wrote individuals.json: {len(individuals)} records")
-    print(f"Wrote households.json: {len(households)} records")
+    individual_columns = [
+        "internal_record_id", "functional_record_id", "household_id",
+        "first_name", "middle_name", "last_name", "full_name", "given_name",
+        "gender", "birth_date", "estimated_age", "marital_status",
+        "phone_numbers", "emails",
+        "foundational_id", "foundational_id_masked",
+        "education_level", "language_code", "image_file",
+        "country", "region", "district", "ward", "village",
+        "latitude", "longitude", "altitude", "plus_code",
+        "address_line_1", "address_line_2", "postal_code", "country_code",
+    ]
+    household_columns = [
+        "internal_record_id", "functional_record_id",
+        "head_individual_id", "head_name", "headship_type",
+        "size_total", "size_adults", "size_children_u5",
+        "size_school_age", "size_elderly",
+        "number_of_female_members", "number_of_male_members",
+        "country", "region", "district", "ward", "village",
+        "latitude", "longitude", "altitude", "plus_code",
+        "address_line_1", "address_line_2", "postal_code", "country_code",
+    ]
+
+    write_csv(OUT_DIR / "individuals.csv", individual_columns, individuals)
+    write_csv(OUT_DIR / "households.csv", household_columns, households)
+    print(f"Wrote individuals.csv: {len(individuals)} records")
+    print(f"Wrote households.csv: {len(households)} records")
     print(f"  Individuals in households: {assigned_to_households}")
     print(f"  Unattached individuals:    {len(individuals) - assigned_to_households}")
 
