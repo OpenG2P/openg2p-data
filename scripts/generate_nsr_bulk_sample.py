@@ -349,6 +349,16 @@ def generate(conn, geo_conn, args, dist, rng):
     leaf_weights = [lf["weight"] for lf in leaves]
     print(f"[bulk-seed] geo: {len(leaves)} leaf nodes, depth {len(levels)}")
 
+    root = leaves[0]["chain"][0] if leaves and leaves[0]["chain"] else None
+    root_id = root["id"] if root else "?"
+    print(f"[bulk-seed] geo root: {root_id} ({root['name'] if root else '?'})")
+    if args.expect_country and root_id != args.expect_country:
+        raise SystemExit(
+            f"[bulk-seed] ABORT: MDS holds geography for '{root_id}' but this "
+            f"deployment expects '{args.expect_country}'. Seeding would create "
+            f"records pointing at the wrong country's places. Check the "
+            f"master-data chart's geoSeed.countryPack.")
+
     n_ind = args.individuals
     n_hh = max(1, n_ind // MEMBERS_PER_HOUSEHOLD)
 
@@ -757,6 +767,11 @@ def main():
                    help="score_definition_id for generated scores (NOT NULL in "
                         "the schema); defaults to the one already in use")
     p.add_argument("--country-code", default=None)
+    p.add_argument("--expect-country", default=None,
+                   help="Guard, not a selector. Fails if the MDS root geo node "
+                        "is not this code (e.g. ET). MDS remains the single "
+                        "place a country is chosen; this only catches a "
+                        "registry pointed at the wrong environment.")
     p.add_argument("--dry-run", action="store_true",
                    help="generate and report counts without writing")
     p.add_argument("--purge", action="store_true",
