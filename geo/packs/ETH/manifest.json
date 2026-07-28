@@ -1,0 +1,28 @@
+{
+  "country": "ETH",
+  "source": "OCHA COD-AB via HDX",
+  "source_title": "Ethiopia - Subnational Administrative Boundaries",
+  "license": "Creative Commons Attribution for Intergovernmental Organisations (CC BY-IGO)",
+  "license_note": "Attribution required. Boundaries are operational, not a statement on legal or political status.",
+  "upstream_last_modified": "2026-04-17T09:59:45.523963",
+  "fetched_on": "2026-07-28",
+  "identifier": "P-code used as level_value_id",
+  "levels": [
+    "country",
+    "region",
+    "zone",
+    "woreda"
+  ],
+  "unit_counts": {
+    "country": 1,
+    "region": 15,
+    "zone": 107,
+    "woreda": 1148
+  },
+  "simplification_tolerance_deg": {
+    "country": 0.005,
+    "region": 0.005,
+    "zone": 0.008,
+    "woreda": 0.012
+  }
+}

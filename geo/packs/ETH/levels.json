@@ -1,0 +1,22 @@
+[
+  {
+    "level_id": "l0",
+    "level_mnemonic": "country",
+    "parent_level_id": null
+  },
+  {
+    "level_id": "l1",
+    "level_mnemonic": "region",
+    "parent_level_id": "l0"
+  },
+  {
+    "level_id": "l2",
+    "level_mnemonic": "zone",
+    "parent_level_id": "l1"
+  },
+  {
+    "level_id": "l3",
+    "level_mnemonic": "woreda",
+    "parent_level_id": "l2"
+  }
+]
