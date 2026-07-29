@@ -272,6 +272,31 @@ def table_columns(conn, table):
         return {r[0] for r in cur.fetchall()}
 
 
+def required_columns(conn, table):
+    """NOT NULL columns with no default — every one must be supplied.
+
+    Postgres reports a violation only once COPY is already streaming, as
+    "null value in column X violates not-null constraint" against an opaque
+    row. Checking up front turns a mid-load failure that leaves the register
+    half-written into a clear message before anything is written.
+    """
+    with conn.cursor() as cur:
+        cur.execute(
+            """
+            select a.attname
+            from pg_class c
+            join pg_namespace n on n.oid = c.relnamespace
+            join pg_attribute a on a.attrelid = c.oid
+            left join pg_attrdef d on d.adrelid = c.oid and d.adnum = a.attnum
+            where n.nspname = 'public' and c.relname = %s
+              and a.attnum > 0 and not a.attisdropped
+              and a.attnotnull and d.adbin is null
+            """,
+            (table,),
+        )
+        return {r[0] for r in cur.fetchall()}
+
+
 class Loader:
     """Buffers dict rows and COPYs them, using only columns the table has."""
 
@@ -285,6 +310,19 @@ class Loader:
         # Preserve caller order so the COPY column list is stable/readable.
         self.cols = [f for f in fields if f in self.available] or list(fields)
         self.skipped = [f for f in fields if f not in self.available]
+
+        # Fail before writing anything if the schema demands a column this
+        # script has no value for — otherwise the load dies partway through
+        # and has to be purged before it can be retried.
+        if self.available and not dry_run:
+            missing = required_columns(conn, table) - set(self.cols)
+            if missing:
+                raise SystemExit(
+                    f"[bulk-seed] ABORT: {table} requires column(s) "
+                    f"{sorted(missing)} (NOT NULL, no default) but this "
+                    f"generator supplies no value for them. Add them to the "
+                    f"field list for this table, or give the column a default."
+                )
         self.buf = io.StringIO()
         self.pending = 0
         self.total = 0
