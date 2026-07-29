@@ -788,8 +788,19 @@ def main():
         user=os.environ.get("PGUSER", "postgres"),
         password=os.environ.get("PGPASSWORD", ""),
     )
+    # The geo hierarchy lives in the Master Data database, which in a real
+    # deployment is owned by a different role than the registry — the registry
+    # user gets "permission denied for table g2p_geo_levels". Fall back to the
+    # registry credentials so single-user setups (local, CI) still work.
+    geo_dsn = dict(
+        dsn,
+        host=os.environ.get("MDS_PGHOST") or dsn["host"],
+        port=os.environ.get("MDS_PGPORT") or dsn["port"],
+        user=os.environ.get("MDS_PGUSER") or dsn["user"],
+        password=os.environ.get("MDS_PGPASSWORD") or dsn["password"],
+    )
     conn = psycopg2.connect(dbname=args.db, **dsn)
-    geo_conn = psycopg2.connect(dbname=args.geo_db, **dsn)
+    geo_conn = psycopg2.connect(dbname=args.geo_db, **geo_dsn)
 
     if args.purge:
         # Before loading distributions: a purge only deletes, so requiring the
