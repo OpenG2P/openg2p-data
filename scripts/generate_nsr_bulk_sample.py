@@ -137,17 +137,69 @@ HOUSING = {
     "roof_material": ["THATCH", "IRON_SHEET", "TILE", "CONCRETE"],
     "wall_material": ["MUD", "WOOD", "BRICK", "CONCRETE"],
     "floor_material": ["EARTH", "WOOD", "CEMENT", "TILE"],
-    "water_source_type": ["SURFACE_WATER", "UNPROTECTED_WELL", "PUBLIC_TAP", "PIPED_DWELLING"],
-    "sanitation_type": ["OPEN_DEFECATION", "PIT_LATRINE", "IMPROVED_LATRINE", "FLUSH_TOILET"],
-    "lighting_source": ["FIREWOOD", "KEROSENE", "SOLAR", "GRID_ELECTRICITY"],
-    "cooking_fuel_type": ["FIREWOOD", "CHARCOAL", "LPG", "ELECTRICITY"],
+    # The four service ladders are enum-backed (WaterSourceTypeEnum,
+    # SanitationTypeEnum, LightingSourceEnum, CookingFuelEnum), so every rung has
+    # to be a real member. They previously read UNPROTECTED_WELL, PIPED_DWELLING,
+    # OPEN_DEFECATION, IMPROVED_LATRINE, GRID_ELECTRICITY and LPG — none of which
+    # exist in those enums. The reporting views matched these invented names, so
+    # the dashboards looked right while the rows themselves were invalid: the API
+    # rejects them on read and the attribute metadata has no matching value_id.
+    #
+    # Order still runs worst -> best, which is what makes the deprivation ladder
+    # correlate with poverty score.
+    "water_source_type": ["SURFACE_WATER", "WELL", "PUBLIC_TAP", "PIPED"],
+    "sanitation_type": ["OPEN", "PIT_LATRINE", "COMPOSTING_TOILET", "FLUSH_TOILET"],
+    "lighting_source": ["NONE", "KEROSENE", "SOLAR", "GRID"],
+    "cooking_fuel_type": ["FIREWOOD", "CHARCOAL", "GAS", "ELECTRICITY"],
 }
-TENURE = ["OWNED", "RENTED", "FREE_OF_CHARGE", "CUSTOMARY"]
+# Enum-backed columns. Every list below must hold members of the matching enum in
+# nsr-extension/.../register_domain/models/enums.py.
+#
+# These columns are plain String, not native PG enums, so an invalid value INSERTs
+# without complaint and only bites later: the API rejects the row on read, the
+# attribute metadata has no matching value_id, and dashboards group by a category
+# that does not exist. Name and weight are paired throughout so the two cannot
+# drift out of step.
+TENURE = [("OWNED", 62), ("RENTED", 18), ("HOSTED", 12), ("TEMPORARY", 8)]
 HEADSHIP = ["MALE_HEADED", "FEMALE_HEADED", "CHILD_HEADED", "ELDERLY_HEADED"]
-PROGRAMS = ["RPSNP", "UPSNP", "URBAN_PSNP", "DIRECT_SUPPORT"]
-DISPLACEMENT = ["SETTLED", "IDP", "RETURNEE", "REFUGEE"]
-PASTORALIST = ["NON_PASTORALIST", "AGRO_PASTORALIST", "PASTORALIST"]
-RELATIONSHIPS = ["HEAD", "SPOUSE", "CHILD", "PARENT", "SIBLING", "OTHER_RELATIVE"]
+# Must be members of the extension's ProgramEnum
+# (nsr-extension/.../register_domain/models/enums.py), which in turn matches the
+# PROGRAM_NAME value_id rows in g2p_attribute_values.
+#
+# program_name is a plain String column, not a native PG enum, so an invalid
+# value INSERTs happily and only surfaces later — the API rejects the row on
+# read, the attribute metadata has no matching entry, and the dashboards' program
+# breakdown shows a programme that does not exist. This list previously carried
+# URBAN_PSNP and DIRECT_SUPPORT, which G2P-5412's enum rework dropped.
+#
+# Name and weight are paired so the two cannot drift: they used to be a list plus
+# a separate weights=[...] literal that had to stay the same length, and adding a
+# programme raised inside rng.choices.
+PROGRAMS = [
+    ("PROG_CASH_TRANSFER", 30),
+    ("PROG_FOOD_SUPPORT", 20),
+    ("PROG_SCHOOL_FEEDING", 14),
+    ("PROG_PUBLIC_WORKS", 12),
+    ("PROG_ELDERLY_PENSION", 8),
+    ("PROG_DISABILITY_ALLOWANCE", 6),
+    ("PROG_HEALTH_INSURANCE", 5),
+    ("UPSNP", 3),
+    ("RPSNP", 2),
+]
+
+
+def names_and_weights(pairs):
+    return [n for n, _ in pairs], [w for _, w in pairs]
+
+
+PROGRAM_NAMES, PROGRAM_WEIGHTS = names_and_weights(PROGRAMS)
+TENURE_NAMES, TENURE_WEIGHTS = names_and_weights(TENURE)
+DISPLACEMENT_NAMES, DISPLACEMENT_WEIGHTS = names_and_weights(DISPLACEMENT)
+PASTORALIST_NAMES, PASTORALIST_WEIGHTS = names_and_weights(PASTORALIST)
+DISPLACEMENT = [("HOST_COMMUNITY", 88), ("IDP", 7), ("RETURNEE", 3), ("REFUGEE", 2)]
+PASTORALIST = [("SETTLED", 80), ("SEMI_PASTORALIST", 13), ("PASTORALIST", 7)]
+# SELF, not HEAD — RelationshipToHeadEnum names the head's own row SELF.
+RELATIONSHIPS = ["SELF", "SPOUSE", "CHILD", "PARENT", "SIBLING", "OTHER_RELATIVE"]
 MARITAL = ["SINGLE", "MARRIED", "WIDOWED", "DIVORCED", "SEPARATED"]
 
 
@@ -564,7 +616,7 @@ def generate(conn, geo_conn, args, dist, rng):
             "elderly_member_present": elderly > 0,
             "rooms_count": rooms,
             "overcrowding_indicator": round(size / rooms, 2),
-            "tenure_status": rng.choices(TENURE, weights=[62, 18, 12, 8], k=1)[0],
+            "tenure_status": rng.choices(TENURE_NAMES, weights=TENURE_WEIGHTS, k=1)[0],
             "water_distance_minutes": int(abs(rng.gauss(poverty * 45, 15))),
             "country_code": args.country_code,
         }
@@ -603,7 +655,7 @@ def generate(conn, geo_conn, args, dist, rng):
             prog = {
                 "internal_record_id": rid(),
                 "record_name": "Programme enrolment",
-                "program_name": rng.choices(PROGRAMS, weights=[46, 24, 18, 12], k=1)[0],
+                "program_name": rng.choices(PROGRAM_NAMES, weights=PROGRAM_WEIGHTS, k=1)[0],
                 "program_start_date": base - timedelta(days=rng.randint(30, 1400)),
                 "program_exit_date": None,
             }
@@ -623,8 +675,8 @@ def generate(conn, geo_conn, args, dist, rng):
             plw = bool(gender == "FEMALE" and 15 <= age <= 49 and rng.random() < 0.13)
             orphan = bool(age < 18 and rng.random() < 0.05)
             chronic = bool(rng.random() < 0.07 + poverty * 0.05)
-            displacement = rng.choices(DISPLACEMENT, weights=[88, 7, 3, 2], k=1)[0]
-            pastoral = rng.choices(PASTORALIST, weights=[80, 13, 7], k=1)[0]
+            displacement = rng.choices(DISPLACEMENT_NAMES, weights=DISPLACEMENT_WEIGHTS, k=1)[0]
+            pastoral = rng.choices(PASTORALIST_NAMES, weights=PASTORALIST_WEIGHTS, k=1)[0]
             livelihood = dist["livelihood"].pick() if adult else None
             employment = dist["employment"].pick() if adult else None
             education = dist["education"].pick() if age >= 5 else None
@@ -656,16 +708,19 @@ def generate(conn, geo_conn, args, dist, rng):
                 "gender": gender,
                 "birth_date": date(base.year - age, rng.randint(1, 12), rng.randint(1, 28)),
                 "estimated_age": age,
-                "age_method": "DECLARED" if rng.random() < 0.8 else "ESTIMATED",
+                # AgeMethodEnum is DOCUMENTED/ESTIMATED — there is no DECLARED.
+                "age_method": "DOCUMENTED" if rng.random() < 0.8 else "ESTIMATED",
                 "marital_status": (rng.choices(MARITAL, weights=[30, 52, 9, 6, 3], k=1)[0]
                                    if adult else "SINGLE"),
                 "education_level": education,
                 "educational_status": education,
                 "occupation": livelihood,
                 "registration_date": base,
-                "relationship_to_head": "HEAD" if is_head else rng.choice(RELATIONSHIPS[1:]),
+                "relationship_to_head": RELATIONSHIPS[0] if is_head else rng.choice(RELATIONSHIPS[1:]),
                 "is_head": is_head,
-                "citizenship_category": "CITIZEN" if rng.random() < 0.97 else "NON_CITIZEN",
+                # CitizenshipCategoryEnum has no NON_CITIZEN; RESIDENT is the
+                # non-citizen-but-settled category.
+                "citizenship_category": "CITIZEN" if rng.random() < 0.97 else "RESIDENT",
                 "residency_status": "RESIDENT",
                 "dependency_indicator": (not adult) or age >= 65,
                 "disability_status": disability,
@@ -684,7 +739,9 @@ def generate(conn, geo_conn, args, dist, rng):
                 "foundational_id_verification_status": fid_status,
                 "foundational_id_masked": (f"FID******{ind_seq % 10000:04d}"
                                            if has_fid else None),
-                "identity_evidence_type": ("NATIONAL_ID" if has_fid else None),
+                # IdentityEvidenceTypeEnum: a verified foundational id is
+                # FOUNDATIONAL_ID_VERIFIED, not NATIONAL_ID.
+                "identity_evidence_type": ("FOUNDATIONAL_ID_VERIFIED" if has_fid else "NONE"),
                 # Digital-inclusion signal: phone ownership tracks wealth.
                 "has_national_id": has_fid,
                 "phone_numbers": ([{"phone_no": f"+2519{rng.randint(10**7, 10**8 - 1)}"}]
