@@ -1,0 +1,27 @@
+{
+  "country": "XKM",
+  "country_name": "Kamuntu",
+  "synthetic": true,
+  "source": "Synthetic \u2014 openg2p-data/scripts/packs/generate_synthetic_pack.py",
+  "source_title": "Kamuntu \u2014 synthetic country pack",
+  "license": "CC0-1.0",
+  "license_note": "Kamuntu is a fictitious country. Its boundaries, place names and P-codes are invented and describe no real place, so no attribution is owed and nothing here states a position on any real border. Codes are drawn from the ISO 3166 user-assigned ranges (XAA-XZZ, XA-XZ) and cannot collide with a real country.",
+  "version": "2026-07-30",
+  "generated_by": "generate_synthetic_pack.py",
+  "seed": 20260730,
+  "identifier": "P-code used as level_value_id",
+  "levels": [
+    "country",
+    "region",
+    "district",
+    "ward",
+    "village"
+  ],
+  "unit_counts": {
+    "country": 1,
+    "region": 9,
+    "district": 42,
+    "ward": 164,
+    "village": 668
+  }
+}

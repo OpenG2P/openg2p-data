@@ -6,7 +6,7 @@ administrative hierarchy, official P-codes, and simplified boundary geometry —
 everything the platform needs to know about a country's geography.
 
     python fetch_country_pack.py --country ETH \\
-        --level-names region,zone,woreda --out ../geo/packs/ETH
+        --level-names region,zone,woreda --out ../../packs/ETH
 
 Why COD-AB
 ----------
@@ -41,7 +41,6 @@ Output
 from __future__ import annotations
 
 import argparse
-import io
 import json
 import os
 import shutil
@@ -49,6 +48,8 @@ import tempfile
 import urllib.request
 import zipfile
 from datetime import date
+
+from _geometry import count_points, simplify_geometry
 
 HDX_API = "https://data.humdata.org/api/3/action/package_show?id=cod-ab-{iso3}"
 
@@ -61,105 +62,6 @@ DEFAULT_TOLERANCE = {0: 0.005, 1: 0.005, 2: 0.008, 3: 0.012, 4: 0.015}
 def fetch_json(url):
     with urllib.request.urlopen(url, timeout=120) as r:
         return json.loads(r.read().decode())
-
-
-# ---------------------------------------------------------------------------
-# geometry simplification (Douglas-Peucker, pure python)
-# ---------------------------------------------------------------------------
-def _perp_distance(pt, start, end):
-    (x, y), (x1, y1), (x2, y2) = pt, start, end
-    dx, dy = x2 - x1, y2 - y1
-    if dx == 0 and dy == 0:
-        return ((x - x1) ** 2 + (y - y1) ** 2) ** 0.5
-    t = max(0.0, min(1.0, ((x - x1) * dx + (y - y1) * dy) / (dx * dx + dy * dy)))
-    px, py = x1 + t * dx, y1 + t * dy
-    return ((x - px) ** 2 + (y - py) ** 2) ** 0.5
-
-
-def simplify_ring(ring, tol):
-    """Douglas-Peucker, iterative so a 10k-vertex woreda can't blow the stack.
-
-    A ring must keep at least 4 points (3 distinct + closing point) or it stops
-    being a polygon and renderers silently drop it.
-    """
-    if len(ring) <= 4:
-        return ring
-    keep = [False] * len(ring)
-    keep[0] = keep[-1] = True
-    stack = [(0, len(ring) - 1)]
-    while stack:
-        lo, hi = stack.pop()
-        if hi <= lo + 1:
-            continue
-        worst, worst_i = tol, -1
-        for i in range(lo + 1, hi):
-            d = _perp_distance(ring[i], ring[lo], ring[hi])
-            if d > worst:
-                worst, worst_i = d, i
-        if worst_i != -1:
-            keep[worst_i] = True
-            stack.append((lo, worst_i))
-            stack.append((worst_i, hi))
-    out = [p for p, k in zip(ring, keep) if k]
-    if len(out) < 4:
-        # Too aggressive for this ring — fall back to an evenly-spaced sample
-        # rather than emitting a degenerate polygon.
-        step = max(1, len(ring) // 4)
-        out = ring[::step]
-        if out[0] != out[-1]:
-            out.append(out[0])
-    return out
-
-
-def geom_extent(geom):
-    """Largest bbox dimension, in degrees."""
-    c = geom.get("coordinates") or []
-    t = geom.get("type")
-    if t == "Polygon":
-        pts = [p for r in c for p in r]
-    elif t == "MultiPolygon":
-        pts = [p for poly in c for r in poly for p in r]
-    else:
-        return 0.0
-    if not pts:
-        return 0.0
-    xs = [p[0] for p in pts]
-    ys = [p[1] for p in pts]
-    return max(max(xs) - min(xs), max(ys) - min(ys))
-
-
-# A unit is never thinned by more than this fraction of its own size, however
-# generous the level tolerance is.
-MAX_RELATIVE_TOLERANCE = 0.02
-
-
-def simplify_geometry(geom, tol):
-    """Simplify with a tolerance capped relative to the feature's own extent.
-
-    A flat tolerance in degrees treats a 200 km region and a 5 km urban woreda
-    identically, so the small one gets flattened into a sliver — area error at
-    the 90th percentile was 27% (worst case 85%) before this cap, which is
-    plainly visible as wrong shapes on a choropleth.
-    """
-    eff = min(tol, geom_extent(geom) * MAX_RELATIVE_TOLERANCE) or tol
-    t = geom.get("type")
-    c = geom.get("coordinates")
-    if t == "Polygon":
-        return {"type": t, "coordinates": [simplify_ring(r, eff) for r in c]}
-    if t == "MultiPolygon":
-        return {"type": t,
-                "coordinates": [[simplify_ring(r, eff) for r in poly] for poly in c]}
-    return geom
-
-
-def count_points(geom):
-    c = geom.get("coordinates") or []
-    t = geom.get("type")
-    if t == "Polygon":
-        return sum(len(r) for r in c)
-    if t == "MultiPolygon":
-        return sum(len(r) for poly in c for r in poly)
-    return 0
 
 
 # ---------------------------------------------------------------------------
@@ -301,6 +203,7 @@ def main():
         with open(os.path.join(args.out, "manifest.json"), "w") as fh:
             json.dump({
                 "country": args.country,
+                "synthetic": False,
                 "source": "OCHA COD-AB via HDX",
                 "source_title": src["title"],
                 "license": src["license"],
@@ -308,6 +211,10 @@ def main():
                                 "not a statement on legal or political status.",
                 "upstream_last_modified": src["last_modified"],
                 "fetched_on": date.today().isoformat(),
+                # Every pack carries a `version`, whatever produced it, so
+                # load_geo_pack.py stamps seeded rows from one field rather than
+                # guessing per pack flavour.
+                "version": src["last_modified"] or date.today().isoformat(),
                 "identifier": "P-code used as level_value_id",
                 "levels": [lv["level_mnemonic"] for lv in levels],
                 "unit_counts": counts,
