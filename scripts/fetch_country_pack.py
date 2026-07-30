@@ -276,7 +276,11 @@ def main():
                 after += count_points(simple)
                 feats.append({
                     "type": "Feature",
-                    "properties": {"pcode": pcode, "name": name or pcode,
+                    # Deliberately NOT "name": Evidence backs each map input
+                    # with a callable proxy, and a field called `name` collides
+                    # with the read-only Function.name — the map then dies with
+                    # "Cannot assign to read only property 'name'".
+                    "properties": {"pcode": pcode, "area_name": name or pcode,
                                    "parent_pcode": parent, "level": mnemonic},
                     "geometry": simple,
                 })
