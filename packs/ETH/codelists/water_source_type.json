@@ -7,7 +7,7 @@
     {
       "value_id": "PIPED",
       "value_code": "PIPED",
-      "value_display": "Piped to dwelling",
+      "value_display": "Piped",
       "sort_order": 1,
       "roles": [
         "improved_water"
@@ -39,23 +39,23 @@
       "display_i18n": {}
     },
     {
+      "value_id": "SURFACE_WATER",
+      "value_code": "SURFACE_WATER",
+      "value_display": "Surface water",
+      "sort_order": 5,
+      "display_i18n": {}
+    },
+    {
       "value_id": "RAINWATER",
       "value_code": "RAINWATER",
       "value_display": "Rainwater",
-      "sort_order": 5,
+      "sort_order": 6,
       "display_i18n": {}
     },
     {
       "value_id": "TANKER_TRUCK",
       "value_code": "TANKER_TRUCK",
       "value_display": "Tanker truck",
-      "sort_order": 6,
-      "display_i18n": {}
-    },
-    {
-      "value_id": "SURFACE_WATER",
-      "value_code": "SURFACE_WATER",
-      "value_display": "Surface water",
       "sort_order": 7,
       "display_i18n": {}
     },

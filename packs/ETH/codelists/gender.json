@@ -27,6 +27,13 @@
       "value_display": "Other",
       "sort_order": 3,
       "display_i18n": {}
+    },
+    {
+      "value_id": "UNKNOWN",
+      "value_code": "UNKNOWN",
+      "value_display": "Unknown",
+      "sort_order": 4,
+      "display_i18n": {}
     }
   ]
 }
