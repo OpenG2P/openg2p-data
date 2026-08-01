@@ -1,0 +1,29 @@
+{
+  "attribute_id": "CROP_SEASON",
+  "attribute_code": "CROP_SEASON",
+  "attribute_display": "Cropping season",
+  "is_hierarchical": false,
+  "values": [
+    {
+      "value_id": "SEASON_SUMMER",
+      "value_code": "SEASON_SUMMER",
+      "value_display": "SUMMER",
+      "sort_order": 1,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "SEASON_MONSOON",
+      "value_code": "SEASON_MONSOON",
+      "value_display": "MONSOON",
+      "sort_order": 2,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "SEASON_WINTER",
+      "value_code": "SEASON_WINTER",
+      "value_display": "WINTER",
+      "sort_order": 3,
+      "display_i18n": {}
+    }
+  ]
+}

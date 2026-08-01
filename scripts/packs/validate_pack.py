@@ -195,6 +195,90 @@ def check_codelists(pack_dir, r):
                     f"found {len(holders)}: {holders}")
 
 
+# sample field -> the code list it must draw from
+SAMPLE_CODED = {
+    "individuals": {
+        "gender": "GENDER", "relationship_to_head": "RELATIONSHIP_TO_HEAD",
+        "marital_status": "MARITAL_STATUS", "education_level": "EDUCATION_LEVEL",
+        "employment_status": "EMPLOYMENT_STATUS", "disability_status": "DISABILITY_STATUS",
+    },
+    "households": {
+        "headship_type": "HEADSHIP_TYPE", "dwelling_type": "DWELLING_TYPE",
+        "tenure_status": "TENURE_STATUS", "water_source_type": "WATER_SOURCE_TYPE",
+        "sanitation_type": "SANITATION_TYPE", "lighting_source": "LIGHTING_SOURCE",
+        "cooking_fuel_type": "COOKING_FUEL_TYPE",
+    },
+}
+
+
+def check_samples(pack_dir, r, geo_ids):
+    """Sample people must be placeable and their coded values must be real.
+
+    A sample record is the one thing in the pack a human actually reads, so an
+    incoherent one is visible in a way a bad boundary is not — today's shared
+    fixture has American names in Swahili-named villages. These checks stop the
+    quieter version: a value that no longer exists in its list, or a household
+    sitting on a P-code the pack does not contain.
+    """
+    d = os.path.join(pack_dir, "samples")
+    if not os.path.isdir(d):
+        return
+    lists = {}
+    cl = os.path.join(pack_dir, "codelists")
+    if os.path.isdir(cl):
+        for fn in os.listdir(cl):
+            if fn.endswith(".json"):
+                doc = read_json(os.path.join(cl, fn))
+                lists[doc.get("attribute_id")] = {v.get("value_id") for v in doc.get("values", [])}
+
+    data = {}
+    for kind in ("individuals", "households"):
+        path = os.path.join(d, f"{kind}.json")
+        if not os.path.exists(path):
+            r.error(f"samples/ exists but {kind}.json is missing")
+            return
+        data[kind] = read_json(path)
+
+    for kind, fields in SAMPLE_CODED.items():
+        for rec in data[kind]:
+            for field, attr in fields.items():
+                val = rec.get(field)
+                if val is None or attr not in lists:
+                    continue
+                if val not in lists[attr]:
+                    r.error(f"sample {kind[:-1]} {rec.get(kind[:-1] + '_id')} has "
+                            f"{field}={val!r}, which is not a value of {attr}")
+            g = rec.get("geo_pcode")
+            if g and g not in geo_ids:
+                r.error(f"sample {kind[:-1]} {rec.get(kind[:-1] + '_id')} sits on "
+                        f"{g}, which is not a unit in this pack")
+
+    hh_ids = {h.get("household_id") for h in data["households"]}
+    ind_by_id = {i.get("individual_id"): i for i in data["individuals"]}
+    for i in data["individuals"]:
+        if i.get("household_id") not in hh_ids:
+            r.error(f"individual {i.get('individual_id')} belongs to unknown "
+                    f"household {i.get('household_id')}")
+    for h in data["households"]:
+        head = ind_by_id.get(h.get("head_individual_id"))
+        if not head:
+            r.error(f"household {h.get('household_id')} names an unknown head")
+            continue
+        if head.get("household_id") != h.get("household_id"):
+            r.error(f"household {h.get('household_id')} is headed by someone in "
+                    f"another household")
+        if head.get("relationship_to_head") != "SELF":
+            r.error(f"the head of {h.get('household_id')} is recorded as "
+                    f"{head.get('relationship_to_head')}, not SELF")
+        # headship_type must agree with the head's gender, or every gender
+        # breakdown of headship disagrees with the underlying people
+        want = {"MALE": "MALE_HEADED", "FEMALE": "FEMALE_HEADED"}.get(head.get("gender"))
+        if want and h.get("headship_type") not in (want, "CHILD_HEADED",
+                                                   "ELDERLY_HEADED", "DISABLED_HEADED"):
+            r.error(f"household {h.get('household_id')} is {h.get('headship_type')} "
+                    f"but its head is {head.get('gender')}")
+
+
 def validate(pack_dir):
     r = Report(os.path.basename(pack_dir.rstrip("/")))
 
@@ -296,6 +380,7 @@ def validate(pack_dir):
                 f"do not match values.json {counts}")
 
     check_codelists(pack_dir, r)
+    check_samples(pack_dir, r, set(vals))
 
     # -- boundaries --------------------------------------------------------
     bdir = os.path.join(pack_dir, "boundaries")

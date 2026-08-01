@@ -1,0 +1,92 @@
+{
+  "attribute_id": "CROP_COMMODITY",
+  "attribute_code": "CROP_COMMODITY",
+  "attribute_display": "Crop",
+  "is_hierarchical": false,
+  "values": [
+    {
+      "value_id": "CROP_WHEAT",
+      "value_code": "CROP_WHEAT",
+      "value_display": "WHEAT",
+      "sort_order": 1,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "CROP_TEFF",
+      "value_code": "CROP_TEFF",
+      "value_display": "TEFF",
+      "sort_order": 2,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "CROP_MAIZE",
+      "value_code": "CROP_MAIZE",
+      "value_display": "MAIZE",
+      "sort_order": 3,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "CROP_SESAME",
+      "value_code": "CROP_SESAME",
+      "value_display": "SESAME",
+      "sort_order": 4,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "CROP_MALT_BARLEY",
+      "value_code": "CROP_MALT_BARLEY",
+      "value_display": "MALT_BARLEY",
+      "sort_order": 5,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "CROP_TOMATO",
+      "value_code": "CROP_TOMATO",
+      "value_display": "TOMATO",
+      "sort_order": 6,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "CROP_ONION",
+      "value_code": "CROP_ONION",
+      "value_display": "ONION",
+      "sort_order": 7,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "CROP_AVOCADO",
+      "value_code": "CROP_AVOCADO",
+      "value_display": "AVOCADO",
+      "sort_order": 8,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "CROP_BANANA",
+      "value_code": "CROP_BANANA",
+      "value_display": "BANANA",
+      "sort_order": 9,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "CROP_MANGO",
+      "value_code": "CROP_MANGO",
+      "value_display": "MANGO",
+      "sort_order": 10,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "CROP_SOYBEAN",
+      "value_code": "CROP_SOYBEAN",
+      "value_display": "SOYBEAN",
+      "sort_order": 11,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "CROP_OTHER",
+      "value_code": "CROP_OTHER",
+      "value_display": "OTHER",
+      "sort_order": 12,
+      "display_i18n": {}
+    }
+  ]
+}

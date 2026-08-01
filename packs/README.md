@@ -22,12 +22,22 @@ country it carries.
 Every pack — real or synthetic — is exactly these four things:
 
 ```
-levels.json                 the hierarchy: level_id, level_mnemonic, parent_level_id
-values.json                 every unit: level_value_id, level_id, level_value_mnemonic,
-                            parent_level_value_id, pcode, pcode_source, display_name
-boundaries/<level>.geojson  one FeatureCollection per level, keyed on pcode
-manifest.json               provenance, licence, version, level names, unit counts
+levels.json                    the hierarchy: level_id, level_mnemonic, parent_level_id
+values.json                    every unit: level_value_id, level_id, level_value_mnemonic,
+                               parent_level_value_id, pcode, pcode_source, display_name
+boundaries/<level>.geojson     one FeatureCollection per level, keyed on pcode
+manifest.json                  provenance, licence, version, level names, unit counts
+
+codelists/<attribute>.json     the country's code lists — gender, education, water
+                               source. Values may carry `roles` (see ../roles.json)
+domains/<domain>/*.json        lists that vary by domain AND country, e.g. crops.
+                               A Farmer Registry reads agriculture/; NSR ignores it
+samples/individuals.json       a few dozen people, coherent with this country
+samples/households.json        and the households they form
 ```
+
+Everything after `manifest.json` is optional — a pack with geography alone is
+still valid — but `validate_pack.py` checks whatever is present.
 
 Consumers are told nothing else. `load_geo_pack.py` reads only these files and
 cannot tell a synthetic pack from a real one, which is the point: swapping
@@ -51,6 +61,17 @@ Evidence backs each map input with a callable proxy, and a field called `name`
 collides with the read-only `Function.name` — the map dies outright with
 *"Cannot assign to read only property 'name'"*. This is checked, because it has
 happened.
+
+**Code lists carry meaning, not just values.** Platform logic must never test a
+literal: `is_head = (relationship_to_head = 'SELF')` breaks the moment a country
+names that value differently, and it breaks silently. A value instead carries a
+`role` from the closed vocabulary in [`roles.json`](roles.json), and logic asks for
+the role. The validator rejects an unknown role, a single-value role held twice,
+and a role no value carries.
+
+**Sample people must be placeable and coded correctly.** Every `geo_pcode` must be
+a unit in this pack, every coded field a value of its list, and a household's
+headship must agree with its head's gender.
 
 **Nothing hardcodes level names or depth.** Ethiopia has four levels and calls
 them regions, zones and woredas; Kamuntu has five and calls them regions,
