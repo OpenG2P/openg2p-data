@@ -1,0 +1,13 @@
+{
+  "_comment": "Closed vocabulary of semantic roles. Platform logic asks for a role, never a literal value, so a report survives a country that names things differently. This file is the ONLY source: validate_pack.py reads it rather than restating it. Prose: docs/country-pack-architecture.md",
+  "roles": {
+    "female":              {"attribute": "GENDER",                "cardinality": "one", "used_by": "is_female"},
+    "head_of_household":   {"attribute": "RELATIONSHIP_TO_HEAD",  "cardinality": "one", "used_by": "is_head"},
+    "not_displaced":       {"attribute": "DISPLACEMENT_STATUS",   "cardinality": "one", "used_by": "is_displaced (negated)"},
+    "disability_yes":      {"attribute": "DISABILITY_STATUS",     "cardinality": "one", "used_by": "has_disability"},
+    "improved_water":      {"attribute": "WATER_SOURCE_TYPE",     "cardinality": "many", "used_by": "has_improved_water"},
+    "improved_sanitation": {"attribute": "SANITATION_TYPE",       "cardinality": "many", "used_by": "has_improved_sanitation"},
+    "clean_cooking":       {"attribute": "COOKING_FUEL_TYPE",     "cardinality": "many", "used_by": "has_clean_cooking"},
+    "electrified":         {"attribute": "LIGHTING_SOURCE",       "cardinality": "many", "used_by": "has_electricity"}
+  }
+}

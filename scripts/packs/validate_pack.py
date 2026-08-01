@@ -61,6 +61,31 @@ NESTING_THRESHOLD = 0.90
 
 REQUIRED_MANIFEST = ["country", "source", "license", "levels", "unit_counts"]
 
+# Closed vocabulary — see packs/ROLES.md. A role not listed here is a typo, and a
+# typo must fail the build rather than silently match nothing.
+#   single: exactly one value in that list must hold it
+#   set:    one or more may
+def load_roles():
+    """The role vocabulary, read from packs/roles.json.
+
+    Read rather than restated. It began as a markdown table beside a matching
+    dict in this file — two copies of one contract, which is the drift this whole
+    exercise exists to remove.
+
+    Returns (single, many): role -> owning attribute. A role is only *required*
+    when its owning list is present, since a pack need not define every list.
+    """
+    path = os.path.join(os.path.dirname(os.path.dirname(
+        os.path.dirname(os.path.abspath(__file__)))), "packs", "roles.json")
+    roles = json.load(open(path))["roles"]
+    single = {r: m["attribute"] for r, m in roles.items() if m["cardinality"] == "one"}
+    many = {r: m["attribute"] for r, m in roles.items() if m["cardinality"] == "many"}
+    return single, many
+
+
+SINGLE_ROLES, SET_ROLES = load_roles()
+KNOWN_ROLES = set(SINGLE_ROLES) | set(SET_ROLES)
+
 
 class Report:
     def __init__(self, name):
@@ -111,6 +136,63 @@ def sample_interior(geom, n=12):
             if point_in_polygon(cand, geom):
                 out.append(cand)
     return out
+
+
+def check_codelists(pack_dir, r):
+    """Code lists are optional; when present they must be loadable and coherent.
+
+    The role checks matter most. Platform logic asks for a role rather than a
+    literal, so a missing or duplicated role is a metric that silently reads
+    wrong — which is how is_head came to be false for every household.
+    """
+    d = os.path.join(pack_dir, "codelists")
+    if not os.path.isdir(d):
+        return
+    seen_roles, docs = {}, []
+    for fn in sorted(f for f in os.listdir(d) if f.endswith(".json")):
+        doc = read_json(os.path.join(d, fn))
+        docs.append(doc)
+        attr = doc.get("attribute_id")
+        if not attr:
+            r.error(f"codelists/{fn} has no attribute_id")
+            continue
+        if fn != f"{attr.lower()}.json":
+            r.warn(f"codelists/{fn} declares {attr}; expected {attr.lower()}.json")
+        values = doc.get("values") or []
+        if not values:
+            r.error(f"{attr} has no values")
+            continue
+        ids = [v.get("value_id") for v in values]
+        if len(set(ids)) != len(ids):
+            r.error(f"{attr} has duplicate value_id")
+        if any(not i for i in ids):
+            r.error(f"{attr} has a value with no value_id")
+        for v in values:
+            for role in v.get("roles", []):
+                if role not in KNOWN_ROLES:
+                    r.error(f"{attr}.{v.get('value_id')} claims unknown role "
+                            f"'{role}' — add it to packs/roles.json first")
+                seen_roles.setdefault(role, []).append(f"{attr}.{v.get('value_id')}")
+        parents = {v.get("parent_value_id") for v in values if v.get("parent_value_id")}
+        orphan = parents - set(ids)
+        if orphan:
+            r.error(f"{attr} has values whose parent is missing: {sorted(orphan)}")
+
+    # Check every role whose list is present — NOT just the roles that turned up.
+    # Iterating over what was found cannot see a role held by nobody, which is
+    # the exact shape of the is_head bug: the list is there, the tag is missing,
+    # and the metric silently reads zero.
+    present = {d.get("attribute_id") for d in docs}
+    for role, owner in sorted({**SINGLE_ROLES, **SET_ROLES}.items()):
+        if owner not in present:
+            continue
+        holders = seen_roles.get(role, [])
+        if not holders:
+            r.error(f"{owner} is in this pack but no value carries the "
+                    f"'{role}' role — anything derived from it reads empty")
+        elif role in SINGLE_ROLES and len(holders) != 1:
+            r.error(f"role '{role}' must be held by exactly one value, "
+                    f"found {len(holders)}: {holders}")
 
 
 def validate(pack_dir):
@@ -212,6 +294,8 @@ def validate(pack_dir):
     if manifest.get("unit_counts") and manifest["unit_counts"] != counts:
         r.error(f"manifest unit_counts {manifest.get('unit_counts')} "
                 f"do not match values.json {counts}")
+
+    check_codelists(pack_dir, r)
 
     # -- boundaries --------------------------------------------------------
     bdir = os.path.join(pack_dir, "boundaries")
