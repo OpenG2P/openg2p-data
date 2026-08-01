@@ -15,7 +15,13 @@
     "disability_status": "NO",
     "phone": "+251941923320",
     "national_id": "5026 2831 8720",
-    "geo_pcode": "ET010101"
+    "geo_pcode": "ET010101",
+    "address_parts": {
+      "kebele": "02",
+      "house_number": "1145"
+    },
+    "latitude": 14.40715,
+    "longitude": 37.74038
   },
   {
     "individual_id": "ETH-IND-0002",
@@ -33,7 +39,13 @@
     "disability_status": "NO",
     "phone": "+251912148121",
     "national_id": "7219 9639 4985",
-    "geo_pcode": "ET010101"
+    "geo_pcode": "ET010101",
+    "address_parts": {
+      "kebele": "02",
+      "house_number": "1145"
+    },
+    "latitude": 14.40715,
+    "longitude": 37.74038
   },
   {
     "individual_id": "ETH-IND-0003",
@@ -51,7 +63,13 @@
     "disability_status": "NO",
     "phone": "+251953088322",
     "national_id": "5140 8276 1996",
-    "geo_pcode": "ET010101"
+    "geo_pcode": "ET010101",
+    "address_parts": {
+      "kebele": "02",
+      "house_number": "1145"
+    },
+    "latitude": 14.40715,
+    "longitude": 37.74038
   },
   {
     "individual_id": "ETH-IND-0004",
@@ -69,7 +87,13 @@
     "disability_status": "NO",
     "phone": "+251913161202",
     "national_id": "5381 3210 9850",
-    "geo_pcode": "ET010101"
+    "geo_pcode": "ET010101",
+    "address_parts": {
+      "kebele": "02",
+      "house_number": "1145"
+    },
+    "latitude": 14.40715,
+    "longitude": 37.74038
   },
   {
     "individual_id": "ETH-IND-0005",
@@ -87,7 +111,13 @@
     "disability_status": "NO",
     "phone": "+251966487306",
     "national_id": "1745 6808 9357",
-    "geo_pcode": "ET010101"
+    "geo_pcode": "ET010101",
+    "address_parts": {
+      "kebele": "02",
+      "house_number": "1145"
+    },
+    "latitude": 14.40715,
+    "longitude": 37.74038
   },
   {
     "individual_id": "ETH-IND-0006",
@@ -105,7 +135,13 @@
     "disability_status": "NO",
     "phone": "+251952800638",
     "national_id": "3372 1605 6748",
-    "geo_pcode": "ET010101"
+    "geo_pcode": "ET010101",
+    "address_parts": {
+      "kebele": "02",
+      "house_number": "0876"
+    },
+    "latitude": 14.38917,
+    "longitude": 37.75456
   },
   {
     "individual_id": "ETH-IND-0007",
@@ -123,7 +159,13 @@
     "disability_status": "NO",
     "phone": "+251913920053",
     "national_id": "9460 5312 5409",
-    "geo_pcode": "ET010101"
+    "geo_pcode": "ET010101",
+    "address_parts": {
+      "kebele": "02",
+      "house_number": "0876"
+    },
+    "latitude": 14.38917,
+    "longitude": 37.75456
   },
   {
     "individual_id": "ETH-IND-0008",
@@ -141,7 +183,13 @@
     "disability_status": "NO",
     "phone": "+251985416801",
     "national_id": "3059 7479 9421",
-    "geo_pcode": "ET010101"
+    "geo_pcode": "ET010101",
+    "address_parts": {
+      "kebele": "02",
+      "house_number": "0876"
+    },
+    "latitude": 14.38917,
+    "longitude": 37.75456
   },
   {
     "individual_id": "ETH-IND-0009",
@@ -159,7 +207,13 @@
     "disability_status": "NO",
     "phone": "+251959031795",
     "national_id": "1216 5437 7346",
-    "geo_pcode": "ET010104"
+    "geo_pcode": "ET010104",
+    "address_parts": {
+      "kebele": "01",
+      "house_number": "0312"
+    },
+    "latitude": 14.02755,
+    "longitude": 38.31802
   },
   {
     "individual_id": "ETH-IND-0010",
@@ -177,7 +231,13 @@
     "disability_status": "NO",
     "phone": "+251920856921",
     "national_id": "4028 6914 8701",
-    "geo_pcode": "ET010104"
+    "geo_pcode": "ET010104",
+    "address_parts": {
+      "kebele": "01",
+      "house_number": "0312"
+    },
+    "latitude": 14.02755,
+    "longitude": 38.31802
   },
   {
     "individual_id": "ETH-IND-0011",
@@ -195,7 +255,13 @@
     "disability_status": "NO",
     "phone": "+251919253244",
     "national_id": "4043 1260 5891",
-    "geo_pcode": "ET010104"
+    "geo_pcode": "ET010104",
+    "address_parts": {
+      "kebele": "01",
+      "house_number": "0312"
+    },
+    "latitude": 14.02755,
+    "longitude": 38.31802
   },
   {
     "individual_id": "ETH-IND-0012",
@@ -213,7 +279,13 @@
     "disability_status": "NO",
     "phone": "+251986027701",
     "national_id": "4102 6742 2977",
-    "geo_pcode": "ET010104"
+    "geo_pcode": "ET010104",
+    "address_parts": {
+      "kebele": "01",
+      "house_number": "0312"
+    },
+    "latitude": 14.02755,
+    "longitude": 38.31802
   },
   {
     "individual_id": "ETH-IND-0013",
@@ -231,7 +303,13 @@
     "disability_status": "NO",
     "phone": "+251980582359",
     "national_id": "5242 1141 8956",
-    "geo_pcode": "ET010104"
+    "geo_pcode": "ET010104",
+    "address_parts": {
+      "kebele": "01",
+      "house_number": "0312"
+    },
+    "latitude": 14.02755,
+    "longitude": 38.31802
   },
   {
     "individual_id": "ETH-IND-0014",
@@ -249,7 +327,13 @@
     "disability_status": "NO",
     "phone": "+251921118013",
     "national_id": "6525 1021 5959",
-    "geo_pcode": "ET010104"
+    "geo_pcode": "ET010104",
+    "address_parts": {
+      "kebele": "01",
+      "house_number": "2210"
+    },
+    "latitude": 14.36212,
+    "longitude": 38.39123
   },
   {
     "individual_id": "ETH-IND-0015",
@@ -267,7 +351,13 @@
     "disability_status": "NO",
     "phone": "+251968900768",
     "national_id": "2815 6187 4311",
-    "geo_pcode": "ET010104"
+    "geo_pcode": "ET010104",
+    "address_parts": {
+      "kebele": "01",
+      "house_number": "2210"
+    },
+    "latitude": 14.36212,
+    "longitude": 38.39123
   },
   {
     "individual_id": "ETH-IND-0016",
@@ -285,7 +375,13 @@
     "disability_status": "NO",
     "phone": "+251964815374",
     "national_id": "8746 9629 5652",
-    "geo_pcode": "ET010108"
+    "geo_pcode": "ET010108",
+    "address_parts": {
+      "kebele": "05",
+      "house_number": "0489"
+    },
+    "latitude": 14.09851,
+    "longitude": 38.28554
   },
   {
     "individual_id": "ETH-IND-0017",
@@ -303,7 +399,13 @@
     "disability_status": "NO",
     "phone": "+251927283364",
     "national_id": "6924 7692 7610",
-    "geo_pcode": "ET010108"
+    "geo_pcode": "ET010108",
+    "address_parts": {
+      "kebele": "05",
+      "house_number": "0489"
+    },
+    "latitude": 14.09851,
+    "longitude": 38.28554
   },
   {
     "individual_id": "ETH-IND-0018",
@@ -321,7 +423,13 @@
     "disability_status": "NO",
     "phone": "+251936065802",
     "national_id": "8244 5923 4875",
-    "geo_pcode": "ET010108"
+    "geo_pcode": "ET010108",
+    "address_parts": {
+      "kebele": "05",
+      "house_number": "1703"
+    },
+    "latitude": 14.10132,
+    "longitude": 38.28503
   },
   {
     "individual_id": "ETH-IND-0019",
@@ -339,7 +447,13 @@
     "disability_status": "NO",
     "phone": "+251925577406",
     "national_id": "8087 4570 2436",
-    "geo_pcode": "ET010108"
+    "geo_pcode": "ET010108",
+    "address_parts": {
+      "kebele": "05",
+      "house_number": "1703"
+    },
+    "latitude": 14.10132,
+    "longitude": 38.28503
   },
   {
     "individual_id": "ETH-IND-0020",
@@ -357,7 +471,13 @@
     "disability_status": "NO",
     "phone": "+251977961714",
     "national_id": "7656 3738 9203",
-    "geo_pcode": "ET010108"
+    "geo_pcode": "ET010108",
+    "address_parts": {
+      "kebele": "05",
+      "house_number": "1703"
+    },
+    "latitude": 14.10132,
+    "longitude": 38.28503
   },
   {
     "individual_id": "ETH-IND-0021",
@@ -375,6 +495,12 @@
     "disability_status": "NO",
     "phone": "+251979661022",
     "national_id": "7940 9859 1406",
-    "geo_pcode": "ET010108"
+    "geo_pcode": "ET010108",
+    "address_parts": {
+      "kebele": "05",
+      "house_number": "1703"
+    },
+    "latitude": 14.10132,
+    "longitude": 38.28503
   }
 ]

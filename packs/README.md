@@ -32,6 +32,7 @@ codelists/<attribute>.json     the country's code lists — gender, education, w
                                source. Values may carry `roles` (see ../roles.json)
 domains/<domain>/*.json        lists that vary by domain AND country, e.g. crops.
                                A Farmer Registry reads agriculture/; NSR ignores it
+address.json                   how an address is written BELOW the lowest level
 samples/individuals.json       a few dozen people, coherent with this country
 samples/households.json        and the households they form
 ```
@@ -55,6 +56,18 @@ construction rather than by convention.
 
 **One chain, not a tree.** Each level has at most one child level. A country has
 one hierarchy; branching would make "the level below this one" ambiguous.
+
+**An address is a P-code plus what is written below it — never both.** The
+P-code already resolves the whole administrative chain, so nothing else in the
+pack repeats it as text. `address.json` declares only the part beneath the lowest
+level (Ethiopia: kebele, house number) and whether the country uses postal codes
+or street names at all; samples carry those parts in `address_parts`.
+
+This pack once stored `"address": "Tahtay Adiyabo, North Western, Tigray"` beside
+`"geo_pcode": "ET010101"` — the same fact twice, one copy of which stops being
+true the day a woreda is renamed or resplit. A sample may also carry
+`latitude`/`longitude`, and the validator checks the point falls inside the unit
+its P-code names, so the map and the tables cannot tell different stories.
 
 **Never a property called `name`.** Boundary features use **`area_name`**.
 Evidence backs each map input with a callable proxy, and a field called `name`

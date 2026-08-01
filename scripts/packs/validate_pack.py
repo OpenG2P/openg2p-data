@@ -38,6 +38,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import sys
 
 from _geometry import (
@@ -211,6 +212,52 @@ SAMPLE_CODED = {
 }
 
 
+def check_address(pack_dir, r):
+    """The address contract: what is written BELOW the lowest level in the pack.
+
+    Returns (declared ids, required ids), or (None, None) when the pack declares
+    no address shape — which is allowed, and simply means its samples carry no
+    address parts either.
+
+    The rule this enforces is that the two halves never overlap. The P-code says
+    which unit; address.json says what is written inside it. An admin name stored
+    as address text is the same value in a second place, and it is the copy that
+    goes stale when a woreda is renamed or resplit.
+    """
+    path = os.path.join(pack_dir, "address.json")
+    if not os.path.exists(path):
+        return None, None
+    doc = read_json(path)
+
+    subs = doc.get("sub_levels") or []
+    ids = [s.get("id") for s in subs]
+    declared = set(ids)
+    if len(declared) != len(ids):
+        r.error("address.json declares a duplicate sub_level id")
+    for s in subs:
+        if not s.get("id") or not s.get("label"):
+            r.error(f"address sub_level {s!r} needs both an id and a label")
+    required = {s["id"] for s in subs if s.get("required") and s.get("id")}
+
+    # A line referring to a part nobody declares renders as a literal
+    # "{street}" in whatever the registry stores — visible only once it is data.
+    for line in doc.get("lines") or []:
+        for token in re.findall(r"\{([^{}]*)\}", line):
+            if token not in declared:
+                r.error(f"address line {line!r} uses {{{token}}}, which is not "
+                        f"a declared sub_level")
+
+    # levels.json already names every administrative level. Re-declaring one as
+    # an address part is exactly the duplication this file exists to prevent.
+    levels = read_json(os.path.join(pack_dir, "levels.json"))
+    admin = {lv.get("level_mnemonic") for lv in levels}
+    for dup in sorted(declared & admin):
+        r.error(f"address.json declares '{dup}' as a sub_level, but it is "
+                f"already an administrative level — the P-code identifies it")
+
+    return declared, required
+
+
 def check_samples(pack_dir, r, geo_ids):
     """Sample people must be placeable and their coded values must be real.
 
@@ -253,6 +300,34 @@ def check_samples(pack_dir, r, geo_ids):
                 r.error(f"sample {kind[:-1]} {rec.get(kind[:-1] + '_id')} sits on "
                         f"{g}, which is not a unit in this pack")
 
+    declared, required = check_address(pack_dir, r)
+    for kind in ("individuals", "households"):
+        for rec in data[kind]:
+            rid = rec.get(kind[:-1] + "_id")
+            # A flat address string is the P-code's ancestry copied out as text.
+            # It was in this pack once ("Tahtay Adiyabo, North Western, Tigray")
+            # and it is the copy that rots, so it stays out.
+            if isinstance(rec.get("address"), str):
+                r.error(f"sample {kind[:-1]} {rid} carries a flat 'address' "
+                        f"string — put what is below the lowest level in "
+                        f"address_parts, and let geo_pcode carry the rest")
+            parts = rec.get("address_parts")
+            if not parts:
+                if required:
+                    r.error(f"sample {kind[:-1]} {rid} has no address_parts, but "
+                            f"address.json requires {sorted(required)}")
+                continue
+            if declared is None:
+                r.error(f"sample {kind[:-1]} {rid} has address_parts but the "
+                        f"pack declares no address.json to interpret them")
+                continue
+            for k in sorted(set(parts) - declared):
+                r.error(f"sample {kind[:-1]} {rid} has address part {k!r}, "
+                        f"which address.json does not declare")
+            for k in sorted(required - set(parts)):
+                r.error(f"sample {kind[:-1]} {rid} is missing required address "
+                        f"part {k!r}")
+
     hh_ids = {h.get("household_id") for h in data["households"]}
     ind_by_id = {i.get("individual_id"): i for i in data["individuals"]}
     for i in data["individuals"]:
@@ -277,6 +352,39 @@ def check_samples(pack_dir, r, geo_ids):
                                                    "ELDERLY_HEADED", "DISABLED_HEADED"):
             r.error(f"household {h.get('household_id')} is {h.get('headship_type')} "
                     f"but its head is {head.get('gender')}")
+
+
+def check_sample_locations(pack_dir, r, geoms):
+    """A sample's coordinates must fall inside the unit its P-code names.
+
+    Two ways of saying where someone lives, so they can disagree — and a map
+    built from the coordinates then contradicts every table built from the
+    P-code, with neither one visibly wrong on its own.
+    """
+    d = os.path.join(pack_dir, "samples")
+    if not os.path.isdir(d):
+        return
+    for kind in ("individuals", "households"):
+        path = os.path.join(d, f"{kind}.json")
+        if not os.path.exists(path):
+            continue
+        for rec in read_json(path):
+            lat, lon = rec.get("latitude"), rec.get("longitude")
+            pcode = rec.get("geo_pcode")
+            rid = rec.get(kind[:-1] + "_id")
+            if lat is None and lon is None:
+                continue
+            if lat is None or lon is None:
+                r.error(f"sample {kind[:-1]} {rid} has only one of "
+                        f"latitude/longitude")
+                continue
+            geom = geoms.get(pcode)
+            if not geom:
+                continue
+            if not point_in_polygon((lon, lat), geom):
+                r.error(f"sample {kind[:-1]} {rid} is at ({lat}, {lon}), which "
+                        f"is outside {pcode} — its coordinates and its P-code "
+                        f"disagree about where it is")
 
 
 def validate(pack_dir):
@@ -436,6 +544,8 @@ def validate(pack_dir):
         if missing:
             r.error(f"{len(missing)} {m} unit(s) have no geometry, e.g. "
                     f"{sorted(missing)[:3]}")
+
+    check_sample_locations(pack_dir, r, geoms)
 
     # -- nesting and coverage ---------------------------------------------
     # The invariant drill-down depends on: a child lies inside its parent, and a
