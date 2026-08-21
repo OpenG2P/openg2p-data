@@ -37,6 +37,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import datetime
 import os
 import re
 import sys
@@ -258,6 +259,12 @@ def check_address(pack_dir, r):
     return declared, required
 
 
+# The year the packs' `age` values were written against. An age in a pack is a
+# snapshot, not a live figure — every one of them drifts by a year each January —
+# so the check below allows a year of slack rather than pretending otherwise.
+REFERENCE_YEAR = 2026
+
+
 def check_samples(pack_dir, r, geo_ids):
     """Sample people must be placeable and their coded values must be real.
 
@@ -295,6 +302,33 @@ def check_samples(pack_dir, r, geo_ids):
                 if val not in lists[attr]:
                     r.error(f"sample {kind[:-1]} {rec.get(kind[:-1] + '_id')} has "
                             f"{field}={val!r}, which is not a value of {attr}")
+            # A birth date that disagrees with its own birth_year, or with age,
+            # is the kind of incoherence nobody spots by reading: both fields
+            # look plausible alone. Registries seed from ONE of them depending on
+            # their vintage, so a pack that disagrees with itself produces two
+            # different people from the same record.
+            if kind == "individuals":
+                bd, by = rec.get("birth_date"), rec.get("birth_year")
+                ident = rec.get("individual_id")
+                if bd:
+                    try:
+                        y, m, dd = (int(x) for x in str(bd).split("-"))
+                        datetime.date(y, m, dd)
+                    except (ValueError, TypeError):
+                        r.error(f"sample individual {ident} has birth_date={bd!r}, "
+                                f"which is not a valid ISO date")
+                    else:
+                        if by is not None and y != by:
+                            r.error(f"sample individual {ident} has birth_date={bd} "
+                                    f"but birth_year={by}")
+                        age = rec.get("age")
+                        if age is not None:
+                            implied = REFERENCE_YEAR - y
+                            if abs(implied - age) > 1:
+                                r.error(f"sample individual {ident} has age={age} "
+                                        f"but birth_date={bd} implies about "
+                                        f"{implied}")
+
             g = rec.get("geo_pcode")
             if g and g not in geo_ids:
                 r.error(f"sample {kind[:-1]} {rec.get(kind[:-1] + '_id')} sits on "
