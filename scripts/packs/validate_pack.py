@@ -147,19 +147,34 @@ def check_codelists(pack_dir, r):
     literal, so a missing or duplicated role is a metric that silently reads
     wrong — which is how is_head came to be false for every household.
     """
-    d = os.path.join(pack_dir, "codelists")
-    if not os.path.isdir(d):
+    # Core lists, then every domain subtree (domains/<domain>/*.json, same
+    # format). MDS loads both into one attribute table keyed by attribute_id, so
+    # a domain list that reuses a core id would silently overwrite it.
+    dirs = []
+    if os.path.isdir(os.path.join(pack_dir, "codelists")):
+        dirs.append("codelists")
+    domains_dir = os.path.join(pack_dir, "domains")
+    if os.path.isdir(domains_dir):
+        dirs += [os.path.join("domains", dom) for dom in sorted(os.listdir(domains_dir))
+                 if os.path.isdir(os.path.join(domains_dir, dom))]
+    if not dirs:
         return
-    seen_roles, docs = {}, []
-    for fn in sorted(f for f in os.listdir(d) if f.endswith(".json")):
-        doc = read_json(os.path.join(d, fn))
+    seen_roles, docs, owner_of = {}, [], {}
+    files = [(rel, fn) for rel in dirs
+             for fn in sorted(os.listdir(os.path.join(pack_dir, rel))) if fn.endswith(".json")]
+    for rel, fn in files:
+        doc = read_json(os.path.join(pack_dir, rel, fn))
         docs.append(doc)
         attr = doc.get("attribute_id")
         if not attr:
-            r.error(f"codelists/{fn} has no attribute_id")
+            r.error(f"{rel}/{fn} has no attribute_id")
             continue
+        if attr in owner_of:
+            r.error(f"{attr} is declared twice: {owner_of[attr]} and {rel}/{fn}")
+            continue
+        owner_of[attr] = f"{rel}/{fn}"
         if fn != f"{attr.lower()}.json":
-            r.warn(f"codelists/{fn} declares {attr}; expected {attr.lower()}.json")
+            r.warn(f"{rel}/{fn} declares {attr}; expected {attr.lower()}.json")
         values = doc.get("values") or []
         if not values:
             r.error(f"{attr} has no values")

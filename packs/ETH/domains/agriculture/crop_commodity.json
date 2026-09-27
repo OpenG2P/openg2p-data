@@ -82,10 +82,66 @@
       "display_i18n": {}
     },
     {
+      "value_id": "CROP_SORGHUM",
+      "value_code": "CROP_SORGHUM",
+      "value_display": "SORGHUM",
+      "sort_order": 12,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "CROP_BARLEY",
+      "value_code": "CROP_BARLEY",
+      "value_display": "BARLEY",
+      "sort_order": 13,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "CROP_FINGER_MILLET",
+      "value_code": "CROP_FINGER_MILLET",
+      "value_display": "FINGER_MILLET",
+      "sort_order": 14,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "CROP_FABA_BEAN",
+      "value_code": "CROP_FABA_BEAN",
+      "value_display": "FABA_BEAN",
+      "sort_order": 15,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "CROP_HARICOT_BEAN",
+      "value_code": "CROP_HARICOT_BEAN",
+      "value_display": "HARICOT_BEAN",
+      "sort_order": 16,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "CROP_CHICKPEA",
+      "value_code": "CROP_CHICKPEA",
+      "value_display": "CHICKPEA",
+      "sort_order": 17,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "CROP_COFFEE",
+      "value_code": "CROP_COFFEE",
+      "value_display": "COFFEE",
+      "sort_order": 18,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "CROP_POTATO",
+      "value_code": "CROP_POTATO",
+      "value_display": "POTATO",
+      "sort_order": 19,
+      "display_i18n": {}
+    },
+    {
       "value_id": "CROP_OTHER",
       "value_code": "CROP_OTHER",
       "value_display": "OTHER",
-      "sort_order": 12,
+      "sort_order": 20,
       "display_i18n": {}
     }
   ]
