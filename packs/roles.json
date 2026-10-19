@@ -1,5 +1,5 @@
 {
-  "_comment": "Closed vocabulary of semantic roles. Platform logic asks for a role, never a literal value, so a report survives a country that names things differently. This file is the ONLY source: validate_pack.py reads it rather than restating it. Prose: docs/country-pack-architecture.md",
+  "_comment": "Closed vocabulary of semantic roles. Platform logic asks for a role, never a literal value, so a report survives a country that names things differently. This file is the ONLY source: validate_pack.py reads it rather than restating it. Prose: https://docs.openg2p.org/platform/platform-services/master-data-service/country-packs#semantic-roles",
   "roles": {
     "female":              {"attribute": "GENDER",                "cardinality": "one", "used_by": "is_female"},
     "head_of_household":   {"attribute": "RELATIONSHIP_TO_HEAD",  "cardinality": "one", "used_by": "is_head"},
