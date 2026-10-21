@@ -195,6 +195,8 @@ def check_codelists(pack_dir, r):
         if orphan:
             r.error(f"{attr} has values whose parent is missing: {sorted(orphan)}")
 
+    check_typed_attributes(docs, r)
+
     # Check every role whose list is present — NOT just the roles that turned up.
     # Iterating over what was found cannot see a role held by nobody, which is
     # the exact shape of the is_head bug: the list is there, the tag is missing,
@@ -210,6 +212,109 @@ def check_codelists(pack_dir, r):
         elif role in SINGLE_ROLES and len(holders) != 1:
             r.error(f"role '{role}' must be held by exactly one value, "
                     f"found {len(holders)}: {holders}")
+
+
+_JSON_TYPES = {"string": (str,), "integer": (int,), "number": (int, float), "boolean": (bool,),
+               "array": (list,), "object": (dict,)}
+
+
+def _list_refs(schema, path=""):
+    """[(path, referenced list code)] for every x-list-ref, as Master Data reads them."""
+    out = []
+    if not isinstance(schema, dict):
+        return out
+    if isinstance(schema.get("x-list-ref"), str):
+        out.append((path or "$", schema["x-list-ref"]))
+    for name, sub in (schema.get("properties") or {}).items():
+        out += _list_refs(sub, f"{path}.{name}" if path else name)
+    if isinstance(schema.get("items"), dict):
+        out += _list_refs(schema["items"], f"{path}[]")
+    return out
+
+
+def _attribute_errors(schema, value):
+    """Errors of one value's attributes: JSON Schema when jsonschema is installed,
+    else the subset the packs use (object, required, additionalProperties, types)."""
+    try:
+        from jsonschema import Draft202012Validator
+    except ImportError:
+        Draft202012Validator = None
+    if Draft202012Validator is not None:
+        return [f"{'/'.join(map(str, e.path)) or '(root)'}: {e.message}"
+                for e in Draft202012Validator(schema).iter_errors(value)]
+    errors = []
+    if not isinstance(value, dict):
+        return ["(root): not an object"]
+    props = schema.get("properties") or {}
+    errors += [f"{k}: required" for k in schema.get("required") or [] if k not in value]
+    if schema.get("additionalProperties") is False:
+        errors += [f"{k}: not in the schema" for k in value if k not in props]
+    for k, v in value.items():
+        want = (props.get(k) or {}).get("type")
+        ok = _JSON_TYPES.get(want)
+        if ok and (not isinstance(v, ok) or (want in ("integer", "number") and isinstance(v, bool))):
+            errors.append(f"{k}: not {want}")
+    return errors
+
+
+def _ref_values(schema, value):
+    """{list code: codes} that the value's x-list-ref fields hold."""
+    out = {}
+    if not isinstance(schema, dict) or value is None:
+        return out
+    ref = schema.get("x-list-ref")
+    if isinstance(ref, str):
+        for v in value if isinstance(value, list) else [value]:
+            if isinstance(v, str):
+                out.setdefault(ref, set()).add(v)
+    if isinstance(value, dict):
+        for name, sub in (schema.get("properties") or {}).items():
+            if name in value:
+                for k, codes in _ref_values(sub, value[name]).items():
+                    out.setdefault(k, set()).update(codes)
+    if isinstance(schema.get("items"), dict) and isinstance(value, list):
+        for item in value:
+            for k, codes in _ref_values(schema["items"], item).items():
+                out.setdefault(k, set()).update(codes)
+    return out
+
+
+def check_typed_attributes(docs, r):
+    """A list's attribute_schema, and each value's attributes against it.
+
+    Master Data checks these when a draft is submitted, not when the loader writes
+    it: a pack value that breaks its list's schema, or names a code its x-list-ref
+    list lacks, loads fine and then cannot be approved. So check them here:
+    every x-list-ref names a list in this pack, and every referenced code is a
+    value_code of that list.
+    """
+    by_code = {(d.get("attribute_code") or d.get("attribute_id")): d for d in docs if d.get("attribute_id")}
+    for doc in docs:
+        attr = doc.get("attribute_id")
+        schema = doc.get("attribute_schema")
+        values = doc.get("values") or []
+        if schema is None:
+            stray = [v.get("value_id") for v in values if v.get("attributes")]
+            if stray:
+                r.error(f"{attr} values carry attributes but the list has no attribute_schema: {stray[:5]}")
+            continue
+        if not isinstance(schema, dict) or schema.get("type") != "object":
+            r.error(f"{attr}.attribute_schema must be a JSON Schema of type object")
+            continue
+        for path, ref in _list_refs(schema):
+            if ref not in by_code:
+                r.error(f"{attr}.attribute_schema {path}: x-list-ref names {ref}, not a list in this pack")
+        for v in values:
+            vid = v.get("value_id")
+            for err in _attribute_errors(schema, v.get("attributes") or {}):
+                r.error(f"{attr}.{vid} attributes {err}")
+            for ref, used in _ref_values(schema, v.get("attributes") or {}).items():
+                target = by_code.get(ref)
+                if target is None:
+                    continue
+                unknown = used - {t.get("value_code") or t.get("value_id") for t in target.get("values") or []}
+                if unknown:
+                    r.error(f"{attr}.{vid} refers to {ref} code(s) the list lacks: {sorted(unknown)}")
 
 
 # sample field -> the code list it must draw from
