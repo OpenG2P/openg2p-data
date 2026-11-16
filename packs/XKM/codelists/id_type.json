@@ -1,0 +1,10 @@
+{
+  "attribute_id": "ID_TYPE",
+  "attribute_code": "ID_TYPE",
+  "attribute_display": "ID type",
+  "is_hierarchical": false,
+  "values": [
+    {"value_id": "foundational_id", "value_code": "foundational_id", "value_display": "Foundational ID", "sort_order": 1},
+    {"value_id": "national_id", "value_code": "national_id", "value_display": "National ID", "sort_order": 2}
+  ]
+}

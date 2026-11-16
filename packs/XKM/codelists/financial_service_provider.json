@@ -1,0 +1,24 @@
+{
+  "attribute_id": "FINANCIAL_SERVICE_PROVIDER",
+  "attribute_code": "FINANCIAL_SERVICE_PROVIDER",
+  "attribute_display": "Financial service provider",
+  "is_hierarchical": false,
+  "attribute_schema": {
+    "type": "object",
+    "properties": {
+      "services": {"type": "array", "items": {"type": "string"}},
+      "group_name": {"type": "string"}
+    },
+    "required": ["services"]
+  },
+  "values": [
+    {"value_id": "okicici", "value_code": "okicici", "value_display": "Google Pay (ICICI)", "sort_order": 1, "attributes": {"group_name": "Google Pay", "services": ["BANK_ACCOUNT"]}},
+    {"value_id": "AIRTEL-WALLET", "value_code": "AIRTEL-WALLET", "value_display": "Airtel wallet", "sort_order": 2, "attributes": {"group_name": "Airtel", "services": ["WALLET"]}},
+    {"value_id": "PAYTM-WALLET", "value_code": "PAYTM-WALLET", "value_display": "Paytm wallet", "sort_order": 3, "attributes": {"group_name": "Paytm", "services": ["WALLET"]}},
+    {"value_id": "HDFC", "value_code": "HDFC", "value_display": "HDFC Bank", "sort_order": 4, "attributes": {"group_name": "HDFC", "services": ["BANK_ACCOUNT"]}},
+    {"value_id": "SBIN", "value_code": "SBIN", "value_display": "State Bank of India", "sort_order": 5, "attributes": {"group_name": "SBI", "services": ["BANK_ACCOUNT"]}},
+    {"value_id": "ICIC", "value_code": "ICIC", "value_display": "ICICI Bank", "sort_order": 6, "attributes": {"group_name": "ICICI", "services": ["BANK_ACCOUNT"]}},
+    {"value_id": "UTIB", "value_code": "UTIB", "value_display": "Axis Bank", "sort_order": 7, "attributes": {"group_name": "Axis", "services": ["BANK_ACCOUNT"]}},
+    {"value_id": "HABBPKKA", "value_code": "HABBPKKA", "value_display": "Habib Bank Limited", "sort_order": 8, "attributes": {"group_name": "HBL", "services": ["BANK_ACCOUNT", "WALLET"]}}
+  ]
+}

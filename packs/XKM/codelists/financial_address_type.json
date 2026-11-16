@@ -1,0 +1,94 @@
+{
+  "attribute_id": "FINANCIAL_ADDRESS_TYPE",
+  "attribute_code": "FINANCIAL_ADDRESS_TYPE",
+  "attribute_display": "Financial address type",
+  "is_hierarchical": false,
+  "attribute_schema": {
+    "type": "object",
+    "properties": {
+      "handler": {"type": "string"},
+      "kind": {"type": "string"},
+      "validation_method": {"type": "string"},
+      "provider_required": {"type": "boolean"},
+      "details_schema": {"type": "object"}
+    },
+    "required": ["handler", "kind", "validation_method", "provider_required"]
+  },
+  "values": [
+    {
+      "value_id": "UPI-VPA-BANK-ACCOUNT",
+      "value_code": "UPI-VPA-BANK-ACCOUNT",
+      "value_display": "UPI virtual payment address",
+      "sort_order": 1,
+      "attributes": {
+        "handler": "UpiVpaHandler",
+        "kind": "BANK_ACCOUNT",
+        "validation_method": "LOOKUP",
+        "provider_required": false
+      }
+    },
+    {
+      "value_id": "MSISDN-WALLET",
+      "value_code": "MSISDN-WALLET",
+      "value_display": "Mobile wallet",
+      "sort_order": 2,
+      "attributes": {
+        "handler": "MsisdnHandler",
+        "kind": "WALLET",
+        "validation_method": "LOOKUP",
+        "provider_required": true
+      }
+    },
+    {
+      "value_id": "MSISDN-BANK-ACCOUNT",
+      "value_code": "MSISDN-BANK-ACCOUNT",
+      "value_display": "Phone number alias of a bank account",
+      "sort_order": 3,
+      "attributes": {
+        "handler": "MsisdnHandler",
+        "kind": "BANK_ACCOUNT",
+        "validation_method": "LOOKUP",
+        "provider_required": true,
+        "details_schema": {"type": "object", "properties": {"rail": {"type": "string"}}}
+      }
+    },
+    {
+      "value_id": "IFSC-BANK-ACCOUNT",
+      "value_code": "IFSC-BANK-ACCOUNT",
+      "value_display": "Indian bank account with IFSC",
+      "sort_order": 4,
+      "attributes": {
+        "handler": "IfscBankAccountHandler",
+        "kind": "BANK_ACCOUNT",
+        "validation_method": "PENNY_DROP",
+        "provider_required": true,
+        "details_schema": {"type": "object", "required": ["ifsc"], "properties": {"ifsc": {"type": "string"}}}
+      }
+    },
+    {
+      "value_id": "IBAN-BANK-ACCOUNT",
+      "value_code": "IBAN-BANK-ACCOUNT",
+      "value_display": "IBAN bank account",
+      "sort_order": 5,
+      "attributes": {
+        "handler": "IbanHandler",
+        "kind": "BANK_ACCOUNT",
+        "validation_method": "PENNY_DROP",
+        "provider_required": false
+      }
+    },
+    {
+      "value_id": "BIC-BANK-ACCOUNT",
+      "value_code": "BIC-BANK-ACCOUNT",
+      "value_display": "BIC addressed bank account",
+      "sort_order": 6,
+      "attributes": {
+        "handler": "BicHandler",
+        "kind": "BANK_ACCOUNT",
+        "validation_method": "PENNY_DROP",
+        "provider_required": true,
+        "details_schema": {"type": "object", "required": ["bic"], "properties": {"bic": {"type": "string"}}}
+      }
+    }
+  ]
+}
