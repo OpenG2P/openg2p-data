@@ -1,0 +1,28 @@
+username,email,first_name,last_name,position,department,level,geography,grievance_role,keycloak_sub,proposed_role
+abebe.kebede@moa.gov.et,abebe.kebede@moa.gov.et,Abebe,Kebede,Crop DA,Crop Production,Kebele,"ET010101 (Kebele 01, Tahtay Adiyabo)",Grievance Officer,5b2e19ea-770f-4f92-8719-9e3f0d5d2c04,Grievance Officer
+tigist.haile@moa.gov.et,tigist.haile@moa.gov.et,Tigist,Haile,Livestock DA,Livestock and Veterinary,Kebele,"ET010101 (Kebele 01, Tahtay Adiyabo)",Grievance Officer,deaf2d90-0789-48e3-b612-c7c5d58520a2,Grievance Officer
+dawit.tesfaye@moa.gov.et,dawit.tesfaye@moa.gov.et,Dawit,Tesfaye,NRM DA,Natural Resource Management,Kebele,"ET010101 (Kebele 01, Tahtay Adiyabo)",Grievance Officer,c9c7ed1b-8e49-4354-90bf-cb4fcbec6539,Grievance Officer
+mulugeta.alemu@moa.gov.et,mulugeta.alemu@moa.gov.et,Mulugeta,Alemu,KAO Head,Agricultural Extension,Kebele,"ET010101 (Kebele 01, Tahtay Adiyabo)",Grievance Officer,11edfa8c-4a0c-4f06-b6d7-c5ffcbba0f0f,Grievance Desk Head
+hana.girma@moa.gov.et,hana.girma@moa.gov.et,Hana,Girma,Crop SMS,Crop Production,Woreda,ET010101 (Tahtay Adiyabo),Grievance Officer,e614d90d-df45-4f39-b517-d5847bf48f2c,Grievance Officer
+yonas.bekele@moa.gov.et,yonas.bekele@moa.gov.et,Yonas,Bekele,Cooperative promotion officer,Cooperative Promotion,Woreda,ET010101 (Tahtay Adiyabo),Grievance Officer,92a12721-8a90-4af2-882d-058ca595c418,Grievance Officer
+selam.worku@moa.gov.et,selam.worku@moa.gov.et,Selam,Worku,Mechanization expert,Agricultural Mechanization,Woreda,ET010101 (Tahtay Adiyabo),Grievance Officer,d1ed5d8f-ef5c-499f-911d-21962abaf1f8,Grievance Officer
+getachew.mekonnen@moa.gov.et,getachew.mekonnen@moa.gov.et,Getachew,Mekonnen,Extension team leader,Agricultural Extension,Woreda,ET010101 (Tahtay Adiyabo),Grievance Officer,243fabe4-3902-4a03-b24b-d2fcff2c4ce1,Grievance Officer
+meron.assefa@moa.gov.et,meron.assefa@moa.gov.et,Meron,Assefa,Programme team,Crop Production,Woreda,ET010101 (Tahtay Adiyabo),Grievance Officer,001c8dd4-b5ca-42cb-bc02-403cc0c772ff,Grievance Officer
+tadesse.negash@moa.gov.et,tadesse.negash@moa.gov.et,Tadesse,Negash,Land admin expert,Land Administration,Woreda,ET010101 (Tahtay Adiyabo),Grievance Officer,1de8da18-7dcb-4fb3-a8ec-4c645ab9aa03,Grievance Officer
+birtukan.desta@moa.gov.et,birtukan.desta@moa.gov.et,Birtukan,Desta,Irrigation expert,Irrigation Development,Woreda,ET010101 (Tahtay Adiyabo),Grievance Officer,787d77e2-28f3-4fcb-b203-6c1b1ae426be,Grievance Officer
+henok.abera@moa.gov.et,henok.abera@moa.gov.et,Henok,Abera,Livestock SMS,Livestock and Veterinary,Woreda,ET010101 (Tahtay Adiyabo),Grievance Officer,5fcb8585-dca7-4870-94fe-1a95bc627aca,Grievance Officer
+rahel.tadesse@moa.gov.et,rahel.tadesse@moa.gov.et,Rahel,Tadesse,Veterinarian,Livestock and Veterinary,Woreda,ET010101 (Tahtay Adiyabo),Grievance Officer,485366bd-ea15-4f49-b12e-a29c06b669ee,Grievance Officer
+samuel.gebre@moa.gov.et,samuel.gebre@moa.gov.et,Samuel,Gebre,Marketing officer,Agricultural Marketing,Woreda,ET010101 (Tahtay Adiyabo),Grievance Officer,4afad7ee-885f-47a4-bb9b-5375b9354890,Grievance Officer
+lemlem.hailu@moa.gov.et,lemlem.hailu@moa.gov.et,Lemlem,Hailu,Credit officer,Credit and Payments,Woreda,ET010101 (Tahtay Adiyabo),Grievance Officer,07d22f97-b5bf-42b7-8e63-4ded6e36718c,Grievance Officer
+biniam.teshome@moa.gov.et,biniam.teshome@moa.gov.et,Biniam,Teshome,NRM SMS,Natural Resource Management,Woreda,ET010101 (Tahtay Adiyabo),Grievance Officer,cb21c9a4-8162-46ff-b9df-ef3e74782e82,Grievance Officer
+almaz.wondimu@moa.gov.et,almaz.wondimu@moa.gov.et,Almaz,Wondimu,Crop protection SMS,Crop Protection,Woreda,ET010101 (Tahtay Adiyabo),Grievance Officer,e522ab67-a83e-4f76-a714-25285194358f,Grievance Officer
+berhanu.lemma@moa.gov.et,berhanu.lemma@moa.gov.et,Berhanu,Lemma,Woreda Office Head,Office of the Head,Woreda,ET010101 (Tahtay Adiyabo),Grievance Officer,105873dd-8cb6-4333-b8a8-ecdaffde82b5,Grievance Desk Head
+senait.fikre@moa.gov.et,senait.fikre@moa.gov.et,Senait,Fikre,Ethics focal person,Office of the Head,Woreda,ET010101 (Tahtay Adiyabo),Grievance Officer,3331b273-74fe-4ee3-bf9c-2e7efa16ac8a,Grievance Officer
+mekdes.yilma@moa.gov.et,mekdes.yilma@moa.gov.et,Mekdes,Yilma,Female focal person / Safety officer,Gender and Safety,Woreda,ET010101 (Tahtay Adiyabo),Grievance Officer,16ee5c76-6025-4f48-a025-f80197e4e0e3,Grievance Officer
+fikadu.zewdu@moa.gov.et,fikadu.zewdu@moa.gov.et,Fikadu,Zewdu,Zone department head,All departments (same dept),Zone,ET0101 (North Western),Grievance Officer,0718783e-555c-40ba-afc6-c14ca9659990,Grievance Review Officer
+eyob.mamo@moa.gov.et,eyob.mamo@moa.gov.et,Eyob,Mamo,Zone Head,Office of the Head,Zone,ET0101 (North Western),Grievance Officer,ebd7014b-87f3-4957-9829-eb5bb76a4c11,Grievance Review Officer
+aster.bogale@moa.gov.et,aster.bogale@moa.gov.et,Aster,Bogale,Region department head,All departments (same dept),Region,ET01 (Tigray),Grievance Officer,b9b27ccf-7da7-4c70-8605-66742830dbb6,Grievance Review Officer
+kidane.gebremariam@moa.gov.et,kidane.gebremariam@moa.gov.et,Kidane,Gebremariam,Regional Bureau Head,Office of the Head,Region,ET01 (Tigray),Grievance Officer,388a9f1d-7132-48c3-9dd7-76ab99d8b4a7,Grievance Review Officer
+betelhem.solomon@ati.gov.et,betelhem.solomon@ati.gov.et,Betelhem,Solomon,ATI Data Protection officer,OAN Data Protection (ATI),National,ET,Grievance Officer,e9138685-ab3c-45d1-b3c9-0d1f131a34e8,Grievance Officer
+natnael.ayele@ati.gov.et,natnael.ayele@ati.gov.et,Natnael,Ayele,ATI service desk,OAN Digital Services (ATI),National,ET,Grievance Officer,a223081f-8cc7-49d9-8b9b-d3dc37a71807,Grievance Officer
+ruth.demissie@ati.gov.et,ruth.demissie@ati.gov.et,Ruth,Demissie,System triage officer,Other (system),National,ET,Grievance Officer,fa1a52b2-fa68-4c42-bd4f-30cd87efaed7,Grievance Officer
