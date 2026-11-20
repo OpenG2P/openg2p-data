@@ -1,0 +1,49 @@
+{
+  "attribute_id": "IFSC_DIRECTORY",
+  "attribute_code": "IFSC_DIRECTORY",
+  "attribute_display": "IFSC directory",
+  "is_hierarchical": true,
+  "values": [
+    {"value_id": "HDFC", "value_code": "HDFC", "value_display": "HDFC Bank", "sort_order": 1},
+    {"value_id": "HDFC0001234", "value_code": "HDFC0001234", "value_display": "HDFC Fort Branch", "parent_value_id": "HDFC", "sort_order": 1},
+    {"value_id": "HDFC0000456", "value_code": "HDFC0000456", "value_display": "HDFC Bandra Branch", "parent_value_id": "HDFC", "sort_order": 2},
+    {"value_id": "HDFC0000789", "value_code": "HDFC0000789", "value_display": "HDFC Andheri Branch", "parent_value_id": "HDFC", "sort_order": 3},
+    {"value_id": "HDFC0001122", "value_code": "HDFC0001122", "value_display": "HDFC Koramangala Branch", "parent_value_id": "HDFC", "sort_order": 4},
+    {"value_id": "HDFC0001567", "value_code": "HDFC0001567", "value_display": "HDFC MG Road Branch", "parent_value_id": "HDFC", "sort_order": 5},
+
+    {"value_id": "SBIN", "value_code": "SBIN", "value_display": "State Bank of India", "sort_order": 2},
+    {"value_id": "SBIN0000456", "value_code": "SBIN0000456", "value_display": "SBI Main Branch", "parent_value_id": "SBIN", "sort_order": 1},
+    {"value_id": "SBIN0001122", "value_code": "SBIN0001122", "value_display": "SBI Connaught Place Branch", "parent_value_id": "SBIN", "sort_order": 2},
+    {"value_id": "SBIN0002345", "value_code": "SBIN0002345", "value_display": "SBI Park Street Branch", "parent_value_id": "SBIN", "sort_order": 3},
+    {"value_id": "SBIN0003456", "value_code": "SBIN0003456", "value_display": "SBI T Nagar Branch", "parent_value_id": "SBIN", "sort_order": 4},
+    {"value_id": "SBIN0004567", "value_code": "SBIN0004567", "value_display": "SBI Salt Lake Branch", "parent_value_id": "SBIN", "sort_order": 5},
+
+    {"value_id": "ICIC", "value_code": "ICIC", "value_display": "ICICI Bank", "sort_order": 3},
+    {"value_id": "ICIC0000001", "value_code": "ICIC0000001", "value_display": "ICICI Nariman Point Branch", "parent_value_id": "ICIC", "sort_order": 1},
+    {"value_id": "ICIC0000011", "value_code": "ICIC0000011", "value_display": "ICICI Bandra Kurla Branch", "parent_value_id": "ICIC", "sort_order": 2},
+    {"value_id": "ICIC0000104", "value_code": "ICIC0000104", "value_display": "ICICI Andheri Branch", "parent_value_id": "ICIC", "sort_order": 3},
+    {"value_id": "ICIC0000123", "value_code": "ICIC0000123", "value_display": "ICICI Connaught Place Branch", "parent_value_id": "ICIC", "sort_order": 4},
+    {"value_id": "ICIC0001876", "value_code": "ICIC0001876", "value_display": "ICICI MG Road Branch", "parent_value_id": "ICIC", "sort_order": 5},
+
+    {"value_id": "UTIB", "value_code": "UTIB", "value_display": "Axis Bank", "sort_order": 4},
+    {"value_id": "UTIB0000001", "value_code": "UTIB0000001", "value_display": "Axis Fort Branch", "parent_value_id": "UTIB", "sort_order": 1},
+    {"value_id": "UTIB0000123", "value_code": "UTIB0000123", "value_display": "Axis Bandra Branch", "parent_value_id": "UTIB", "sort_order": 2},
+    {"value_id": "UTIB0000456", "value_code": "UTIB0000456", "value_display": "Axis Koramangala Branch", "parent_value_id": "UTIB", "sort_order": 3},
+    {"value_id": "UTIB0000789", "value_code": "UTIB0000789", "value_display": "Axis T Nagar Branch", "parent_value_id": "UTIB", "sort_order": 4},
+    {"value_id": "UTIB0001122", "value_code": "UTIB0001122", "value_display": "Axis Salt Lake Branch", "parent_value_id": "UTIB", "sort_order": 5},
+
+    {"value_id": "PUNB", "value_code": "PUNB", "value_display": "Punjab National Bank", "sort_order": 5},
+    {"value_id": "PUNB0000123", "value_code": "PUNB0000123", "value_display": "PNB Connaught Place Branch", "parent_value_id": "PUNB", "sort_order": 1},
+    {"value_id": "PUNB0000456", "value_code": "PUNB0000456", "value_display": "PNB Karol Bagh Branch", "parent_value_id": "PUNB", "sort_order": 2},
+    {"value_id": "PUNB0000789", "value_code": "PUNB0000789", "value_display": "PNB Civil Lines Branch", "parent_value_id": "PUNB", "sort_order": 3},
+    {"value_id": "PUNB0001122", "value_code": "PUNB0001122", "value_display": "PNB Park Street Branch", "parent_value_id": "PUNB", "sort_order": 4},
+    {"value_id": "PUNB0001567", "value_code": "PUNB0001567", "value_display": "PNB MG Road Branch", "parent_value_id": "PUNB", "sort_order": 5},
+
+    {"value_id": "BARB", "value_code": "BARB", "value_display": "Bank of Baroda", "sort_order": 6},
+    {"value_id": "BARB0000123", "value_code": "BARB0000123", "value_display": "BoB Fort Branch", "parent_value_id": "BARB", "sort_order": 1},
+    {"value_id": "BARB0000456", "value_code": "BARB0000456", "value_display": "BoB Bandra Branch", "parent_value_id": "BARB", "sort_order": 2},
+    {"value_id": "BARB0000789", "value_code": "BARB0000789", "value_display": "BoB Alkapuri Branch", "parent_value_id": "BARB", "sort_order": 3},
+    {"value_id": "BARB0001122", "value_code": "BARB0001122", "value_display": "BoB CG Road Branch", "parent_value_id": "BARB", "sort_order": 4},
+    {"value_id": "BARB0001567", "value_code": "BARB0001567", "value_display": "BoB Hazratganj Branch", "parent_value_id": "BARB", "sort_order": 5}
+  ]
+}

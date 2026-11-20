@@ -1,0 +1,11 @@
+{
+  "attribute_id": "CURRENCY",
+  "attribute_code": "CURRENCY",
+  "attribute_display": "Currency",
+  "is_hierarchical": false,
+  "values": [
+    {"value_id": "INR", "value_code": "INR", "value_display": "INR", "sort_order": 1},
+    {"value_id": "PKR", "value_code": "PKR", "value_display": "PKR", "sort_order": 2},
+    {"value_id": "EUR", "value_code": "EUR", "value_display": "EUR", "sort_order": 3}
+  ]
+}
