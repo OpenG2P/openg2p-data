@@ -1,0 +1,64 @@
+{
+  "attribute_id": "AGENT_QUALIFICATION_LEVEL",
+  "attribute_code": "AGENT_QUALIFICATION_LEVEL",
+  "attribute_display": "Agent qualification level",
+  "is_hierarchical": false,
+  "values": [
+    {
+      "value_id": "AGQUAL_CERTIFICATE",
+      "value_code": "AGQUAL_CERTIFICATE",
+      "value_display": "Certificate",
+      "sort_order": 1,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGQUAL_TVET_LEVEL_3",
+      "value_code": "AGQUAL_TVET_LEVEL_3",
+      "value_display": "Vocational level III",
+      "sort_order": 2,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGQUAL_TVET_LEVEL_4",
+      "value_code": "AGQUAL_TVET_LEVEL_4",
+      "value_display": "Vocational level IV",
+      "sort_order": 3,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGQUAL_DIPLOMA",
+      "value_code": "AGQUAL_DIPLOMA",
+      "value_display": "Diploma",
+      "sort_order": 4,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGQUAL_BACHELORS",
+      "value_code": "AGQUAL_BACHELORS",
+      "value_display": "Bachelor's degree",
+      "sort_order": 5,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGQUAL_MASTERS",
+      "value_code": "AGQUAL_MASTERS",
+      "value_display": "Master's degree",
+      "sort_order": 6,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGQUAL_DOCTORATE",
+      "value_code": "AGQUAL_DOCTORATE",
+      "value_display": "Doctorate",
+      "sort_order": 7,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGQUAL_OTHER",
+      "value_code": "AGQUAL_OTHER",
+      "value_display": "Other",
+      "sort_order": 8,
+      "display_i18n": {}
+    }
+  ]
+}

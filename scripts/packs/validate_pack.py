@@ -508,6 +508,72 @@ def check_samples(pack_dir, r, geo_ids):
                     f"but its head is {head.get('gender')}")
 
 
+# Coded fields of an Agent Registry sample agent (samples/agents.json), and of
+# the rows of its specializations and qualifications.
+AGENT_CODED = {
+    "gender": "GENDER", "position": "AGENT_POSITION", "employer_type": "AGENT_EMPLOYER_TYPE",
+    "employment_type": "AGENT_EMPLOYMENT_TYPE", "service_point_type": "AGENT_SERVICE_POINT_TYPE",
+    "assignment_reason": "AGENT_ASSIGNMENT_REASON", "service_status": "AGENT_SERVICE_STATUS",
+}
+AGENT_ROW_CODED = {
+    "specializations": {"specialization": "AGENT_SPECIALIZATION"},
+    "qualifications": {"level": "AGENT_QUALIFICATION_LEVEL", "field_of_study": "AGENT_FIELD_OF_STUDY"},
+}
+
+
+def check_agent_samples(pack_dir, r, geo_ids):
+    """Sample agents (samples/agents.json, optional) for the Agent Registry.
+
+    Every coded value must be in its list (core or domain), every agent must sit
+    on a unit of this pack, and agent IDs must be eight unique digits — the shape
+    the registry's ID generator gives. Master Data does not load this file: the
+    Agent Registry's db-seed reads it.
+    """
+    path = os.path.join(pack_dir, "samples", "agents.json")
+    if not os.path.exists(path):
+        return
+    lists = {}
+    dirs = [os.path.join(pack_dir, "codelists")]
+    domains = os.path.join(pack_dir, "domains")
+    if os.path.isdir(domains):
+        dirs += [os.path.join(domains, d) for d in sorted(os.listdir(domains))]
+    for d in dirs:
+        if not os.path.isdir(d):
+            continue
+        for fn in os.listdir(d):
+            if fn.endswith(".json"):
+                doc = read_json(os.path.join(d, fn))
+                lists[doc.get("attribute_id")] = {v.get("value_id") for v in doc.get("values", [])}
+    seen = set()
+    for rec in read_json(path):
+        aid = rec.get("agent_id")
+        if not re.fullmatch(r"[0-9]{8}", str(aid or "")):
+            r.error(f"sample agent {aid!r} does not have an 8-digit agent_id")
+        if aid in seen:
+            r.error(f"sample agent {aid} appears twice")
+        seen.add(aid)
+        if rec.get("geo_pcode") not in geo_ids:
+            r.error(f"sample agent {aid} sits on {rec.get('geo_pcode')}, which is not a unit in this pack")
+        checks = [(rec, field, attr) for field, attr in AGENT_CODED.items()]
+        for key, fields in AGENT_ROW_CODED.items():
+            checks += [(row, field, attr) for row in rec.get(key) or [] for field, attr in fields.items()]
+        for row, field, attr in checks:
+            val = row.get(field)
+            if val is None:
+                continue
+            if attr not in lists:
+                r.error(f"sample agent {aid} uses {attr}, which this pack does not have")
+            elif val not in lists[attr]:
+                r.error(f"sample agent {aid} has {field}={val!r}, which is not a value of {attr}")
+        for field in ("birth_date", "date_of_hire", "assigned_since", "service_status_date"):
+            val = rec.get(field)
+            if val:
+                try:
+                    datetime.date.fromisoformat(val)
+                except ValueError:
+                    r.error(f"sample agent {aid} has {field}={val!r}, which is not an ISO date")
+
+
 def check_sample_locations(pack_dir, r, geoms):
     """A sample's coordinates must fall inside the unit its P-code names.
 
@@ -643,6 +709,7 @@ def validate(pack_dir):
 
     check_codelists(pack_dir, r)
     check_samples(pack_dir, r, set(vals))
+    check_agent_samples(pack_dir, r, set(vals))
 
     # -- boundaries --------------------------------------------------------
     bdir = os.path.join(pack_dir, "boundaries")

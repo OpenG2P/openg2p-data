@@ -1,0 +1,78 @@
+{
+  "attribute_id": "AGENT_FIELD_OF_STUDY",
+  "attribute_code": "AGENT_FIELD_OF_STUDY",
+  "attribute_display": "Agent field of study",
+  "is_hierarchical": false,
+  "values": [
+    {
+      "value_id": "AGFOS_PLANT_SCIENCE",
+      "value_code": "AGFOS_PLANT_SCIENCE",
+      "value_display": "Plant science",
+      "sort_order": 1,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGFOS_ANIMAL_SCIENCE",
+      "value_code": "AGFOS_ANIMAL_SCIENCE",
+      "value_display": "Animal science",
+      "sort_order": 2,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGFOS_ANIMAL_HEALTH",
+      "value_code": "AGFOS_ANIMAL_HEALTH",
+      "value_display": "Animal health",
+      "sort_order": 3,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGFOS_NATURAL_RESOURCES",
+      "value_code": "AGFOS_NATURAL_RESOURCES",
+      "value_display": "Natural resource management",
+      "sort_order": 4,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGFOS_AGRICULTURAL_ECONOMICS",
+      "value_code": "AGFOS_AGRICULTURAL_ECONOMICS",
+      "value_display": "Agricultural economics",
+      "sort_order": 5,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGFOS_AGRICULTURAL_EXTENSION",
+      "value_code": "AGFOS_AGRICULTURAL_EXTENSION",
+      "value_display": "Agricultural extension",
+      "sort_order": 6,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGFOS_IRRIGATION",
+      "value_code": "AGFOS_IRRIGATION",
+      "value_display": "Irrigation",
+      "sort_order": 7,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGFOS_HORTICULTURE",
+      "value_code": "AGFOS_HORTICULTURE",
+      "value_display": "Horticulture",
+      "sort_order": 8,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGFOS_COOPERATIVES",
+      "value_code": "AGFOS_COOPERATIVES",
+      "value_display": "Cooperatives",
+      "sort_order": 9,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGFOS_OTHER",
+      "value_code": "AGFOS_OTHER",
+      "value_display": "Other",
+      "sort_order": 10,
+      "display_i18n": {}
+    }
+  ]
+}

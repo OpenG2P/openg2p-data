@@ -20,6 +20,7 @@ platform logic ever needs to reason about a domain value's meaning; none do toda
 |---|---|
 | `CROP_COMMODITY`, `CROP_END_USE`, `CROP_SEASON`, `CURRENT_LAND_USE`, `FARMER_CLUSTER_ROLE`, `FARMING_TYPE`, `LAND_OWNERSHIP_TYPE`, `LAND_SIZE_UNIT`, `LIVESTOCK_BREED`, `LIVESTOCK_SYSTEM`, `LIVESTOCK_TYPE`, `MEANS_OF_ACQUISITION`, `SOURCE_OF_INCOME`, `WATER_SOURCE` | Farmer Registry |
 | `CROP_COMMODITY` (with `CROP_CATEGORY`), `CROP_SEASON`, `SOIL_FERTILITY`, `WATER_SOURCE`, and the crop-season lists: `CROPPING_SYSTEM`, `LAND_PREPARATION_METHOD`, `IRRIGATION_SOURCE`, `IRRIGATION_METHOD`, `SEED_TYPE`, `SEED_SOURCE`, `SEED_VARIETY`, `SOWING_METHOD`, `FERTILIZER_TYPE`, `FARM_MACHINERY`, `CROP_GROWTH_STAGE`, `CROP_CONDITION`, `INFESTATION_TYPE`, `INFESTATION_AGENT`, `INFESTATION_SEVERITY`, `PEST_CONTROL_ACTION`, `CROP_DAMAGE_CAUSE`, `AGRO_ECOLOGICAL_ZONE` | Crop Sown Registry |
+| `AGENT_POSITION`, `AGENT_SPECIALIZATION`, `AGENT_SERVICE_STATUS`, `AGENT_EMPLOYMENT_TYPE`, `AGENT_EMPLOYER_TYPE`, `AGENT_SERVICE_POINT_TYPE`, `AGENT_ASSIGNMENT_REASON`, `AGENT_QUALIFICATION_LEVEL`, `AGENT_FIELD_OF_STUDY`, `AGENT_TRAINING_TOPIC`, `AGENT_TRAINING_DELIVERY_MODE`, `AGENT_TRAINING_RESULT` | Agents Registry |
 
 Seasons follow Ethiopia's CSA Agricultural Sample Survey: Meher (main rains),
 Belg (short rains) and irrigated dry-season production. Each list's codes carry a
@@ -32,3 +33,10 @@ where `x-list-ref` names another list (a crop's `category` is a `CROP_CATEGORY`
 code; a variety's `crop` is a `CROP_COMMODITY` code). `validate_pack.py` checks
 them. On an existing install, approve the `CROP_COMMODITY` draft before
 `SEED_VARIETY`'s, whose varieties refer to the new crops.
+
+The Agents Registry's lists carry the same codes in every pack (the Kamuntu pack
+has them with generic labels); a country changes the labels and adds or retires
+values. Here they describe Ethiopia's Development Agents: DA positions, Farmer
+and Pastoral Training Centres, TVET levels. The pack's `samples/agents.json`
+holds sample agents for the Agents Registry (its db-seed reads them; Master Data
+does not load that file); `validate_pack.py` checks their codes, units and IDs.

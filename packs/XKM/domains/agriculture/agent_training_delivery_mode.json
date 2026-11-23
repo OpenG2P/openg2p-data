@@ -1,0 +1,29 @@
+{
+  "attribute_id": "AGENT_TRAINING_DELIVERY_MODE",
+  "attribute_code": "AGENT_TRAINING_DELIVERY_MODE",
+  "attribute_display": "Training delivery mode",
+  "is_hierarchical": false,
+  "values": [
+    {
+      "value_id": "AGTDM_IN_PERSON",
+      "value_code": "AGTDM_IN_PERSON",
+      "value_display": "In person",
+      "sort_order": 1,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGTDM_ONLINE",
+      "value_code": "AGTDM_ONLINE",
+      "value_display": "Online",
+      "sort_order": 2,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGTDM_BLENDED",
+      "value_code": "AGTDM_BLENDED",
+      "value_display": "Blended",
+      "sort_order": 3,
+      "display_i18n": {}
+    }
+  ]
+}

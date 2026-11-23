@@ -1,0 +1,36 @@
+{
+  "attribute_id": "AGENT_TRAINING_RESULT",
+  "attribute_code": "AGENT_TRAINING_RESULT",
+  "attribute_display": "Training result",
+  "is_hierarchical": false,
+  "values": [
+    {
+      "value_id": "AGTRS_COMPLETED",
+      "value_code": "AGTRS_COMPLETED",
+      "value_display": "Completed",
+      "sort_order": 1,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGTRS_PASSED",
+      "value_code": "AGTRS_PASSED",
+      "value_display": "Passed",
+      "sort_order": 2,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGTRS_FAILED",
+      "value_code": "AGTRS_FAILED",
+      "value_display": "Failed",
+      "sort_order": 3,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGTRS_ATTENDED",
+      "value_code": "AGTRS_ATTENDED",
+      "value_display": "Attended only",
+      "sort_order": 4,
+      "display_i18n": {}
+    }
+  ]
+}

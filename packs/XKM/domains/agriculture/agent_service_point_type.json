@@ -1,0 +1,50 @@
+{
+  "attribute_id": "AGENT_SERVICE_POINT_TYPE",
+  "attribute_code": "AGENT_SERVICE_POINT_TYPE",
+  "attribute_display": "Agent service point type",
+  "is_hierarchical": false,
+  "values": [
+    {
+      "value_id": "AGSP_EXTENSION_OFFICE",
+      "value_code": "AGSP_EXTENSION_OFFICE",
+      "value_display": "Extension office",
+      "sort_order": 1,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGSP_TRAINING_CENTRE",
+      "value_code": "AGSP_TRAINING_CENTRE",
+      "value_display": "Farmer training centre",
+      "sort_order": 2,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGSP_PASTORAL_CENTRE",
+      "value_code": "AGSP_PASTORAL_CENTRE",
+      "value_display": "Pastoral training centre",
+      "sort_order": 3,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGSP_ANIMAL_HEALTH_POST",
+      "value_code": "AGSP_ANIMAL_HEALTH_POST",
+      "value_display": "Animal health post",
+      "sort_order": 4,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGSP_DEMONSTRATION_SITE",
+      "value_code": "AGSP_DEMONSTRATION_SITE",
+      "value_display": "Demonstration site",
+      "sort_order": 5,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "AGSP_OTHER",
+      "value_code": "AGSP_OTHER",
+      "value_display": "Other",
+      "sort_order": 6,
+      "display_i18n": {}
+    }
+  ]
+}

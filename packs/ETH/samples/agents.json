@@ -1,0 +1,1101 @@
+[
+  {
+    "agent_id": "01010101",
+    "given_name": "Gebremedhin",
+    "fathers_name": "Hailu",
+    "grandfathers_name": "Tesfay",
+    "full_name": "Gebremedhin Hailu Tesfay",
+    "gender": "MALE",
+    "birth_date": "1989-02-04",
+    "national_id": "797811237160",
+    "phone": "+251999126204",
+    "email": "gebremedhin.hailu@agents.example.et",
+    "employee_number": "01-2011-0001",
+    "position": "AGPOS_FIELD_AGENT",
+    "employer_type": "AGEMPR_GOVERNMENT",
+    "employer_name": "Tigray Bureau of Agriculture",
+    "employment_type": "AGEMP_PERMANENT",
+    "date_of_hire": "2011-09-11",
+    "geo_pcode": "ET010101",
+    "service_point_name": "Tahtay Adiyabo kebele 01 Farmer Training Centre",
+    "service_point_type": "AGSP_TRAINING_CENTRE",
+    "assigned_since": "2011-09-11",
+    "assignment_reason": "AGRSN_FIRST_POSTING",
+    "service_status": "AGST_ACTIVE",
+    "service_status_date": "2011-09-11",
+    "service_status_reason": null,
+    "languages_spoken": "Tigrinya",
+    "specializations": [
+      {
+        "specialization": "AGSPEC_CROP",
+        "is_primary": true,
+        "since": "2011-09-11"
+      }
+    ],
+    "qualifications": [
+      {
+        "level": "AGQUAL_TVET_LEVEL_4",
+        "field_of_study": "AGFOS_PLANT_SCIENCE",
+        "institution": "Maichew ATVET College",
+        "year_completed": 2010
+      }
+    ]
+  },
+  {
+    "agent_id": "01010102",
+    "given_name": "Letay",
+    "fathers_name": "Gebru",
+    "grandfathers_name": "Asfaw",
+    "full_name": "Letay Gebru Asfaw",
+    "gender": "FEMALE",
+    "birth_date": "1996-03-07",
+    "national_id": "756912033493",
+    "phone": "+251915559624",
+    "email": "letay.gebru@agents.example.et",
+    "employee_number": "01-2019-0002",
+    "position": "AGPOS_FIELD_AGENT",
+    "employer_type": "AGEMPR_GOVERNMENT",
+    "employer_name": "Tigray Bureau of Agriculture",
+    "employment_type": "AGEMP_PERMANENT",
+    "date_of_hire": "2019-09-11",
+    "geo_pcode": "ET010101",
+    "service_point_name": "Tahtay Adiyabo kebele 02 Farmer Training Centre",
+    "service_point_type": "AGSP_TRAINING_CENTRE",
+    "assigned_since": "2019-09-11",
+    "assignment_reason": "AGRSN_FIRST_POSTING",
+    "service_status": "AGST_ACTIVE",
+    "service_status_date": "2019-09-11",
+    "service_status_reason": null,
+    "languages_spoken": "Tigrinya",
+    "specializations": [
+      {
+        "specialization": "AGSPEC_LIVESTOCK",
+        "is_primary": true,
+        "since": "2019-09-11"
+      },
+      {
+        "specialization": "AGSPEC_ANIMAL_HEALTH",
+        "is_primary": false,
+        "since": "2022-09-11"
+      }
+    ],
+    "qualifications": [
+      {
+        "level": "AGQUAL_TVET_LEVEL_4",
+        "field_of_study": "AGFOS_ANIMAL_SCIENCE",
+        "institution": "Maichew ATVET College",
+        "year_completed": 2018
+      }
+    ]
+  },
+  {
+    "agent_id": "01010103",
+    "given_name": "Kidane",
+    "fathers_name": "Weldu",
+    "grandfathers_name": "Berhe",
+    "full_name": "Kidane Weldu Berhe",
+    "gender": "MALE",
+    "birth_date": "1987-04-10",
+    "national_id": "724526293747",
+    "phone": "+251913165694",
+    "email": "kidane.weldu@agents.example.et",
+    "employee_number": "01-2011-0003",
+    "position": "AGPOS_FIELD_AGENT",
+    "employer_type": "AGEMPR_GOVERNMENT",
+    "employer_name": "Tigray Bureau of Agriculture",
+    "employment_type": "AGEMP_PERMANENT",
+    "date_of_hire": "2011-09-11",
+    "geo_pcode": "ET010101",
+    "service_point_name": "Tahtay Adiyabo kebele 03 Farmer Training Centre",
+    "service_point_type": "AGSP_TRAINING_CENTRE",
+    "assigned_since": "2011-09-11",
+    "assignment_reason": "AGRSN_FIRST_POSTING",
+    "service_status": "AGST_ACTIVE",
+    "service_status_date": "2011-09-11",
+    "service_status_reason": null,
+    "languages_spoken": "Tigrinya",
+    "specializations": [
+      {
+        "specialization": "AGSPEC_NATURAL_RESOURCES",
+        "is_primary": true,
+        "since": "2011-09-11"
+      }
+    ],
+    "qualifications": [
+      {
+        "level": "AGQUAL_TVET_LEVEL_4",
+        "field_of_study": "AGFOS_NATURAL_RESOURCES",
+        "institution": "Maichew ATVET College",
+        "year_completed": 2010
+      }
+    ]
+  },
+  {
+    "agent_id": "01010401",
+    "given_name": "Mulu",
+    "fathers_name": "Tsegay",
+    "grandfathers_name": "Kahsay",
+    "full_name": "Mulu Tsegay Kahsay",
+    "gender": "FEMALE",
+    "birth_date": "1994-05-13",
+    "national_id": "711236048961",
+    "phone": "+251966891318",
+    "email": "mulu.tsegay@agents.example.et",
+    "employee_number": "01-2015-0004",
+    "position": "AGPOS_FIELD_AGENT",
+    "employer_type": "AGEMPR_GOVERNMENT",
+    "employer_name": "Tigray Bureau of Agriculture",
+    "employment_type": "AGEMP_PERMANENT",
+    "date_of_hire": "2015-09-11",
+    "geo_pcode": "ET010104",
+    "service_point_name": "Tahtay Koraro kebele 01 Farmer Training Centre",
+    "service_point_type": "AGSP_TRAINING_CENTRE",
+    "assigned_since": "2015-09-11",
+    "assignment_reason": "AGRSN_FIRST_POSTING",
+    "service_status": "AGST_ON_LEAVE",
+    "service_status_date": "2026-07-01",
+    "service_status_reason": "Maternity leave",
+    "languages_spoken": "Tigrinya",
+    "specializations": [
+      {
+        "specialization": "AGSPEC_CROP",
+        "is_primary": true,
+        "since": "2015-09-11"
+      },
+      {
+        "specialization": "AGSPEC_IRRIGATION",
+        "is_primary": false,
+        "since": "2018-09-11"
+      }
+    ],
+    "qualifications": [
+      {
+        "level": "AGQUAL_TVET_LEVEL_4",
+        "field_of_study": "AGFOS_PLANT_SCIENCE",
+        "institution": "Maichew ATVET College",
+        "year_completed": 2014
+      },
+      {
+        "level": "AGQUAL_BACHELORS",
+        "field_of_study": "AGFOS_PLANT_SCIENCE",
+        "institution": "Mekelle University",
+        "year_completed": 2020
+      }
+    ]
+  },
+  {
+    "agent_id": "01010402",
+    "given_name": "Haftom",
+    "fathers_name": "Abraha",
+    "grandfathers_name": "Gidey",
+    "full_name": "Haftom Abraha Gidey",
+    "gender": "MALE",
+    "birth_date": "1985-06-16",
+    "national_id": "721558699457",
+    "phone": "+251928671428",
+    "email": "haftom.abraha@agents.example.et",
+    "employee_number": "01-2007-0005",
+    "position": "AGPOS_SUPERVISOR",
+    "employer_type": "AGEMPR_GOVERNMENT",
+    "employer_name": "Tigray Bureau of Agriculture",
+    "employment_type": "AGEMP_PERMANENT",
+    "date_of_hire": "2007-09-11",
+    "geo_pcode": "ET010104",
+    "service_point_name": "Tahtay Koraro woreda agriculture office",
+    "service_point_type": "AGSP_EXTENSION_OFFICE",
+    "assigned_since": "2011-09-11",
+    "assignment_reason": "AGRSN_TRANSFER",
+    "service_status": "AGST_ACTIVE",
+    "service_status_date": "2007-09-11",
+    "service_status_reason": null,
+    "languages_spoken": "Tigrinya",
+    "specializations": [
+      {
+        "specialization": "AGSPEC_GENERAL",
+        "is_primary": true,
+        "since": "2007-09-11"
+      }
+    ],
+    "qualifications": [
+      {
+        "level": "AGQUAL_DIPLOMA",
+        "field_of_study": "AGFOS_AGRICULTURAL_EXTENSION",
+        "institution": "Maichew ATVET College",
+        "year_completed": 2006
+      },
+      {
+        "level": "AGQUAL_BACHELORS",
+        "field_of_study": "AGFOS_AGRICULTURAL_EXTENSION",
+        "institution": "Mekelle University",
+        "year_completed": 2012
+      }
+    ]
+  },
+  {
+    "agent_id": "01010801",
+    "given_name": "Tsehaye",
+    "fathers_name": "Gebreyohannes",
+    "grandfathers_name": "Mesfin",
+    "full_name": "Tsehaye Gebreyohannes Mesfin",
+    "gender": "MALE",
+    "birth_date": "1992-07-19",
+    "national_id": "718549486372",
+    "phone": "+251910595630",
+    "email": "tsehaye.gebreyohannes@agents.example.et",
+    "employee_number": "01-2015-0006",
+    "position": "AGPOS_COORDINATOR",
+    "employer_type": "AGEMPR_GOVERNMENT",
+    "employer_name": "Tigray Bureau of Agriculture",
+    "employment_type": "AGEMP_CONTRACT",
+    "date_of_hire": "2015-09-11",
+    "geo_pcode": "ET010108",
+    "service_point_name": "Shire Endaslasie town woreda agriculture office",
+    "service_point_type": "AGSP_EXTENSION_OFFICE",
+    "assigned_since": "2015-09-11",
+    "assignment_reason": "AGRSN_PROMOTION",
+    "service_status": "AGST_ACTIVE",
+    "service_status_date": "2015-09-11",
+    "service_status_reason": null,
+    "languages_spoken": "Tigrinya",
+    "specializations": [
+      {
+        "specialization": "AGSPEC_GENERAL",
+        "is_primary": true,
+        "since": "2015-09-11"
+      }
+    ],
+    "qualifications": [
+      {
+        "level": "AGQUAL_DIPLOMA",
+        "field_of_study": "AGFOS_AGRICULTURAL_EXTENSION",
+        "institution": "Maichew ATVET College",
+        "year_completed": 2014
+      },
+      {
+        "level": "AGQUAL_BACHELORS",
+        "field_of_study": "AGFOS_AGRICULTURAL_EXTENSION",
+        "institution": "Mekelle University",
+        "year_completed": 2020
+      }
+    ]
+  },
+  {
+    "agent_id": "03010401",
+    "given_name": "Tigist",
+    "fathers_name": "Alemu",
+    "grandfathers_name": "Worku",
+    "full_name": "Tigist Alemu Worku",
+    "gender": "FEMALE",
+    "birth_date": "1983-08-22",
+    "national_id": "764698519851",
+    "phone": "+251975555142",
+    "email": "tigist.alemu@agents.example.et",
+    "employee_number": "03-2007-0007",
+    "position": "AGPOS_FIELD_AGENT",
+    "employer_type": "AGEMPR_GOVERNMENT",
+    "employer_name": "Amhara Bureau of Agriculture",
+    "employment_type": "AGEMP_PERMANENT",
+    "date_of_hire": "2007-09-11",
+    "geo_pcode": "ET030104",
+    "service_point_name": "Debark kebele 01 Farmer Training Centre",
+    "service_point_type": "AGSP_TRAINING_CENTRE",
+    "assigned_since": "2007-09-11",
+    "assignment_reason": "AGRSN_FIRST_POSTING",
+    "service_status": "AGST_ACTIVE",
+    "service_status_date": "2007-09-11",
+    "service_status_reason": null,
+    "languages_spoken": "Amharic",
+    "specializations": [
+      {
+        "specialization": "AGSPEC_CROP",
+        "is_primary": true,
+        "since": "2007-09-11"
+      }
+    ],
+    "qualifications": [
+      {
+        "level": "AGQUAL_TVET_LEVEL_4",
+        "field_of_study": "AGFOS_PLANT_SCIENCE",
+        "institution": "Woreta ATVET College",
+        "year_completed": 2006
+      }
+    ]
+  },
+  {
+    "agent_id": "03010402",
+    "given_name": "Getachew",
+    "fathers_name": "Mekonnen",
+    "grandfathers_name": "Ayele",
+    "full_name": "Getachew Mekonnen Ayele",
+    "gender": "MALE",
+    "birth_date": "1990-09-25",
+    "national_id": "756532776444",
+    "phone": "+251910186987",
+    "email": "getachew.mekonnen@agents.example.et",
+    "employee_number": "03-2011-0008",
+    "position": "AGPOS_FIELD_AGENT",
+    "employer_type": "AGEMPR_GOVERNMENT",
+    "employer_name": "Amhara Bureau of Agriculture",
+    "employment_type": "AGEMP_PERMANENT",
+    "date_of_hire": "2011-09-11",
+    "geo_pcode": "ET030104",
+    "service_point_name": "Debark kebele 02 Farmer Training Centre",
+    "service_point_type": "AGSP_TRAINING_CENTRE",
+    "assigned_since": "2011-09-11",
+    "assignment_reason": "AGRSN_FIRST_POSTING",
+    "service_status": "AGST_ACTIVE",
+    "service_status_date": "2011-09-11",
+    "service_status_reason": null,
+    "languages_spoken": "Amharic",
+    "specializations": [
+      {
+        "specialization": "AGSPEC_LIVESTOCK",
+        "is_primary": true,
+        "since": "2011-09-11"
+      }
+    ],
+    "qualifications": [
+      {
+        "level": "AGQUAL_TVET_LEVEL_4",
+        "field_of_study": "AGFOS_ANIMAL_SCIENCE",
+        "institution": "Woreta ATVET College",
+        "year_completed": 2010
+      },
+      {
+        "level": "AGQUAL_BACHELORS",
+        "field_of_study": "AGFOS_ANIMAL_SCIENCE",
+        "institution": "Bahir Dar University",
+        "year_completed": 2016
+      }
+    ]
+  },
+  {
+    "agent_id": "03010403",
+    "given_name": "Yeshi",
+    "fathers_name": "Tadesse",
+    "grandfathers_name": "Kebede",
+    "full_name": "Yeshi Tadesse Kebede",
+    "gender": "FEMALE",
+    "birth_date": "1997-10-01",
+    "national_id": "717312704129",
+    "phone": "+251935936900",
+    "email": "yeshi.tadesse@agents.example.et",
+    "employee_number": "03-2019-0009",
+    "position": "AGPOS_SENIOR_FIELD_AGENT",
+    "employer_type": "AGEMPR_GOVERNMENT",
+    "employer_name": "Amhara Bureau of Agriculture",
+    "employment_type": "AGEMP_PERMANENT",
+    "date_of_hire": "2019-09-11",
+    "geo_pcode": "ET030104",
+    "service_point_name": "Debark woreda agriculture office",
+    "service_point_type": "AGSP_EXTENSION_OFFICE",
+    "assigned_since": "2019-09-11",
+    "assignment_reason": "AGRSN_PROMOTION",
+    "service_status": "AGST_RETIRED",
+    "service_status_date": "2025-12-31",
+    "service_status_reason": "Reached retirement age",
+    "languages_spoken": "Amharic",
+    "specializations": [
+      {
+        "specialization": "AGSPEC_NATURAL_RESOURCES",
+        "is_primary": true,
+        "since": "2019-09-11"
+      }
+    ],
+    "qualifications": [
+      {
+        "level": "AGQUAL_DIPLOMA",
+        "field_of_study": "AGFOS_NATURAL_RESOURCES",
+        "institution": "Woreta ATVET College",
+        "year_completed": 2018
+      },
+      {
+        "level": "AGQUAL_BACHELORS",
+        "field_of_study": "AGFOS_AGRICULTURAL_EXTENSION",
+        "institution": "Bahir Dar University",
+        "year_completed": 2024
+      }
+    ]
+  },
+  {
+    "agent_id": "04061101",
+    "given_name": "Chaltu",
+    "fathers_name": "Bekele",
+    "grandfathers_name": "Gutema",
+    "full_name": "Chaltu Bekele Gutema",
+    "gender": "FEMALE",
+    "birth_date": "1988-11-04",
+    "national_id": "744816727104",
+    "phone": "+251920364035",
+    "email": "chaltu.bekele@agents.example.et",
+    "employee_number": "04-2011-0010",
+    "position": "AGPOS_FIELD_AGENT",
+    "employer_type": "AGEMPR_GOVERNMENT",
+    "employer_name": "Oromia Bureau of Agriculture",
+    "employment_type": "AGEMP_PERMANENT",
+    "date_of_hire": "2011-09-11",
+    "geo_pcode": "ET040611",
+    "service_point_name": "Sheno town kebele 01 Farmer Training Centre",
+    "service_point_type": "AGSP_TRAINING_CENTRE",
+    "assigned_since": "2015-09-11",
+    "assignment_reason": "AGRSN_TRANSFER",
+    "service_status": "AGST_ACTIVE",
+    "service_status_date": "2011-09-11",
+    "service_status_reason": null,
+    "languages_spoken": "Afaan Oromo, Amharic",
+    "specializations": [
+      {
+        "specialization": "AGSPEC_CROP",
+        "is_primary": true,
+        "since": "2011-09-11"
+      },
+      {
+        "specialization": "AGSPEC_HORTICULTURE",
+        "is_primary": false,
+        "since": "2014-09-11"
+      }
+    ],
+    "qualifications": [
+      {
+        "level": "AGQUAL_TVET_LEVEL_4",
+        "field_of_study": "AGFOS_PLANT_SCIENCE",
+        "institution": "Holeta ATVET College",
+        "year_completed": 2010
+      }
+    ]
+  },
+  {
+    "agent_id": "04061102",
+    "given_name": "Tolera",
+    "fathers_name": "Dinka",
+    "grandfathers_name": "Fayisa",
+    "full_name": "Tolera Dinka Fayisa",
+    "gender": "MALE",
+    "birth_date": "1995-12-07",
+    "national_id": "763885437991",
+    "phone": "+251930785623",
+    "email": "tolera.dinka@agents.example.et",
+    "employee_number": "04-2019-0011",
+    "position": "AGPOS_SUBJECT_SPECIALIST",
+    "employer_type": "AGEMPR_GOVERNMENT",
+    "employer_name": "Oromia Bureau of Agriculture",
+    "employment_type": "AGEMP_PERMANENT",
+    "date_of_hire": "2019-09-11",
+    "geo_pcode": "ET040611",
+    "service_point_name": "Sheno town woreda agriculture office",
+    "service_point_type": "AGSP_EXTENSION_OFFICE",
+    "assigned_since": "2019-09-11",
+    "assignment_reason": "AGRSN_PROMOTION",
+    "service_status": "AGST_ACTIVE",
+    "service_status_date": "2019-09-11",
+    "service_status_reason": null,
+    "languages_spoken": "Afaan Oromo, Amharic",
+    "specializations": [
+      {
+        "specialization": "AGSPEC_COOPERATIVES",
+        "is_primary": true,
+        "since": "2019-09-11"
+      }
+    ],
+    "qualifications": [
+      {
+        "level": "AGQUAL_DIPLOMA",
+        "field_of_study": "AGFOS_COOPERATIVES",
+        "institution": "Holeta ATVET College",
+        "year_completed": 2018
+      },
+      {
+        "level": "AGQUAL_BACHELORS",
+        "field_of_study": "AGFOS_AGRICULTURAL_EXTENSION",
+        "institution": "Haramaya University",
+        "year_completed": 2024
+      }
+    ]
+  },
+  {
+    "agent_id": "04010301",
+    "given_name": "Abdisa",
+    "fathers_name": "Merga",
+    "grandfathers_name": "Tolosa",
+    "full_name": "Abdisa Merga Tolosa",
+    "gender": "MALE",
+    "birth_date": "1986-01-10",
+    "national_id": "710899618480",
+    "phone": "+251990746608",
+    "email": "abdisa.merga@agents.example.et",
+    "employee_number": "04-2007-0012",
+    "position": "AGPOS_FIELD_AGENT",
+    "employer_type": "AGEMPR_GOVERNMENT",
+    "employer_name": "Oromia Bureau of Agriculture",
+    "employment_type": "AGEMP_CONTRACT",
+    "date_of_hire": "2007-09-11",
+    "geo_pcode": "ET040103",
+    "service_point_name": "Gimbi kebele 01 Farmer Training Centre",
+    "service_point_type": "AGSP_TRAINING_CENTRE",
+    "assigned_since": "2007-09-11",
+    "assignment_reason": "AGRSN_FIRST_POSTING",
+    "service_status": "AGST_ACTIVE",
+    "service_status_date": "2007-09-11",
+    "service_status_reason": null,
+    "languages_spoken": "Afaan Oromo, Amharic",
+    "specializations": [
+      {
+        "specialization": "AGSPEC_CROP",
+        "is_primary": true,
+        "since": "2007-09-11"
+      }
+    ],
+    "qualifications": [
+      {
+        "level": "AGQUAL_TVET_LEVEL_4",
+        "field_of_study": "AGFOS_PLANT_SCIENCE",
+        "institution": "Holeta ATVET College",
+        "year_completed": 2006
+      },
+      {
+        "level": "AGQUAL_BACHELORS",
+        "field_of_study": "AGFOS_PLANT_SCIENCE",
+        "institution": "Haramaya University",
+        "year_completed": 2012
+      }
+    ]
+  },
+  {
+    "agent_id": "04010302",
+    "given_name": "Lalise",
+    "fathers_name": "Gudeta",
+    "grandfathers_name": "Bayisa",
+    "full_name": "Lalise Gudeta Bayisa",
+    "gender": "FEMALE",
+    "birth_date": "1993-02-13",
+    "national_id": "761332549015",
+    "phone": "+251989874469",
+    "email": "lalise.gudeta@agents.example.et",
+    "employee_number": "04-2015-0013",
+    "position": "AGPOS_FIELD_AGENT",
+    "employer_type": "AGEMPR_GOVERNMENT",
+    "employer_name": "Oromia Bureau of Agriculture",
+    "employment_type": "AGEMP_PERMANENT",
+    "date_of_hire": "2015-09-11",
+    "geo_pcode": "ET040103",
+    "service_point_name": "Gimbi kebele 02 Farmer Training Centre",
+    "service_point_type": "AGSP_TRAINING_CENTRE",
+    "assigned_since": "2015-09-11",
+    "assignment_reason": "AGRSN_FIRST_POSTING",
+    "service_status": "AGST_ACTIVE",
+    "service_status_date": "2015-09-11",
+    "service_status_reason": null,
+    "languages_spoken": "Afaan Oromo, Amharic",
+    "specializations": [
+      {
+        "specialization": "AGSPEC_LIVESTOCK",
+        "is_primary": true,
+        "since": "2015-09-11"
+      }
+    ],
+    "qualifications": [
+      {
+        "level": "AGQUAL_TVET_LEVEL_4",
+        "field_of_study": "AGFOS_ANIMAL_SCIENCE",
+        "institution": "Holeta ATVET College",
+        "year_completed": 2014
+      }
+    ]
+  },
+  {
+    "agent_id": "04010303",
+    "given_name": "Gemechu",
+    "fathers_name": "Olana",
+    "grandfathers_name": "Hirpa",
+    "full_name": "Gemechu Olana Hirpa",
+    "gender": "MALE",
+    "birth_date": "1984-03-16",
+    "national_id": "710153120090",
+    "phone": "+251930468804",
+    "email": "gemechu.olana@agents.example.et",
+    "employee_number": "04-2007-0014",
+    "position": "AGPOS_FIELD_AGENT",
+    "employer_type": "AGEMPR_GOVERNMENT",
+    "employer_name": "Oromia Bureau of Agriculture",
+    "employment_type": "AGEMP_PERMANENT",
+    "date_of_hire": "2007-09-11",
+    "geo_pcode": "ET040103",
+    "service_point_name": "Gimbi kebele 03 Farmer Training Centre",
+    "service_point_type": "AGSP_TRAINING_CENTRE",
+    "assigned_since": "2007-09-11",
+    "assignment_reason": "AGRSN_FIRST_POSTING",
+    "service_status": "AGST_SUSPENDED",
+    "service_status_date": "2026-05-15",
+    "service_status_reason": "Pending disciplinary review",
+    "languages_spoken": "Afaan Oromo, Amharic",
+    "specializations": [
+      {
+        "specialization": "AGSPEC_NATURAL_RESOURCES",
+        "is_primary": true,
+        "since": "2007-09-11"
+      }
+    ],
+    "qualifications": [
+      {
+        "level": "AGQUAL_TVET_LEVEL_4",
+        "field_of_study": "AGFOS_NATURAL_RESOURCES",
+        "institution": "Holeta ATVET College",
+        "year_completed": 2006
+      }
+    ]
+  },
+  {
+    "agent_id": "08010501",
+    "given_name": "Abebech",
+    "fathers_name": "Dana",
+    "grandfathers_name": "Ersado",
+    "full_name": "Abebech Dana Ersado",
+    "gender": "FEMALE",
+    "birth_date": "1991-04-19",
+    "national_id": "775908191784",
+    "phone": "+251923987249",
+    "email": "abebech.dana@agents.example.et",
+    "employee_number": "08-2015-0015",
+    "position": "AGPOS_FIELD_AGENT",
+    "employer_type": "AGEMPR_GOVERNMENT",
+    "employer_name": "South Ethiopia Bureau of Agriculture",
+    "employment_type": "AGEMP_PERMANENT",
+    "date_of_hire": "2015-09-11",
+    "geo_pcode": "ET080105",
+    "service_point_name": "Sodo Zuria kebele 01 Farmer Training Centre",
+    "service_point_type": "AGSP_TRAINING_CENTRE",
+    "assigned_since": "2019-09-11",
+    "assignment_reason": "AGRSN_TRANSFER",
+    "service_status": "AGST_ACTIVE",
+    "service_status_date": "2015-09-11",
+    "service_status_reason": null,
+    "languages_spoken": "Wolaytta, Amharic",
+    "specializations": [
+      {
+        "specialization": "AGSPEC_HOME_ECONOMICS",
+        "is_primary": true,
+        "since": "2015-09-11"
+      }
+    ],
+    "qualifications": [
+      {
+        "level": "AGQUAL_TVET_LEVEL_4",
+        "field_of_study": "AGFOS_OTHER",
+        "institution": "Wolaita Sodo ATVET College",
+        "year_completed": 2014
+      }
+    ]
+  },
+  {
+    "agent_id": "08010502",
+    "given_name": "Tamirat",
+    "fathers_name": "Gamo",
+    "grandfathers_name": "Ayana",
+    "full_name": "Tamirat Gamo Ayana",
+    "gender": "MALE",
+    "birth_date": "1982-05-22",
+    "national_id": "773124042844",
+    "phone": "+251978083115",
+    "email": "tamirat.gamo@agents.example.et",
+    "employee_number": "08-2003-0016",
+    "position": "AGPOS_FIELD_AGENT",
+    "employer_type": "AGEMPR_GOVERNMENT",
+    "employer_name": "South Ethiopia Bureau of Agriculture",
+    "employment_type": "AGEMP_PERMANENT",
+    "date_of_hire": "2003-09-11",
+    "geo_pcode": "ET080105",
+    "service_point_name": "Sodo Zuria kebele 02 Farmer Training Centre",
+    "service_point_type": "AGSP_TRAINING_CENTRE",
+    "assigned_since": "2003-09-11",
+    "assignment_reason": "AGRSN_FIRST_POSTING",
+    "service_status": "AGST_ACTIVE",
+    "service_status_date": "2003-09-11",
+    "service_status_reason": null,
+    "languages_spoken": "Wolaytta, Amharic",
+    "specializations": [
+      {
+        "specialization": "AGSPEC_CROP",
+        "is_primary": true,
+        "since": "2003-09-11"
+      }
+    ],
+    "qualifications": [
+      {
+        "level": "AGQUAL_TVET_LEVEL_4",
+        "field_of_study": "AGFOS_PLANT_SCIENCE",
+        "institution": "Wolaita Sodo ATVET College",
+        "year_completed": 2002
+      },
+      {
+        "level": "AGQUAL_BACHELORS",
+        "field_of_study": "AGFOS_PLANT_SCIENCE",
+        "institution": "Wolaita Sodo University",
+        "year_completed": 2008
+      }
+    ]
+  },
+  {
+    "agent_id": "08010503",
+    "given_name": "Mesele",
+    "fathers_name": "Wolde",
+    "grandfathers_name": "Badebo",
+    "full_name": "Mesele Wolde Badebo",
+    "gender": "MALE",
+    "birth_date": "1989-06-25",
+    "national_id": "786262453234",
+    "phone": "+251914959686",
+    "email": "mesele.wolde@agents.example.et",
+    "employee_number": "08-2011-0017",
+    "position": "AGPOS_SENIOR_FIELD_AGENT",
+    "employer_type": "AGEMPR_GOVERNMENT",
+    "employer_name": "South Ethiopia Bureau of Agriculture",
+    "employment_type": "AGEMP_PERMANENT",
+    "date_of_hire": "2011-09-11",
+    "geo_pcode": "ET080105",
+    "service_point_name": "Sodo Zuria woreda agriculture office",
+    "service_point_type": "AGSP_EXTENSION_OFFICE",
+    "assigned_since": "2011-09-11",
+    "assignment_reason": "AGRSN_PROMOTION",
+    "service_status": "AGST_ACTIVE",
+    "service_status_date": "2011-09-11",
+    "service_status_reason": null,
+    "languages_spoken": "Wolaytta, Amharic",
+    "specializations": [
+      {
+        "specialization": "AGSPEC_LIVESTOCK",
+        "is_primary": true,
+        "since": "2011-09-11"
+      }
+    ],
+    "qualifications": [
+      {
+        "level": "AGQUAL_DIPLOMA",
+        "field_of_study": "AGFOS_ANIMAL_SCIENCE",
+        "institution": "Wolaita Sodo ATVET College",
+        "year_completed": 2010
+      },
+      {
+        "level": "AGQUAL_BACHELORS",
+        "field_of_study": "AGFOS_AGRICULTURAL_EXTENSION",
+        "institution": "Wolaita Sodo University",
+        "year_completed": 2016
+      }
+    ]
+  },
+  {
+    "agent_id": "16020801",
+    "given_name": "Tsige",
+    "fathers_name": "Lemma",
+    "grandfathers_name": "Danbe",
+    "full_name": "Tsige Lemma Danbe",
+    "gender": "FEMALE",
+    "birth_date": "1996-07-01",
+    "national_id": "799683001894",
+    "phone": "+251927832171",
+    "email": "tsige.lemma@agents.example.et",
+    "employee_number": "16-2019-0018",
+    "position": "AGPOS_FIELD_AGENT",
+    "employer_type": "AGEMPR_GOVERNMENT",
+    "employer_name": "Sidama Bureau of Agriculture",
+    "employment_type": "AGEMP_CONTRACT",
+    "date_of_hire": "2019-09-11",
+    "geo_pcode": "ET160208",
+    "service_point_name": "Boricha kebele 01 Farmer Training Centre",
+    "service_point_type": "AGSP_TRAINING_CENTRE",
+    "assigned_since": "2019-09-11",
+    "assignment_reason": "AGRSN_FIRST_POSTING",
+    "service_status": "AGST_ACTIVE",
+    "service_status_date": "2019-09-11",
+    "service_status_reason": null,
+    "languages_spoken": "Sidaamu Afoo, Amharic",
+    "specializations": [
+      {
+        "specialization": "AGSPEC_CROP",
+        "is_primary": true,
+        "since": "2019-09-11"
+      },
+      {
+        "specialization": "AGSPEC_AGRIBUSINESS",
+        "is_primary": false,
+        "since": "2022-09-11"
+      }
+    ],
+    "qualifications": [
+      {
+        "level": "AGQUAL_TVET_LEVEL_4",
+        "field_of_study": "AGFOS_PLANT_SCIENCE",
+        "institution": "Alage ATVET College",
+        "year_completed": 2018
+      }
+    ]
+  },
+  {
+    "agent_id": "16020802",
+    "given_name": "Tesfaye",
+    "fathers_name": "Hirbaye",
+    "grandfathers_name": "Gudisa",
+    "full_name": "Tesfaye Hirbaye Gudisa",
+    "gender": "MALE",
+    "birth_date": "1987-08-04",
+    "national_id": "721000553597",
+    "phone": "+251948263835",
+    "email": "tesfaye.hirbaye@agents.example.et",
+    "employee_number": "16-2011-0019",
+    "position": "AGPOS_FIELD_AGENT",
+    "employer_type": "AGEMPR_GOVERNMENT",
+    "employer_name": "Sidama Bureau of Agriculture",
+    "employment_type": "AGEMP_PERMANENT",
+    "date_of_hire": "2011-09-11",
+    "geo_pcode": "ET160208",
+    "service_point_name": "Boricha kebele 02 Farmer Training Centre",
+    "service_point_type": "AGSP_TRAINING_CENTRE",
+    "assigned_since": "2011-09-11",
+    "assignment_reason": "AGRSN_FIRST_POSTING",
+    "service_status": "AGST_ACTIVE",
+    "service_status_date": "2011-09-11",
+    "service_status_reason": null,
+    "languages_spoken": "Sidaamu Afoo, Amharic",
+    "specializations": [
+      {
+        "specialization": "AGSPEC_NATURAL_RESOURCES",
+        "is_primary": true,
+        "since": "2011-09-11"
+      }
+    ],
+    "qualifications": [
+      {
+        "level": "AGQUAL_TVET_LEVEL_4",
+        "field_of_study": "AGFOS_NATURAL_RESOURCES",
+        "institution": "Alage ATVET College",
+        "year_completed": 2010
+      }
+    ]
+  },
+  {
+    "agent_id": "02010101",
+    "given_name": "Ali",
+    "fathers_name": "Mohammed",
+    "grandfathers_name": "Hamadu",
+    "full_name": "Ali Mohammed Hamadu",
+    "gender": "MALE",
+    "birth_date": "1994-09-07",
+    "national_id": "732074357277",
+    "phone": "+251961269757",
+    "email": "ali.mohammed@agents.example.et",
+    "employee_number": "02-2015-0020",
+    "position": "AGPOS_FIELD_AGENT",
+    "employer_type": "AGEMPR_GOVERNMENT",
+    "employer_name": "Afar Bureau of Agriculture",
+    "employment_type": "AGEMP_PERMANENT",
+    "date_of_hire": "2015-09-11",
+    "geo_pcode": "ET020101",
+    "service_point_name": "Dubti kebele 01 Pastoral Training Centre",
+    "service_point_type": "AGSP_PASTORAL_CENTRE",
+    "assigned_since": "2019-09-11",
+    "assignment_reason": "AGRSN_TRANSFER",
+    "service_status": "AGST_ACTIVE",
+    "service_status_date": "2015-09-11",
+    "service_status_reason": null,
+    "languages_spoken": "Afar, Amharic",
+    "specializations": [
+      {
+        "specialization": "AGSPEC_LIVESTOCK",
+        "is_primary": true,
+        "since": "2015-09-11"
+      }
+    ],
+    "qualifications": [
+      {
+        "level": "AGQUAL_TVET_LEVEL_4",
+        "field_of_study": "AGFOS_ANIMAL_SCIENCE",
+        "institution": "Gewane ATVET College",
+        "year_completed": 2014
+      },
+      {
+        "level": "AGQUAL_BACHELORS",
+        "field_of_study": "AGFOS_ANIMAL_SCIENCE",
+        "institution": "Samara University",
+        "year_completed": 2020
+      }
+    ]
+  },
+  {
+    "agent_id": "02010102",
+    "given_name": "Fatuma",
+    "fathers_name": "Ahmed",
+    "grandfathers_name": "Ali",
+    "full_name": "Fatuma Ahmed Ali",
+    "gender": "FEMALE",
+    "birth_date": "1985-10-10",
+    "national_id": "785136245712",
+    "phone": "+251934914358",
+    "email": "fatuma.ahmed@agents.example.et",
+    "employee_number": "02-2007-0021",
+    "position": "AGPOS_ANIMAL_HEALTH_WORKER",
+    "employer_type": "AGEMPR_GOVERNMENT",
+    "employer_name": "Afar Bureau of Agriculture",
+    "employment_type": "AGEMP_PERMANENT",
+    "date_of_hire": "2007-09-11",
+    "geo_pcode": "ET020101",
+    "service_point_name": "Dubti kebele 02 animal health post",
+    "service_point_type": "AGSP_ANIMAL_HEALTH_POST",
+    "assigned_since": "2007-09-11",
+    "assignment_reason": "AGRSN_FIRST_POSTING",
+    "service_status": "AGST_ACTIVE",
+    "service_status_date": "2007-09-11",
+    "service_status_reason": null,
+    "languages_spoken": "Afar, Amharic",
+    "specializations": [
+      {
+        "specialization": "AGSPEC_ANIMAL_HEALTH",
+        "is_primary": true,
+        "since": "2007-09-11"
+      }
+    ],
+    "qualifications": [
+      {
+        "level": "AGQUAL_TVET_LEVEL_4",
+        "field_of_study": "AGFOS_ANIMAL_HEALTH",
+        "institution": "Gewane ATVET College",
+        "year_completed": 2006
+      }
+    ]
+  },
+  {
+    "agent_id": "05010101",
+    "given_name": "Abdi",
+    "fathers_name": "Hassan",
+    "grandfathers_name": "Farah",
+    "full_name": "Abdi Hassan Farah",
+    "gender": "MALE",
+    "birth_date": "1992-11-13",
+    "national_id": "728305401574",
+    "phone": "+251915042553",
+    "email": "abdi.hassan@agents.example.et",
+    "employee_number": "05-2015-0022",
+    "position": "AGPOS_ANIMAL_HEALTH_WORKER",
+    "employer_type": "AGEMPR_GOVERNMENT",
+    "employer_name": "Somali Bureau of Agriculture",
+    "employment_type": "AGEMP_PERMANENT",
+    "date_of_hire": "2015-09-11",
+    "geo_pcode": "ET050101",
+    "service_point_name": "Ayisha kebele 01 animal health post",
+    "service_point_type": "AGSP_ANIMAL_HEALTH_POST",
+    "assigned_since": "2015-09-11",
+    "assignment_reason": "AGRSN_FIRST_POSTING",
+    "service_status": "AGST_ACTIVE",
+    "service_status_date": "2015-09-11",
+    "service_status_reason": null,
+    "languages_spoken": "Somali",
+    "specializations": [
+      {
+        "specialization": "AGSPEC_ANIMAL_HEALTH",
+        "is_primary": true,
+        "since": "2015-09-11"
+      }
+    ],
+    "qualifications": [
+      {
+        "level": "AGQUAL_TVET_LEVEL_4",
+        "field_of_study": "AGFOS_ANIMAL_HEALTH",
+        "institution": "Gewane ATVET College",
+        "year_completed": 2014
+      }
+    ]
+  },
+  {
+    "agent_id": "06020601",
+    "given_name": "Desta",
+    "fathers_name": "Kassa",
+    "grandfathers_name": "Alemayehu",
+    "full_name": "Desta Kassa Alemayehu",
+    "gender": "MALE",
+    "birth_date": "1983-12-16",
+    "national_id": "711001915003",
+    "phone": "+251934700769",
+    "email": "desta.kassa@agents.example.et",
+    "employee_number": "06-2007-0023",
+    "position": "AGPOS_FIELD_AGENT",
+    "employer_type": "AGEMPR_GOVERNMENT",
+    "employer_name": "Benishangul-Gumuz Bureau of Agriculture",
+    "employment_type": "AGEMP_PERMANENT",
+    "date_of_hire": "2007-09-11",
+    "geo_pcode": "ET060206",
+    "service_point_name": "Pawe kebele 01 Farmer Training Centre",
+    "service_point_type": "AGSP_TRAINING_CENTRE",
+    "assigned_since": "2007-09-11",
+    "assignment_reason": "AGRSN_FIRST_POSTING",
+    "service_status": "AGST_ACTIVE",
+    "service_status_date": "2007-09-11",
+    "service_status_reason": null,
+    "languages_spoken": "Gumuz, Amharic",
+    "specializations": [
+      {
+        "specialization": "AGSPEC_CROP",
+        "is_primary": true,
+        "since": "2007-09-11"
+      },
+      {
+        "specialization": "AGSPEC_IRRIGATION",
+        "is_primary": false,
+        "since": "2010-09-11"
+      }
+    ],
+    "qualifications": [
+      {
+        "level": "AGQUAL_TVET_LEVEL_4",
+        "field_of_study": "AGFOS_PLANT_SCIENCE",
+        "institution": "Assosa ATVET College",
+        "year_completed": 2006
+      }
+    ]
+  },
+  {
+    "agent_id": "06020602",
+    "given_name": "Almaz",
+    "fathers_name": "Getahun",
+    "grandfathers_name": "Mamo",
+    "full_name": "Almaz Getahun Mamo",
+    "gender": "FEMALE",
+    "birth_date": "1990-01-19",
+    "national_id": "710313044087",
+    "phone": "+251961549519",
+    "email": "almaz.getahun@agents.example.et",
+    "employee_number": "06-2011-0024",
+    "position": "AGPOS_FIELD_AGENT",
+    "employer_type": "AGEMPR_GOVERNMENT",
+    "employer_name": "Benishangul-Gumuz Bureau of Agriculture",
+    "employment_type": "AGEMP_CONTRACT",
+    "date_of_hire": "2011-09-11",
+    "geo_pcode": "ET060206",
+    "service_point_name": "Pawe kebele 02 Farmer Training Centre",
+    "service_point_type": "AGSP_TRAINING_CENTRE",
+    "assigned_since": "2011-09-11",
+    "assignment_reason": "AGRSN_FIRST_POSTING",
+    "service_status": "AGST_ACTIVE",
+    "service_status_date": "2011-09-11",
+    "service_status_reason": null,
+    "languages_spoken": "Gumuz, Amharic",
+    "specializations": [
+      {
+        "specialization": "AGSPEC_HOME_ECONOMICS",
+        "is_primary": true,
+        "since": "2011-09-11"
+      }
+    ],
+    "qualifications": [
+      {
+        "level": "AGQUAL_TVET_LEVEL_4",
+        "field_of_study": "AGFOS_OTHER",
+        "institution": "Assosa ATVET College",
+        "year_completed": 2010
+      },
+      {
+        "level": "AGQUAL_BACHELORS",
+        "field_of_study": "AGFOS_OTHER",
+        "institution": "Assosa University",
+        "year_completed": 2016
+      }
+    ]
+  }
+]
