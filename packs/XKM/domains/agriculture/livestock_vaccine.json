@@ -1,0 +1,106 @@
+{
+  "attribute_id": "LIVESTOCK_VACCINE",
+  "attribute_code": "LIVESTOCK_VACCINE",
+  "attribute_display": "Livestock vaccine",
+  "is_hierarchical": false,
+  "values": [
+    {
+      "value_id": "LVAC_FMD",
+      "value_code": "LVAC_FMD",
+      "value_display": "Foot-and-mouth disease (FMD)",
+      "sort_order": 1,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LVAC_LSD",
+      "value_code": "LVAC_LSD",
+      "value_display": "Lumpy skin disease (LSD)",
+      "sort_order": 2,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LVAC_ANTHRAX",
+      "value_code": "LVAC_ANTHRAX",
+      "value_display": "Anthrax",
+      "sort_order": 3,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LVAC_BLACKLEG",
+      "value_code": "LVAC_BLACKLEG",
+      "value_display": "Blackleg",
+      "sort_order": 4,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LVAC_CBPP",
+      "value_code": "LVAC_CBPP",
+      "value_display": "Contagious bovine pleuropneumonia (CBPP)",
+      "sort_order": 5,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LVAC_PASTEURELLOSIS",
+      "value_code": "LVAC_PASTEURELLOSIS",
+      "value_display": "Pasteurellosis",
+      "sort_order": 6,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LVAC_PPR",
+      "value_code": "LVAC_PPR",
+      "value_display": "Peste des petits ruminants (PPR)",
+      "sort_order": 7,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LVAC_SGP",
+      "value_code": "LVAC_SGP",
+      "value_display": "Sheep and goat pox",
+      "sort_order": 8,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LVAC_CCPP",
+      "value_code": "LVAC_CCPP",
+      "value_display": "Contagious caprine pleuropneumonia (CCPP)",
+      "sort_order": 9,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LVAC_NEWCASTLE",
+      "value_code": "LVAC_NEWCASTLE",
+      "value_display": "Newcastle disease",
+      "sort_order": 10,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LVAC_AHS",
+      "value_code": "LVAC_AHS",
+      "value_display": "African horse sickness",
+      "sort_order": 11,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LVAC_CAMEL_POX",
+      "value_code": "LVAC_CAMEL_POX",
+      "value_display": "Camel pox",
+      "sort_order": 12,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LVAC_RABIES",
+      "value_code": "LVAC_RABIES",
+      "value_display": "Rabies",
+      "sort_order": 13,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LVAC_OTHER",
+      "value_code": "LVAC_OTHER",
+      "value_display": "Other vaccine",
+      "sort_order": 14,
+      "display_i18n": {}
+    }
+  ]
+}

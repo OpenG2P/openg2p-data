@@ -1,0 +1,36 @@
+{
+  "attribute_id": "LIVESTOCK_VET_CADRE",
+  "attribute_code": "LIVESTOCK_VET_CADRE",
+  "attribute_display": "Animal health provider cadre",
+  "is_hierarchical": false,
+  "values": [
+    {
+      "value_id": "LVC_VETERINARIAN",
+      "value_code": "LVC_VETERINARIAN",
+      "value_display": "Veterinarian",
+      "sort_order": 1,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LVC_ANIMAL_HEALTH_TECHNICIAN",
+      "value_code": "LVC_ANIMAL_HEALTH_TECHNICIAN",
+      "value_display": "Animal health technician",
+      "sort_order": 2,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LVC_ANIMAL_HEALTH_ASSISTANT",
+      "value_code": "LVC_ANIMAL_HEALTH_ASSISTANT",
+      "value_display": "Animal health assistant",
+      "sort_order": 3,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LVC_CAHW",
+      "value_code": "LVC_CAHW",
+      "value_display": "Community animal health worker",
+      "sort_order": 4,
+      "display_i18n": {}
+    }
+  ]
+}

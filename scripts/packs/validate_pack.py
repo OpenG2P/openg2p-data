@@ -574,6 +574,58 @@ def check_agent_samples(pack_dir, r, geo_ids):
                     r.error(f"sample agent {aid} has {field}={val!r}, which is not an ISO date")
 
 
+
+# Coded fields of a Livestock Registry sample vet (samples/veterinarians.json).
+VET_CODED = {"gender": "GENDER", "cadre": "LIVESTOCK_VET_CADRE", "employer_type": "LIVESTOCK_VET_EMPLOYER"}
+
+
+def check_vet_samples(pack_dir, r, geo_ids):
+    """Sample vets (samples/veterinarians.json, optional) for the Livestock Registry.
+
+    Every coded value must be in its list (core or domain), every vet must serve
+    a unit of this pack, and Vet IDs must be eight unique digits — the shape the
+    registry's ID generator gives. Master Data does not load this file: the
+    Livestock Registry's db-seed reads it.
+    """
+    path = os.path.join(pack_dir, "samples", "veterinarians.json")
+    if not os.path.exists(path):
+        return
+    lists = {}
+    dirs = [os.path.join(pack_dir, "codelists")]
+    domains = os.path.join(pack_dir, "domains")
+    if os.path.isdir(domains):
+        dirs += [os.path.join(domains, d) for d in sorted(os.listdir(domains))]
+    for d in dirs:
+        if not os.path.isdir(d):
+            continue
+        for fn in os.listdir(d):
+            if fn.endswith(".json"):
+                doc = read_json(os.path.join(d, fn))
+                lists[doc.get("attribute_id")] = {v.get("value_id") for v in doc.get("values", [])}
+    seen = set()
+    for rec in read_json(path):
+        vid = rec.get("vet_id")
+        if not re.fullmatch(r"[0-9]{8}", str(vid or "")):
+            r.error(f"sample vet {vid!r} does not have an 8-digit vet_id")
+        if vid in seen:
+            r.error(f"sample vet {vid} appears twice")
+        seen.add(vid)
+        if rec.get("geo_pcode") not in geo_ids:
+            r.error(f"sample vet {vid} serves {rec.get('geo_pcode')}, which is not a unit in this pack")
+        for field, attr in VET_CODED.items():
+            val = rec.get(field)
+            if val is None:
+                continue
+            if attr not in lists:
+                r.error(f"sample vet {vid} uses {attr}, which this pack does not have")
+            elif val not in lists[attr]:
+                r.error(f"sample vet {vid} has {field}={val!r}, which is not a value of {attr}")
+        if rec.get("birth_date"):
+            try:
+                datetime.date.fromisoformat(rec["birth_date"])
+            except ValueError:
+                r.error(f"sample vet {vid} has birth_date={rec['birth_date']!r}, which is not an ISO date")
+
 def check_sample_locations(pack_dir, r, geoms):
     """A sample's coordinates must fall inside the unit its P-code names.
 
@@ -710,6 +762,7 @@ def validate(pack_dir):
     check_codelists(pack_dir, r)
     check_samples(pack_dir, r, set(vals))
     check_agent_samples(pack_dir, r, set(vals))
+    check_vet_samples(pack_dir, r, set(vals))
 
     # -- boundaries --------------------------------------------------------
     bdir = os.path.join(pack_dir, "boundaries")

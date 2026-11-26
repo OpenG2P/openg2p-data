@@ -1,0 +1,71 @@
+{
+  "attribute_id": "LIVESTOCK_TREATMENT",
+  "attribute_code": "LIVESTOCK_TREATMENT",
+  "attribute_display": "Livestock treatment",
+  "is_hierarchical": false,
+  "values": [
+    {
+      "value_id": "LTRT_DEWORMING",
+      "value_code": "LTRT_DEWORMING",
+      "value_display": "Deworming",
+      "sort_order": 1,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LTRT_ACARICIDE",
+      "value_code": "LTRT_ACARICIDE",
+      "value_display": "Acaricide (spraying or dipping)",
+      "sort_order": 2,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LTRT_ANTIBIOTIC",
+      "value_code": "LTRT_ANTIBIOTIC",
+      "value_display": "Antibiotic",
+      "sort_order": 3,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LTRT_TRYPANOCIDE",
+      "value_code": "LTRT_TRYPANOCIDE",
+      "value_display": "Trypanocide",
+      "sort_order": 4,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LTRT_ANTI_INFLAMMATORY",
+      "value_code": "LTRT_ANTI_INFLAMMATORY",
+      "value_display": "Anti-inflammatory or pain relief",
+      "sort_order": 5,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LTRT_VITAMINS_MINERALS",
+      "value_code": "LTRT_VITAMINS_MINERALS",
+      "value_display": "Vitamins and minerals",
+      "sort_order": 6,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LTRT_WOUND_CARE",
+      "value_code": "LTRT_WOUND_CARE",
+      "value_display": "Wound care",
+      "sort_order": 7,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LTRT_SURGERY",
+      "value_code": "LTRT_SURGERY",
+      "value_display": "Surgery",
+      "sort_order": 8,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LTRT_OTHER",
+      "value_code": "LTRT_OTHER",
+      "value_display": "Other",
+      "sort_order": 9,
+      "display_i18n": {}
+    }
+  ]
+}

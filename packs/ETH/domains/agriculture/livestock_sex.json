@@ -1,0 +1,29 @@
+{
+  "attribute_id": "LIVESTOCK_SEX",
+  "attribute_code": "LIVESTOCK_SEX",
+  "attribute_display": "Livestock sex",
+  "is_hierarchical": false,
+  "values": [
+    {
+      "value_id": "LSEX_FEMALE",
+      "value_code": "LSEX_FEMALE",
+      "value_display": "Female",
+      "sort_order": 1,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LSEX_MALE",
+      "value_code": "LSEX_MALE",
+      "value_display": "Male (entire)",
+      "sort_order": 2,
+      "display_i18n": {}
+    },
+    {
+      "value_id": "LSEX_CASTRATED",
+      "value_code": "LSEX_CASTRATED",
+      "value_display": "Castrated male (e.g. ox)",
+      "sort_order": 3,
+      "display_i18n": {}
+    }
+  ]
+}

@@ -21,6 +21,7 @@ platform logic ever needs to reason about a domain value's meaning; none do toda
 | `CROP_COMMODITY`, `CROP_END_USE`, `CROP_SEASON`, `CURRENT_LAND_USE`, `FARMER_CLUSTER_ROLE`, `FARMING_TYPE`, `LAND_OWNERSHIP_TYPE`, `LAND_SIZE_UNIT`, `LIVESTOCK_BREED`, `LIVESTOCK_SYSTEM`, `LIVESTOCK_TYPE`, `MEANS_OF_ACQUISITION`, `SOURCE_OF_INCOME`, `WATER_SOURCE` | Farmer Registry |
 | `CROP_COMMODITY` (with `CROP_CATEGORY`), `CROP_SEASON`, `SOIL_FERTILITY`, `WATER_SOURCE`, and the crop-season lists: `CROPPING_SYSTEM`, `LAND_PREPARATION_METHOD`, `IRRIGATION_SOURCE`, `IRRIGATION_METHOD`, `SEED_TYPE`, `SEED_SOURCE`, `SEED_VARIETY`, `SOWING_METHOD`, `FERTILIZER_TYPE`, `FARM_MACHINERY`, `CROP_GROWTH_STAGE`, `CROP_CONDITION`, `INFESTATION_TYPE`, `INFESTATION_AGENT`, `INFESTATION_SEVERITY`, `PEST_CONTROL_ACTION`, `CROP_DAMAGE_CAUSE`, `AGRO_ECOLOGICAL_ZONE` | Crop Sown Registry |
 | `AGENT_POSITION`, `AGENT_SPECIALIZATION`, `AGENT_SERVICE_STATUS`, `AGENT_EMPLOYMENT_TYPE`, `AGENT_EMPLOYER_TYPE`, `AGENT_SERVICE_POINT_TYPE`, `AGENT_ASSIGNMENT_REASON`, `AGENT_QUALIFICATION_LEVEL`, `AGENT_FIELD_OF_STUDY`, `AGENT_TRAINING_TOPIC`, `AGENT_TRAINING_DELIVERY_MODE`, `AGENT_TRAINING_RESULT` | Agents Registry |
+| `LIVESTOCK_TYPE` (species), `LIVESTOCK_BREED`, and the livestock lists: `LIVESTOCK_SEX`, `LIVESTOCK_ACQUISITION`, `LIVESTOCK_VACCINE`, `LIVESTOCK_DISEASE`, `LIVESTOCK_TREATMENT`, `LIVESTOCK_BUYER_TYPE`, `LIVESTOCK_DEATH_CAUSE`, `LIVESTOCK_VET_CADRE`, `LIVESTOCK_VET_EMPLOYER` | Livestock Registry |
 
 Seasons follow Ethiopia's CSA Agricultural Sample Survey: Meher (main rains),
 Belg (short rains) and irrigated dry-season production. Each list's codes carry a
@@ -40,3 +41,14 @@ values. Here they describe Ethiopia's Development Agents: DA positions, Farmer
 and Pastoral Training Centres, TVET levels. The pack's `samples/agents.json`
 holds sample agents for the Agents Registry (its db-seed reads them; Master Data
 does not load that file); `validate_pack.py` checks their codes, units and IDs.
+
+The Livestock Registry's lists, like the Agents Registry's, carry the same codes
+in every pack (`LSEX_`, `LACQ_`, `LVAC_`, `LDIS_`, `LTRT_`, `LBUY_`, `LDTH_`,
+`LVC_`, `LVE_`). Here the vaccines are those given in Ethiopia (lumpy skin
+disease, PPR, sheep and goat pox, anthrax, Newcastle disease, …) and the vet
+cadres Ethiopia's (DVM, Animal Health Technician, Animal Health Assistant,
+CAHW). The pack's `samples/veterinarians.json` holds sample vets for the
+Livestock Registry, in the woredas of the sample people (its db-seed reads them;
+Master Data does not load that file); `validate_pack.py` checks their codes,
+units and IDs. Its sample animals are not in the pack: the registry derives them
+from the sample people.
