@@ -35,6 +35,8 @@ domains/<domain>/*.json        lists that vary by domain AND country, e.g. crops
 address.json                   how an address is written BELOW the lowest level
 samples/individuals.json       a few dozen people, coherent with this country
 samples/households.json        and the households they form
+samples/animals.json           the adults' animals, for the registries that hold
+                               livestock (not loaded by Master Data)
 ```
 
 Everything after `manifest.json` is optional — a pack with geography alone is

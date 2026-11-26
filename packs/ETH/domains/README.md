@@ -50,5 +50,10 @@ cadres Ethiopia's (DVM, Animal Health Technician, Animal Health Assistant,
 CAHW). The pack's `samples/veterinarians.json` holds sample vets for the
 Livestock Registry, in the woredas of the sample people (its db-seed reads them;
 Master Data does not load that file); `validate_pack.py` checks their codes,
-units and IDs. Its sample animals are not in the pack: the registry derives them
-from the sample people.
+units and IDs. `samples/animals.json` holds the sample people's animals: one to
+three for every adult, with species, breed, sex, birth, dam, how acquired and
+the livestock system. The Livestock Registry loads each animal; the Farmer
+Registry loads, per owner, a herd for each species, breed and system with the
+animals' count, so both show the same livestock for the same farmer. Master Data
+does not load that file either; `validate_pack.py` checks its owners, codes,
+numbering and dams.

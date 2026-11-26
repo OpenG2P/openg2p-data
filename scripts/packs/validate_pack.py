@@ -626,6 +626,109 @@ def check_vet_samples(pack_dir, r, geo_ids):
             except ValueError:
                 r.error(f"sample vet {vid} has birth_date={rec['birth_date']!r}, which is not an ISO date")
 
+ANIMAL_CODED = {"species": "LIVESTOCK_TYPE", "breed": "LIVESTOCK_BREED", "sex": "LIVESTOCK_SEX",
+                "acquisition": "LIVESTOCK_ACQUISITION", "livestock_system": "LIVESTOCK_SYSTEM"}
+
+
+def _pack_lists(pack_dir):
+    """attribute_id -> its value IDs, over the core code lists and every domain."""
+    lists = {}
+    dirs = [os.path.join(pack_dir, "codelists")]
+    domains = os.path.join(pack_dir, "domains")
+    if os.path.isdir(domains):
+        dirs += [os.path.join(domains, d) for d in sorted(os.listdir(domains))]
+    for d in dirs:
+        if not os.path.isdir(d):
+            continue
+        for fn in os.listdir(d):
+            if fn.endswith(".json"):
+                doc = read_json(os.path.join(d, fn))
+                lists[doc.get("attribute_id")] = {v.get("value_id") for v in doc.get("values", [])}
+    return lists
+
+
+def check_animal_samples(pack_dir, r):
+    """Sample animals (samples/animals.json, optional), owned by the sample people.
+
+    One file for both registries that hold livestock: the Livestock Registry
+    loads each animal; the Farmer Registry loads, per owner, a herd for each
+    species, breed and livestock system, with the animals' count. So both show
+    the same animals for the same farmer.
+
+    Every owner must be an adult sample person of this pack (individuals.json),
+    every coded value in its list, each owner's animals numbered 1, 2, … (the
+    registry derives the Animal ID from the owner's number and this sequence), a
+    dam one of the owner's earlier females of the same species, and dates ISO
+    and in order. Master Data does not load this file.
+    """
+    path = os.path.join(pack_dir, "samples", "animals.json")
+    if not os.path.exists(path):
+        return
+    people_path = os.path.join(pack_dir, "samples", "individuals.json")
+    people = {p.get("individual_id"): p for p in read_json(people_path)} if os.path.exists(people_path) else {}
+    lists = _pack_lists(pack_dir)
+
+    def day(rec, field, label):
+        value = rec.get(field)
+        if value in (None, ""):
+            return None
+        try:
+            return datetime.date.fromisoformat(value)
+        except (TypeError, ValueError):
+            r.error(f"sample animal {label} has {field}={value!r}, which is not an ISO date")
+            return None
+
+    by_owner, tags = {}, set()
+    for rec in read_json(path):
+        owner, seq = rec.get("owner_individual_id"), rec.get("seq")
+        label = f"{owner}/{seq}"
+        person = people.get(owner)
+        if person is None:
+            r.error(f"sample animal {label}: owner {owner!r} is not a sample person of this pack")
+        elif (person.get("age") or 0) < 18:
+            r.error(f"sample animal {label}: owner {owner} is not an adult")
+        if not isinstance(seq, int) or seq < 1:
+            r.error(f"sample animal {label} needs a seq of 1 or more")
+            continue
+        if seq in by_owner.setdefault(owner, {}):
+            r.error(f"sample animal {label} appears twice")
+        by_owner[owner][seq] = rec
+        for field, attr in ANIMAL_CODED.items():
+            val = rec.get(field)
+            if val is None:
+                if field in ("species", "sex"):
+                    r.error(f"sample animal {label} has no {field}")
+                continue
+            if attr not in lists:
+                r.error(f"sample animal {label} uses {attr}, which this pack does not have")
+            elif val not in lists[attr]:
+                r.error(f"sample animal {label} has {field}={val!r}, which is not a value of {attr}")
+        tag = rec.get("ear_tag_number")
+        if tag:
+            if tag in tags:
+                r.error(f"sample animal {label}: ear tag {tag} is used twice")
+            tags.add(tag)
+        born, acquired = day(rec, "date_of_birth", label), day(rec, "acquired_on", label)
+        if born and acquired and acquired < born:
+            r.error(f"sample animal {label} is acquired before it was born")
+
+    for owner, animals in by_owner.items():
+        if sorted(animals) != list(range(1, len(animals) + 1)):
+            r.error(f"sample animals of {owner} are not numbered 1..{len(animals)}: {sorted(animals)}")
+        for seq, rec in animals.items():
+            dam_seq = rec.get("dam_seq")
+            if dam_seq is None:
+                continue
+            dam = animals.get(dam_seq)
+            label = f"{owner}/{seq}"
+            if dam is None or dam_seq == seq:
+                r.error(f"sample animal {label}: its dam {owner}/{dam_seq} is not another of the owner's animals")
+            elif dam.get("sex") != "LSEX_FEMALE" or dam.get("species") != rec.get("species"):
+                r.error(f"sample animal {label}: its dam {owner}/{dam_seq} is not a female of the same species")
+            elif (dam.get("date_of_birth") or "") >= (rec.get("date_of_birth") or ""):
+                r.error(f"sample animal {label} is born before its dam {owner}/{dam_seq}")
+
+
 def check_sample_locations(pack_dir, r, geoms):
     """A sample's coordinates must fall inside the unit its P-code names.
 
@@ -763,6 +866,7 @@ def validate(pack_dir):
     check_samples(pack_dir, r, set(vals))
     check_agent_samples(pack_dir, r, set(vals))
     check_vet_samples(pack_dir, r, set(vals))
+    check_animal_samples(pack_dir, r)
 
     # -- boundaries --------------------------------------------------------
     bdir = os.path.join(pack_dir, "boundaries")
